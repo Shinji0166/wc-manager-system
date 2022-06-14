@@ -1,0 +1,12 @@
+##项目附加信息
+app:
+  author: wudskq
+
+##web端口等配置
+server:
+  port: 8099
+
+
+
+
+
