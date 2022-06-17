@@ -11,5 +11,18 @@ spring:
     active: dev
 
 
+# JWT配置
+jwt:
+  # 密匙Key
+  secret: AXzYB2^y2$&#1!#&5h
+  # HeaderKey
+  tokenHeader: Authorization
+  # Token前缀
+  tokenPrefix: Bearer
+  # 过期时间，单位秒
+  expiration: 86400
+  # 配置白名单（不需要认证）
+  antMatchers: /swagger-resources/**,/swagger-ui.html,/v2/api-docs,/webjars/**,/doc.html
+
 
 

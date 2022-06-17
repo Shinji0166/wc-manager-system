@@ -27,6 +27,12 @@
             <artifactId>wc-framework</artifactId>
             <version>1.0.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>cn.com.wudskq</groupId>
+            <artifactId>wc-business</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>

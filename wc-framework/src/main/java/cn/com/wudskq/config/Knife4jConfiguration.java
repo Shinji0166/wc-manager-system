@@ -26,7 +26,7 @@ public class Knife4jConfiguration {
                 .groupName("1.0.0版本")
                 .select()
                 //这里指定Controller扫描包路径
-                .apis(RequestHandlerSelectors.basePackage("cn.com.wudskq.**"))
+                .apis(RequestHandlerSelectors.basePackage("cn.com.wudskq.controller"))
                 .paths(PathSelectors.any())
                 .build();
         return docket;

@@ -24,6 +24,7 @@
         <mybatis-plus-version>3.4.2</mybatis-plus-version>
         <javax-servlet-version>2.4</javax-servlet-version>
         <knife4j-version>3.0.3</knife4j-version>
+        <fastjson-version>1.2.76</fastjson-version>
     </properties>
 
     <dependencyManagement>
@@ -71,6 +72,12 @@
                 <artifactId>knife4j-spring-boot-starter</artifactId>
                 <!--在引用时请在maven中央仓库搜索3.X最新版本号-->
                 <version>${knife4j-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
