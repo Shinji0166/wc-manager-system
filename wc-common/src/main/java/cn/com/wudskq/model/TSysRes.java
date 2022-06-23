@@ -1,26 +1,45 @@
 package cn.com.wudskq.model;
 
+import cn.com.wudskq.common.CreateInfoModel;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.util.Date;
- 
 
+/**
+ * @author chenfangchao
+ * @title: TSysRes
+ * @projectName wc-manager-system
+ * @description: TODO 菜单(权限)模型
+ * @date 2022/6/23 10:56 AM
+ */
 @Data
 @TableName("t_sys_res")
-public class TSysRes {
+@ApiModel("菜单(权限)表模型")
+public class TSysRes extends CreateInfoModel{
  
     @TableId
-    private String id;//主键
-    private String name;//资源名称
-    private String resUrl;//资源路径
-    private String permission;//做拦截的code
-    private String resType;//0菜单   1按钮
-    private String pid;//父级id
-    private String icon;//菜单图标
-    private String createUser;//创建人
-    private Date createDate;//创建时间
- 
+    @ApiModelProperty("主键")
+    private String id;
+
+    @ApiModelProperty("资源名称")
+    private String name;
+
+    @ApiModelProperty("资源路径")
+    private String resUrl;
+
+    @ApiModelProperty("权限标识")
+    private String permission;
+
+    @ApiModelProperty("资源类型:0菜单 1按钮")
+    private String resType;
+
+    @ApiModelProperty("父级id")
+    private String pid;
+
+    @ApiModelProperty("菜单图标")
+    private String icon;
 }
 

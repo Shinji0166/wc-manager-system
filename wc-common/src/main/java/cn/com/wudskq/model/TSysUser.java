@@ -1,55 +1,71 @@
 package cn.com.wudskq.model;
 
+import cn.com.wudskq.common.CreateInfoModel;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
 import java.io.Serializable;
 import java.util.Date;
 
-
+/**
+ * @author chenfangchao
+ * @title: TSysUser
+ * @projectName wc-manager-system
+ * @description: TODO 用户表模型
+ * @date 2022/6/23 10:56 AM
+ */
 @Data
 @TableName("t_sys_user")
-public class TSysUser implements Serializable {
+@ApiModel("用户表模型")
+public class TSysUser extends CreateInfoModel implements Serializable {
  
     private static final long serialVersionUID = 1L;
  
     @TableId
-    //主键
+    @ApiModelProperty("主键ID")
     private String id;
-    //用户名
+
+    @ApiModelProperty("用户名")
     private String username;
-    //密码
+
+    @ApiModelProperty("密码")
     private String password;
-    //昵称
+
+    @ApiModelProperty("昵称")
     private String nickName;
-    //电话
+
+    @ApiModelProperty("电话")
     private String cellPhone;
-    //邮件
+
+    @ApiModelProperty("邮件")
     private String mail;
-    //生日
+
+    @ApiModelProperty("生日")
     private Date birthday;
-    //状态（0-正常，1-禁用，2-删除）
+
+    @ApiModelProperty("状态（0-正常，1-删除，2-禁用)")
     private String status;
-    //1系统账号 2客户账号
+
+    @ApiModelProperty("账户类型 1系统账号 2客户账号")
     private String accountType;
-    //邀请码
+
+    @ApiModelProperty("邀请码")
     private String inviteCode;
-    //性别：0男 1女
+
+    @ApiModelProperty("性别：0男 1女")
     private String sex;
-    //地址
+
+    @ApiModelProperty("地址")
     private String address;
-    //获赞总量
-    private Integer upNum;
-    //文章被阅读总量
-    private Integer readNum;
-    //签名
+
+    @ApiModelProperty("个人签名")
     private String sign;
-    //用户头像
+
+    @ApiModelProperty("用户头像")
     private String pictureId;
-    //创建人
-    private String createUser;
-    //创建时间
-    private Date createDate;
+
+
 }
 

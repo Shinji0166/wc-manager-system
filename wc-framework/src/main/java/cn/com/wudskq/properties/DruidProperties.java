@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * druid 配置属性
  *
- * @author seat
+ * @author chenfangchao
  */
 @Configuration
 public class DruidProperties

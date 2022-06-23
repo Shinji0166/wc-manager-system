@@ -2,17 +2,24 @@ package cn.com.wudskq.model;
  
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
- 
 
 @Data
 @TableName("t_sys_role_res")
+@ApiModel("角色资源表模型")
 public class TSysRoleRes {
  
     @TableId
-    private String id;//主键
-    private String roleId;//角色id
-    private String resId;//资源id
+    @ApiModelProperty("主键")
+    private String id;
+
+    @ApiModelProperty("角色id")
+    private String roleId;
+
+    @ApiModelProperty("资源id")
+    private String resId;
  
 }
 

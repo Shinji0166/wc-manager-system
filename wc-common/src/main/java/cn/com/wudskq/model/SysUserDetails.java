@@ -1,5 +1,6 @@
 package cn.com.wudskq.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,39 +10,34 @@ import java.io.Serializable;
 import java.util.Collection;
 
 
+/**
+ * @author chenfangchao
+ * @title: SysUserDetails
+ * @projectName wc-manager-system
+ * @description: TODO 系统用户详情
+ * @date 2022/6/23 10:56 AM
+ */
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class SysUserDetails extends TSysUser implements UserDetails, Serializable {
     private static final long serialVersionUID = 1L;
- 
-    /**
-     * 用户角色
-     */
+
+    @ApiModelProperty("用户角色")
     private Collection <GrantedAuthority> authorities;
- 
-    /**
-     * 账号是否过期
-     */
+
+    @ApiModelProperty("账号是否过期")
     private boolean isAccountNonExpired = false;
  
-    /**
-     * 账号是否锁定
-     */
+    @ApiModelProperty("账号是否锁定")
     private boolean isAccountNonLocked = false;
- 
-    /**
-     * 证书是否过期
-     */
+
+    @ApiModelProperty("证书是否过期")
     private boolean isCredentialsNonExpired = false;
  
-    /**
-     * 账号是否有效
-     */
+    @ApiModelProperty("账号是否有效(启用-禁用)")
     private boolean isEnabled = true;
  
-    /**
-     * 获得用户权限
-     */
+    @ApiModelProperty("获得用户权限")
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
@@ -70,7 +66,7 @@ public class SysUserDetails extends TSysUser implements UserDetails, Serializabl
     public boolean isCredentialsNonExpired() {
         return isCredentialsNonExpired;
     }
- 
+
     /**
      * 判断账号是否有效
      */

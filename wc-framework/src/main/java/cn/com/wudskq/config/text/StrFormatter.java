@@ -5,7 +5,7 @@ import cn.com.wudskq.utils.StringUtils;
 /**
  * 字符串格式化
  *
- * @author seat
+ * @author chenfangchao
  */
 public class StrFormatter
 {

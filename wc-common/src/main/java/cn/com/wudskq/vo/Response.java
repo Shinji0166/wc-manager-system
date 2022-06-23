@@ -8,6 +8,13 @@ import javax.servlet.ServletResponse;
 import java.io.PrintWriter;
 import java.util.List;
 
+/**
+ * @author chenfangchao
+ * @title: Response
+ * @projectName wc-manager-system
+ * @description: TODO Response模型
+ * @date 2022/6/23 10:56 AM
+ */
 @Data
 public class Response {
 

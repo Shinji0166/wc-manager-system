@@ -10,7 +10,7 @@ import java.nio.charset.Charset;
 /**
  * 类型转换器
  *
- * @author seat
+ * @author chenfangchao
  */
 public class Convert
 {

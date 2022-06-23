@@ -3,7 +3,7 @@ package cn.com.wudskq.enums;
 /**
  * 数据源
  * 
- * @author seat
+ * @author chenfangchao
  */
 public enum DataSourceType
 {
