@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author wudskq
+ */
 @Component
 public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
  

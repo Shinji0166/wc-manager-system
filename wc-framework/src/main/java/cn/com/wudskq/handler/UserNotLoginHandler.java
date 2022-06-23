@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @author wudskq
+ */
 @Component
 public class UserNotLoginHandler implements AuthenticationEntryPoint {
  

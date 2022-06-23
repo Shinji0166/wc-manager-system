@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
  
 
-@Mapper
+
 public interface TSysRoleResMapper extends BaseMapper<TSysRoleRes> {
  
     List<String> selectRoleResByMap(Map<String, Object> map);

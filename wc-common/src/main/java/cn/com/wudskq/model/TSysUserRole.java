@@ -14,7 +14,7 @@ import lombok.Data;
  * @date 2022/6/23 10:56 AM
  */
 @Data
-@TableName("t_sys_user_role")
+@TableName("sys_user_role")
 @ApiModel("用户角色表模型")
 public class TSysUserRole {
  

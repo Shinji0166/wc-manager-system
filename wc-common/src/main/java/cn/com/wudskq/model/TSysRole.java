@@ -17,7 +17,7 @@ import java.util.Date;
  * @date 2022/6/23 10:56 AM
  */
 @Data
-@TableName("t_sys_role")
+@TableName("sys_role")
 @ApiModel("角色表模型")
 public class TSysRole extends CreateInfoModel {
  

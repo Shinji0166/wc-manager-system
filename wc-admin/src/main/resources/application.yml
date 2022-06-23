@@ -11,6 +11,12 @@ spring:
     active: dev
 
 
+##mybatis-puls
+mybatis-plus:
+  configuration:
+    typeAliasesPackage: cn.com.wudskq.model
+
+
 # JWT配置
 jwt:
   # 密匙Key
@@ -22,7 +28,7 @@ jwt:
   # 过期时间，单位秒
   expiration: 86400
   # 配置白名单（不需要认证）
-  antMatchers: /swagger-resources/**,/swagger-ui.html,/v2/api-docs,/webjars/**,/doc.html
+  antMatchers: /swagger-resources/**,/swagger-ui.html,/v2/api-docs,/webjars/**,/doc.html,/druid/**
 
 
 

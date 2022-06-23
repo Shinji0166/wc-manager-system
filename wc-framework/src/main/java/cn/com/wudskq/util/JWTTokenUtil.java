@@ -15,6 +15,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.*;
  
 
+/**
+ * @author wudskq
+ */
 @Slf4j
 public class JWTTokenUtil {
  
@@ -25,11 +28,12 @@ public class JWTTokenUtil {
      * @return
      */
     public static String createAccessToken(SysUserDetails sysUserDetails) {
-        String token = Jwts.builder().setId(// 设置JWT
-                sysUserDetails.getId()) // 用户Id
-                .setSubject(sysUserDetails.getUsername()) // 主题
+        String token =
+                // 设置JWT // 用户Id
+                Jwts.builder().setId(sysUserDetails.getId())//主题
+                .setSubject(sysUserDetails.getUsername())
                 .setIssuedAt(new Date()) // 签发时间
-                .setIssuer("limoumou") // 签发者
+                .setIssuer("wudskq") // 签发者
                 .setExpiration(new Date(System.currentTimeMillis() + JWTConfig.expiration)) // 过期时间
                 .signWith(SignatureAlgorithm.HS512, JWTConfig.secret) // 签名算法、密钥
                 .claim("authorities", JSON.toJSONString(sysUserDetails.getAuthorities())).compact(); // 自定义其他属性，如用户组织机构ID，用户所拥有的角色，用户权限信息等

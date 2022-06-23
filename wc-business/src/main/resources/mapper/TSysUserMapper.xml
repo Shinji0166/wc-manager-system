@@ -1,0 +1,40 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.wudskq.mapper.TSysUserMapper">
+
+    <!--用户信息模式字段映射-->
+    <resultMap id="userInfoList" type="cn.com.wudskq.model.TSysUser">
+        <id column="id" property="id" jdbcType="BIGINT"></id>
+        <result column="user_name" property="username" jdbcType="VARCHAR"/>
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
+        <result column="pass_word" property="password" jdbcType="VARCHAR"/>
+        <result column="cell_phone" property="cellPhone" jdbcType="VARCHAR"/>
+        <result column="mail" property="mail" jdbcType="VARCHAR"/>
+        <result column="birthday" property="birthday" jdbcType="DATE"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="account_type" property="accountType" jdbcType="TINYINT"/>
+        <result column="invite_code" property="inviteCode" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="TINYINT"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="sign" property="sign" jdbcType="VARCHAR"/>
+        <result column="pictureId" property="pictureId" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 查询用户信息列表 -->
+    <select id="getUserInfoList" resultMap="userInfoList">
+        select id, user_name, nick_name, pass_word, cell_phone,
+               mail, birthday, status, account_type, invite_code,
+               sex, address, sign, pictureId from sys_user
+        <where>
+            <if test="query.nickName != null and query.nickName != ''">
+                nick_name like concat('%',#{query.nickName},'%')
+            </if>
+            <if test="query.userName != null and query.userName != ''">
+                and user_name like concat('%',#{query.userName},'%')
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

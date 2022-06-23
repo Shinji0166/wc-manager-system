@@ -4,6 +4,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
  
 
+/**
+ * @author wudskq
+ */
 @Component
 @ConfigurationProperties(prefix = "jwt")
 public class JWTConfig {

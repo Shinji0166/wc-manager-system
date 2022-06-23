@@ -1,7 +1,8 @@
 package cn.com.wudskq.handler;
 
 import cn.com.wudskq.model.SysUserDetails;
-import cn.com.wudskq.service.impl.SysUserDetailsService;
+import cn.com.wudskq.util.JWTTokenUtil;
+import cn.com.wudskq.web.UserDetailsServiceImpl;
 import cn.com.wudskq.util.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -13,11 +14,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+
+/**
+ * @author wudskq
+ */
 @Component
 public class UserAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
-    private SysUserDetailsService userDetailsService;
+    private UserDetailsServiceImpl userDetailsService;
  
     /**
      * 身份验证
@@ -31,10 +36,14 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
             throw new UsernameNotFoundException("用户名或密码不能为空");
         }
-        if(username.equals("admin") && password.equals("123456")){
+        if("admin".equals(username) && "123456".equals(password)){
             SysUserDetails sysUserDetails = (SysUserDetails) userDetailsService.loadUserByUsername(username);
-            return new UsernamePasswordAuthenticationToken(sysUserDetails, password, sysUserDetails.getAuthorities());
-        } else if (username.equals("admin") && !password.equals("123456")){
+            //创建token
+            String accessToken = JWTTokenUtil.createAccessToken(sysUserDetails);
+            UsernamePasswordAuthenticationToken usernamePasswordAuthentication = new UsernamePasswordAuthenticationToken(null,null);
+            usernamePasswordAuthentication.setDetails(accessToken);
+            return usernamePasswordAuthentication;
+        } else if ("admin".equals(username) && !"123456".equals(password)){
             throw new BadCredentialsException("用户名或密码错误");
         } else {
             SysUserDetails sysUserDetails = (SysUserDetails) userDetailsService.loadUserByUsername(username);
@@ -44,7 +53,11 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
             if(!sysUserDetails.getPassword().equals(Md5Util.MD5(password))){
                 throw new BadCredentialsException("用户名或密码错误");
             }
-            return new UsernamePasswordAuthenticationToken(sysUserDetails, password, sysUserDetails.getAuthorities());
+            //创建token
+            String accessToken = JWTTokenUtil.createAccessToken(sysUserDetails);
+            UsernamePasswordAuthenticationToken usernamePasswordAuthentication = new UsernamePasswordAuthenticationToken(null,null);
+            usernamePasswordAuthentication.setDetails(accessToken);
+            return usernamePasswordAuthentication;
         }
     }
  

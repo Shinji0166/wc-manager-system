@@ -9,7 +9,6 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 
-@Mapper
 public interface TSysRoleMapper extends BaseMapper<TSysRole> {
 
     @Select("SELECT r.* FROM t_sys_role r " +

@@ -6,8 +6,11 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+/**
+ * @author wudskq
+ */
 @Data
-@TableName("t_sys_role_res")
+@TableName("sys_role_res")
 @ApiModel("角色资源表模型")
 public class TSysRoleRes {
  

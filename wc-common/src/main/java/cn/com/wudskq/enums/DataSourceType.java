@@ -17,8 +17,4 @@ public enum DataSourceType
      */
     SLAVE,
 
-    /**
-     * 从库 postgres
-     */
-    SLAVE1
 }

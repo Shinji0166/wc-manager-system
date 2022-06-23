@@ -1,6 +1,8 @@
-package cn.com.wudskq.service.impl;
+package cn.com.wudskq.web;
 
 
+import cn.com.wudskq.annotation.DataSource;
+import cn.com.wudskq.enums.DataSourceType;
 import cn.com.wudskq.mapper.TSysResMapper;
 import cn.com.wudskq.model.SysUserDetails;
 import cn.com.wudskq.model.TSysRes;
@@ -23,10 +25,12 @@ import javax.annotation.Resource;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
- 
 
+/**
+ * @author wudskq
+ */
 @Service
-public class SysUserDetailsService  implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
  
     @Autowired
     private TSysUserService tSysUserService;
@@ -45,17 +49,18 @@ public class SysUserDetailsService  implements UserDetailsService {
      * [username]
      */
     @Override
+    @DataSource(DataSourceType.SLAVE)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<TSysRes> resList = null;
-        if(username.equals("admin")){
+        if("admin".equals(username)){
             TSysUser tSysUser = new TSysUser();
             tSysUser.setId("admin");
             tSysUser.setUsername("admin");
             tSysUser.setNickName("系统管理员");
             SysUserDetails sysUserDetails = new SysUserDetails();
             BeanUtils.copyProperties(tSysUser, sysUserDetails);
-            Set<GrantedAuthority> authorities = new HashSet<>(); // 角色集合
- 
+            // 角色集合
+            Set<GrantedAuthority> authorities = new HashSet<>();
             //admin用户有的资源集合
             resList = tSysResMapper.selectList(new QueryWrapper<>());
             for (int i = 0; i < resList.size() ; i++) {

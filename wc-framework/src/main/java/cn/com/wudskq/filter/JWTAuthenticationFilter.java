@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
+/**
+ * @author wudskq
+ */
 public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
  
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
@@ -27,16 +30,16 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
             throws IOException, ServletException {
         // 取出Token
         String token = request.getHeader(JWTConfig.tokenHeader);
- 
+        // 截取Token有效部分
         if (token != null && token.startsWith(JWTConfig.tokenPrefix)) {
             SysUserDetails sysUserDetails = JWTTokenUtil.parseAccessToken(token);
- 
             if (sysUserDetails != null) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         sysUserDetails, sysUserDetails.getId(), sysUserDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
+        //放行
         filterChain.doFilter(request, response);
     }
  

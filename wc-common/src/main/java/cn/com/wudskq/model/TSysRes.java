@@ -16,7 +16,7 @@ import lombok.Data;
  * @date 2022/6/23 10:56 AM
  */
 @Data
-@TableName("t_sys_res")
+@TableName("sys_res")
 @ApiModel("菜单(权限)表模型")
 public class TSysRes extends CreateInfoModel{
  

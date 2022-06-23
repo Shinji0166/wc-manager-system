@@ -17,7 +17,7 @@ import java.util.Date;
  * @date 2022/6/23 10:56 AM
  */
 @Data
-@TableName("t_sys_user")
+@TableName("sys_user")
 @ApiModel("用户表模型")
 public class TSysUser extends CreateInfoModel implements Serializable {
  
@@ -27,10 +27,10 @@ public class TSysUser extends CreateInfoModel implements Serializable {
     @ApiModelProperty("主键ID")
     private String id;
 
-    @ApiModelProperty("用户名")
+    @ApiModelProperty("用户名(不可驼峰命名)")
     private String username;
 
-    @ApiModelProperty("密码")
+    @ApiModelProperty("密码(不可驼峰命名)")
     private String password;
 
     @ApiModelProperty("昵称")
