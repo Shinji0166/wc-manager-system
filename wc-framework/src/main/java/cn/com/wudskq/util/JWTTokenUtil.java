@@ -24,7 +24,6 @@ public class JWTTokenUtil {
  
     /**
      * 创建Token
-     *
      * @param sysUserDetails 用户信息
      * @return
      */
@@ -43,7 +42,6 @@ public class JWTTokenUtil {
  
     /**
      * 解析Token
-     *
      * @param token Token信息
      * @return
      */
