@@ -1,6 +1,9 @@
 package cn.com.wudskq.expection;
  
 
+/**
+ * @author wudskq
+ */
 public class BusinessException extends RuntimeException{
  
     private int code;

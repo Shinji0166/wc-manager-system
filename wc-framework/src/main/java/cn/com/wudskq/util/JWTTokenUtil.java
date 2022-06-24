@@ -1,6 +1,7 @@
 package cn.com.wudskq.util;
 
 import cn.com.wudskq.config.JWTConfig;
+import cn.com.wudskq.expection.BusinessException;
 import cn.com.wudskq.model.SysUserDetails;
 import cn.com.wudskq.utils.StringUtils;
 import com.alibaba.fastjson.JSON;
@@ -29,7 +30,7 @@ public class JWTTokenUtil {
      */
     public static String createAccessToken(SysUserDetails sysUserDetails) {
         String token =
-                // 设置JWT // 用户Id
+                //设置JWT 用户Id
                 Jwts.builder().setId(sysUserDetails.getId())//主题
                 .setSubject(sysUserDetails.getUsername())
                 .setIssuedAt(new Date()) // 签发时间
@@ -55,7 +56,14 @@ public class JWTTokenUtil {
  
                 // 解析Token
                 Claims claims = Jwts.parser().setSigningKey(JWTConfig.secret).parseClaimsJws(token).getBody();
- 
+
+                //验证Token是否过期                              1656086556000
+                long currentTimeMillis = System.currentTimeMillis();
+                Date expiration = claims.getExpiration();
+                if(currentTimeMillis > expiration.getTime()){
+                    throw new BusinessException(500,"Token已过期!请重新登录");
+                }
+
                 // 获取用户信息
                 sysUserDetails = new SysUserDetails();
                 sysUserDetails.setId(claims.getId());

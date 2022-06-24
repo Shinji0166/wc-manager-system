@@ -1,20 +1,20 @@
 spring:
   datasource:
     druid:
-      # 主库数据源
+      # 主库数据源-写数据
       master:
         type: com.alibaba.druid.pool.DruidDataSource
         driverClassName: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://127.0.0.1:3306/wc_mangesys_update_db?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-        username: root
-        password: root
-      # 从库数据源
+        url: jdbc:mysql://rm-bp17s87o23hkxu4800o.mysql.rds.aliyuncs.com:1606/wc_mangesys_update_db?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        username: mysql_wudskq
+        password: xiwRab-siqqed-guppo4
+      # 从库数据源-读数据
       slave:
         type: com.alibaba.druid.pool.DruidDataSource
         driverClassName: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://127.0.0.1:3306/wc_mangesys_read_db?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-        username: root
-        password: root
+        url: jdbc:mysql://rm-bp17s87o23hkxu4800o.mysql.rds.aliyuncs.com:1606/wc_mangesys_read_db?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        username: mysql_wudskq
+        password: xiwRab-siqqed-guppo4
       # 初始连接数
       initialSize: 5
       # 最小连接池数量

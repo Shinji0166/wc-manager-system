@@ -31,8 +31,9 @@
                mail, birthday, status, account_type, invite_code,
                sex, address, sign, pictureId,create_time,create_by,update_time,update_by from sys_user
         <where>
+            status != 1
             <if test="query.nickName != null and query.nickName != ''">
-                nick_name like concat('%',#{query.nickName},'%')
+                and nick_name like concat('%',#{query.nickName},'%')
             </if>
             <if test="query.userName != null and query.userName != ''">
                 and user_name like concat('%',#{query.userName},'%')
