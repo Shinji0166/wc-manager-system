@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * @author wudskq
+ */
 @Service
 public class TSysUserServiceImpl implements TSysUserService {
 
@@ -21,6 +24,7 @@ public class TSysUserServiceImpl implements TSysUserService {
  
 
     @Override
+    @DataSource(DataSourceType.SLAVE)
     public TSysUser findByUsername(String username) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("user_name",username);
@@ -33,5 +37,14 @@ public class TSysUserServiceImpl implements TSysUserService {
         PageHelper.startPage(userInfoQuery.getPageNum(),userInfoQuery.getPageSize());
         return tSysUserMapper.getUserInfoList(userInfoQuery);
     }
+
+
+    @Override
+    @DataSource(DataSourceType.SLAVE)
+    public TSysUser getUserDetail(String id) {
+        return tSysUserMapper.getUserDetail(id);
+    }
+
+
 }
 

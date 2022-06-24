@@ -40,5 +40,11 @@
         </where>
     </select>
 
-
+    <!-- 获取用户详细信息 -->
+    <select id="getUserDetail" resultMap="userInfoList">
+        select id, user_name, nick_name, pass_word, cell_phone,
+               mail, birthday, status, account_type, invite_code,
+               sex, address, sign, pictureId,create_time,create_by,update_time,update_by from sys_user
+        where id = #{id}
+    </select>
 </mapper>

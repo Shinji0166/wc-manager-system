@@ -9,10 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,7 +23,7 @@ import java.util.List;
  */
 @Api("用户管理")
 @RestController
-@RequestMapping("/wc/user/")
+@RequestMapping("/wc")
 public class UserController {
 
     /** 用户组件 **/
@@ -34,7 +31,7 @@ public class UserController {
     private TSysUserService sysUserService;
 
     @ApiOperation("获取用户信息")
-    @PostMapping("/list")
+    @PostMapping("/user/list")
     public Response getUserInfoList(@RequestBody(required = false) UserInfoQueryDTO userInfoQuery){
         List<TSysUser> userInfoList = sysUserService.getUserInfoList(userInfoQuery);
         if(null != userInfoList && 0 < userInfoList.size()){
@@ -42,6 +39,13 @@ public class UserController {
             return Response.success(Collections.singletonList(pageInfo.getList()),pageInfo.getTotal());
         }
         return Response.success();
+    }
+
+    @ApiOperation("获取用户详情信息")
+    @GetMapping("/user/detail")
+    public Response getUserDetail(@RequestParam("id") String id){
+        TSysUser userDetail =sysUserService.getUserDetail(id);
+        return Response.success(userDetail);
     }
 
 }
