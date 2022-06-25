@@ -51,16 +51,9 @@ public class JWTTokenUtil {
             try {
                 // 去除JWT前缀
                 token = token.substring(JWTConfig.tokenPrefix.length());
- 
                 // 解析Token
                 Claims claims = Jwts.parser().setSigningKey(JWTConfig.secret).parseClaimsJws(token).getBody();
 
-                //验证Token是否过期                              1656086556000
-                long currentTimeMillis = System.currentTimeMillis();
-                Date expiration = claims.getExpiration();
-                if(currentTimeMillis > expiration.getTime()){
-                    throw new BusinessException(500,"Token已过期!请重新登录");
-                }
 
                 // 获取用户信息
                 sysUserDetails = new SysUserDetails();

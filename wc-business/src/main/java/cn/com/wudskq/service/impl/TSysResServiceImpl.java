@@ -1,5 +1,7 @@
 package cn.com.wudskq.service.impl;
 
+import cn.com.wudskq.annotation.DataSource;
+import cn.com.wudskq.enums.DataSourceType;
 import cn.com.wudskq.mapper.TSysResMapper;
 import cn.com.wudskq.mapper.TSysRoleMapper;
 import cn.com.wudskq.mapper.TSysRoleResMapper;
@@ -14,6 +16,9 @@ import java.util.List;
 import java.util.Map;
  
 
+/**
+ * @author wudskq
+ */
 @Service
 public class TSysResServiceImpl implements TSysResService {
  
@@ -33,6 +38,7 @@ public class TSysResServiceImpl implements TSysResService {
      * @return {@link List< TSysRes>}
      * @throws
      */
+    @DataSource(DataSourceType.SLAVE)
     @Override
     public List<TSysRes> findResByUserId(String userId) {
         //获取用户有的角色

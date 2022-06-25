@@ -9,10 +9,13 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 
+/**
+ * @author wudskq
+ */
 public interface TSysRoleMapper extends BaseMapper<TSysRole> {
 
-    @Select("SELECT r.* FROM t_sys_role r " +
-            "LEFT JOIN t_sys_user_role ur ON ur.role_id = r.id " +
+    @Select("SELECT r.* FROM  sys_role r " +
+            "LEFT JOIN sys_user_role ur ON ur.role_id = r.id " +
             "WHERE " +
             "ur.user_id = #{userId} ")
     List<TSysRole> findRoleByUserId(String userId);

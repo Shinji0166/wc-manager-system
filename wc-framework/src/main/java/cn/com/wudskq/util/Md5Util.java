@@ -3,6 +3,9 @@ package cn.com.wudskq.util;
 import java.security.MessageDigest;
  
 
+/**
+ * @author wudskq
+ */
 public class Md5Util {
  
     public final static String MD5(String s) {

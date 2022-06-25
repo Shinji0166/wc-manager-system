@@ -27,11 +27,11 @@ public class TSysUser extends CreateInfoModel implements Serializable {
     @ApiModelProperty("主键ID")
     private String id;
 
-    @ApiModelProperty("用户名(不可驼峰命名)")
-    private String username;
+    @ApiModelProperty("用户名")
+    private String userName;
 
-    @ApiModelProperty("密码(不可驼峰命名)")
-    private String password;
+    @ApiModelProperty("密码")
+    private String passWord;
 
     @ApiModelProperty("昵称")
     private String nickName;

@@ -17,6 +17,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 public class WcManagerApplication {
     public static void main(String[] args) {
         SpringApplication.run(WcManagerApplication.class,args);
-        System.out.println("公厕原理系统启动成功");
+        System.out.println("公厕管理系统启动成功");
     }
 }

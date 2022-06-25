@@ -52,10 +52,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @DataSource(DataSourceType.SLAVE)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<TSysRes> resList = null;
+        //管理员账户
         if("admin".equals(username)){
             TSysUser tSysUser = new TSysUser();
             tSysUser.setId("admin");
-            tSysUser.setUsername("admin");
+            tSysUser.setUserName("admin");
             tSysUser.setNickName("系统管理员");
             SysUserDetails sysUserDetails = new SysUserDetails();
             BeanUtils.copyProperties(tSysUser, sysUserDetails);
@@ -71,11 +72,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             sysUserDetails.setAuthorities(authorities);
             return sysUserDetails;
         }
+        //普通用户账户
         TSysUser tSysUser = tSysUserService.findByUsername(username);
         if (tSysUser != null) {
             SysUserDetails sysUserDetails = new SysUserDetails();
             BeanUtils.copyProperties(tSysUser, sysUserDetails);
- 
+            //处理账户名密码
+            sysUserDetails.setUsername(tSysUser.getUserName());
+            sysUserDetails.setPassword(tSysUser.getPassWord());
             Set<GrantedAuthority> authorities = new HashSet<>(); // 角色集合
  
             resList = tSysResService.findResByUserId(sysUserDetails.getId());//当前用户有的资源集合

@@ -115,17 +115,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //获取白名单（不进行权限验证）
                 .antMatchers(antMatchers.split(",")).permitAll()
                 .antMatchers("/wc/system/doLogin").permitAll()
-                .anyRequest().authenticated()  // 其他的需要登陆后才能访问
-                .and().httpBasic().authenticationEntryPoint(userNotLoginHandler) //配置未登录处理类
-                //配置登录URL 配置登录成功处理类 配置登录失败处理类
-                .and().formLogin().permitAll().successHandler(userLoginSuccessHandler).failureHandler(userLoginFailureHandler)
-                // 配置登出地址 配置用户登出处理类 退出登录相关配置
-                .and().logout().logoutUrl("/logout/submit").logoutSuccessHandler(userLogoutSuccessHandler)
-                .and().logout().logoutSuccessUrl("/page/index").deleteCookies("JSESSIONID")
-                // 配置没有权限处理类
-                .and().exceptionHandling().accessDeniedHandler(userAccessDeniedHandler)
+                // 其他的需要登陆后才能访问
+                .anyRequest().authenticated()
                 // 开启跨域 禁用跨站请求伪造防护
                 .and().cors().and().csrf().disable();
+        //配置登录处理器
+        http.formLogin().successHandler(userLoginSuccessHandler).failureHandler(userLoginFailureHandler);
+        //配置未登录处理器
+        http.exceptionHandling().authenticationEntryPoint(userNotLoginHandler);
+        //配置登出处理器
+        http.logout().logoutUrl("/logout").logoutSuccessHandler(userLogoutSuccessHandler);
+        //配置无权限处理器
+        http.exceptionHandling().accessDeniedHandler(userAccessDeniedHandler);
         // 禁用session（使用Token认证）
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         // 禁用缓存

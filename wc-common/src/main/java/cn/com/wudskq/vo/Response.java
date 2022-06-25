@@ -35,7 +35,7 @@ public class Response {
      */
     public static Response success(List<Object> data, long count) {
         Response response = new Response();
-        response.setCode(0);//成功
+        response.setCode(200);//成功
         response.setMsg("成功");//提示语
         response.setData(data);
         response.setCount(count);
@@ -47,7 +47,7 @@ public class Response {
      */
     public static Response success(List data) {
         Response response = new Response();
-        response.setCode(0);//成功
+        response.setCode(200);//成功
         response.setMsg("成功");//提示语
         response.setData(data);
         response.setCount(data == null || data.size() == 0 ? 0 : data.size());
@@ -59,7 +59,7 @@ public class Response {
      */
     public static Response successForPage(List data, Integer count) {
         Response response = new Response();
-        response.setCode(0);//成功
+        response.setCode(200);//成功
         response.setMsg("成功");//提示语
         response.setData(data);
         response.setCount(count == null ? 0 : count);
@@ -71,7 +71,7 @@ public class Response {
      */
     public static Response success() {
         Response response = new Response();
-        response.setCode(0);//成功
+        response.setCode(200);//成功
         response.setMsg("成功");//提示语
         return response;
     }
@@ -81,7 +81,7 @@ public class Response {
      */
     public static Response success(Object object) {
         Response response = new Response();
-        response.setCode(0);//成功
+        response.setCode(200);//成功
         response.setMsg("成功");//提示语
         response.setData(object);//返回内容
         return response;
@@ -92,7 +92,7 @@ public class Response {
      */
     public static Response error() {
         Response response = new Response();
-        response.setCode(1);//失败
+        response.setCode(500);//失败
         response.setMsg("失败");//提示语
         return response;
     }

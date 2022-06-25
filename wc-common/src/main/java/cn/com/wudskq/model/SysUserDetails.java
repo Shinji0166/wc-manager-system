@@ -20,7 +20,12 @@ import java.util.Collection;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class SysUserDetails extends TSysUser implements UserDetails, Serializable {
+
     private static final long serialVersionUID = 1L;
+
+    private String username;
+
+    private String password;
 
     @ApiModelProperty("用户角色")
     private Collection <GrantedAuthority> authorities;

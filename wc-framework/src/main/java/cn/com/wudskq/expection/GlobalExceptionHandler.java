@@ -4,6 +4,7 @@ import cn.com.wudskq.vo.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,7 +25,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public Response handle(Exception e){
         logger.error("系统日志",e);
-        return Response.error(1000,"业务繁忙");
+        return Response.error(500,"业务繁忙");
     }
 
     //业务异常
@@ -39,5 +40,17 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = AccessDeniedException.class)
     public Response handlePermissionDenied(AccessDeniedException e){
         return  Response.error(403,"访问权限不足");
+    }
+
+    //用户名或密码错误
+    @ExceptionHandler(value = BadCredentialsException.class)
+    public Response handleBadCredentialsException(BadCredentialsException e){
+        return  Response.error(500,"用户名或密码错误");
+    }
+
+    //空指针异常
+    @ExceptionHandler(value = NullPointerException.class)
+    public Response handleNullPointerException(NullPointerException e){
+        return  Response.error(500,"空指针异常");
     }
 }
