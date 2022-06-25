@@ -1,5 +1,6 @@
 package cn.com.wudskq.common;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;
@@ -21,12 +22,14 @@ public class CreateInfoModel implements Serializable {
     @ApiModelProperty("创建人")
     private String createBy;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty("创建时间")
     private Date createTime;
 
     @ApiModelProperty("更新人")
     private String updateBy;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty("更新时间")
     private Date updateTime;
 }

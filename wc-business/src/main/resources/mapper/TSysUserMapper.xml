@@ -6,9 +6,9 @@
     <!--用户信息模式字段映射-->
     <resultMap id="userInfoList" type="cn.com.wudskq.model.TSysUser">
         <id column="id" property="id" jdbcType="VARCHAR"></id>
-        <result column="user_name" property="username" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
         <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
-        <result column="pass_word" property="password" jdbcType="VARCHAR"/>
+        <result column="pass_word" property="passWord" jdbcType="VARCHAR"/>
         <result column="cell_phone" property="cellPhone" jdbcType="VARCHAR"/>
         <result column="mail" property="mail" jdbcType="VARCHAR"/>
         <result column="birthday" property="birthday" jdbcType="DATE"/>
@@ -18,9 +18,9 @@
         <result column="sex" property="sex" jdbcType="TINYINT"/>
         <result column="address" property="address" jdbcType="VARCHAR"/>
         <result column="sign" property="sign" jdbcType="VARCHAR"/>
-        <result column="pictureId" property="pictureId" jdbcType="VARCHAR"/>
-        <result column="create_by" property="createTime" jdbcType="VARCHAR"/>
-        <result column="create_time" property="createBy" jdbcType="DATE"/>
+        <result column="picture_id" property="pictureId" jdbcType="VARCHAR"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="DATE"/>
         <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
         <result column="update_time" property="updateTime" jdbcType="DATE"/>
     </resultMap>
@@ -29,8 +29,9 @@
     <select id="getUserInfoList" resultMap="userInfoList">
         select id, user_name, nick_name, pass_word, cell_phone,
                mail, birthday, status, account_type, invite_code,
-               sex, address, sign, pictureId,create_time,create_by,update_time,update_by from sys_user
+               sex, address, sign, picture_id,create_time,create_by,update_time,update_by from sys_user
         <where>
+            <!--排除已删除状态-->
             status != 1
             <if test="query.nickName != null and query.nickName != ''">
                 and nick_name like concat('%',#{query.nickName},'%')
@@ -45,7 +46,7 @@
     <select id="getUserDetail" resultMap="userInfoList">
         select id, user_name, nick_name, pass_word, cell_phone,
                mail, birthday, status, account_type, invite_code,
-               sex, address, sign, pictureId,create_time,create_by,update_time,update_by from sys_user
+               sex, address, sign, picture_id,create_time,create_by,update_time,update_by from sys_user
         where id = #{id}
     </select>
 </mapper>
