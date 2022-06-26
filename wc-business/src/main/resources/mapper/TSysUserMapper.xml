@@ -49,4 +49,17 @@
                sex, address, sign, picture_id,create_time,create_by,update_time,update_by from sys_user
         where id = #{id}
     </select>
+
+    <!-- 逻辑删除用户信息 -->
+    <update id="removeUser">
+        update sys_user set status = 1
+        <where>
+            id in
+            <if test="ids != null and ids.size() != 0">
+                <foreach collection="ids" open="(" separator="," close=")" item="item">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </update>
 </mapper>

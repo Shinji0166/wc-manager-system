@@ -5,6 +5,9 @@ import cn.com.wudskq.model.query.UserInfoQueryDTO;
 
 import java.util.List;
 
+/**
+ * @author wudskq
+ */
 public interface TSysUserService {
 
     /**
@@ -28,5 +31,24 @@ public interface TSysUserService {
      * @return
      */
     TSysUser getUserDetail(String id);
+
+    /**
+     * 保存用户信息
+     * @param sysUser
+     */
+    void saveUser(TSysUser sysUser);
+
+    /**
+     * 更新用户信息
+     * @param sysUser
+     */
+    void updateUser(TSysUser sysUser);
+
+
+    /**
+     * 删除用户信息
+     * @param ids
+     */
+    void removeUser(List<String> ids);
 }
 

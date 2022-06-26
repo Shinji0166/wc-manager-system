@@ -48,4 +48,25 @@ public class UserController {
         return Response.success(userDetail);
     }
 
+    @ApiOperation("新增用户信息")
+    @PostMapping("/save/user")
+    public Response saveUser(@RequestBody TSysUser sysUser){
+        sysUserService.saveUser(sysUser);
+        return Response.success();
+    }
+
+    @ApiOperation("更新用户信息")
+    @PutMapping("/update/user")
+    public Response updateUser(@RequestBody TSysUser sysUser){
+        sysUserService.updateUser(sysUser);
+        return Response.success();
+    }
+
+    @ApiOperation("删除用户信息(逻辑删除)")
+    @DeleteMapping("/remove/user")
+    public Response removeUser(@RequestParam("ids")List<String> ids){
+        sysUserService.removeUser(ids);
+        return Response.success();
+    }
+
 }
