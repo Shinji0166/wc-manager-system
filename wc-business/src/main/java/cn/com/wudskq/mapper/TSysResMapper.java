@@ -2,11 +2,9 @@ package cn.com.wudskq.mapper;
  
 
 import cn.com.wudskq.model.TSysRes;
-import cn.com.wudskq.model.TSysRole;
 import cn.com.wudskq.model.query.ResInfoQueryDTO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.security.core.parameters.P;
 
 import java.util.List;
 

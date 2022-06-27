@@ -6,6 +6,9 @@ import cn.com.wudskq.model.query.RoleInfoQueryDTO;
 
 import java.util.List;
 
+/**
+ * @author wudskq
+ */
 public interface TSysRoleService {
 
     /**

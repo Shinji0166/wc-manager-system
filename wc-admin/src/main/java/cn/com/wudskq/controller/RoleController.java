@@ -6,7 +6,6 @@ import cn.com.wudskq.service.TSysRoleService;
 import cn.com.wudskq.vo.Response;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

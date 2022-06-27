@@ -1,7 +1,6 @@
 package cn.com.wudskq.service;
 
 import cn.com.wudskq.model.TSysRes;
-import cn.com.wudskq.model.TSysRole;
 import cn.com.wudskq.model.query.ResInfoQueryDTO;
 
 import java.util.List;
@@ -10,7 +9,12 @@ import java.util.List;
  * @author wudskq
  */
 public interface TSysResService {
- 
+
+    /**
+     * 根据用户ID查询该用户所拥有的权限资源
+     * @param userId
+     * @return
+     */
     List<TSysRes> findResByUserId(String userId);
 
     /**
