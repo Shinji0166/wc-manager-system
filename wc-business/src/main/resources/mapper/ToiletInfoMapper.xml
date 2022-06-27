@@ -1,0 +1,53 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.wudskq.mapper.ToiletInfoMapper">
+
+    <!--公厕信息模型字段映射-->
+    <resultMap id="resInfo" type="cn.com.wudskq.model.ToiletInfo">
+        <id column="id" property="id" jdbcType="BIGINT"></id>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="location" property="location" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="TINYINT"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="DATE"/>
+    </resultMap>
+
+    <!-- 查询公厕信息列表 -->
+    <select id="getToiletList" resultMap="resInfo">
+        select id, name, code, location, status, type, create_by, create_time, update_by, update_time from toilet_info
+        <where>
+            <!--排除已删除状态-->
+            status != 1
+            <if test="query.toiletName != null and query.toiletName != ''">
+                and toilet_info.name like concat('%',#{query.toiletName},'%')
+            </if>
+            <if test="query.toiletType != null and query.toiletType != ''">
+                and type  = #{query.toiletType}
+            </if>
+        </where>
+    </select>
+
+    <!-- 获取公厕详细信息 -->
+    <select id="getToiletDetail" resultMap="resInfo">
+        select id, name, code, location, status, type, create_by, create_time, update_by, update_time from toilet_info
+        where id = #{id}
+    </select>
+
+    <!-- 删除公厕信息(逻辑删除) -->
+    <update id="removeToilet">
+        update toilet_info set status = 1
+        <where>
+            id in
+            <if test="ids != null and ids.size() != 0">
+                <foreach collection="ids" open="(" separator="," close=")" item="item">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </update>
+</mapper>
