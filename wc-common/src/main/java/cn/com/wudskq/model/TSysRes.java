@@ -22,7 +22,7 @@ public class TSysRes extends CreateInfoModel{
  
     @TableId
     @ApiModelProperty("主键")
-    private String id;
+    private Long id;
 
     @ApiModelProperty("资源名称")
     private String name;

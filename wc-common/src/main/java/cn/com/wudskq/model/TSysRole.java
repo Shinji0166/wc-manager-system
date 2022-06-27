@@ -33,8 +33,5 @@ public class TSysRole extends CreateInfoModel {
 
     @ApiModelProperty("角色描述")
     private String roleExplain;
-
-    @ApiModelProperty("状态(0-正常,1-删除)")
-    private Integer status;
 }
 

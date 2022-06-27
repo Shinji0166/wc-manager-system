@@ -46,7 +46,7 @@ public class TSysUser extends CreateInfoModel implements Serializable {
     private Date birthday;
 
     @ApiModelProperty("状态（0-正常，1-删除，2-禁用)")
-    private String status;
+    private Integer status;
 
     @ApiModelProperty("账户类型 1系统账号 2普通账号")
     private String accountType;

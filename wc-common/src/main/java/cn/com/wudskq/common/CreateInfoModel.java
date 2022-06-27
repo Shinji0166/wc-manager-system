@@ -19,6 +19,9 @@ import java.util.Date;
 @ToString
 public class CreateInfoModel implements Serializable {
 
+    @ApiModelProperty("状态(0-正常,1-删除)")
+    private Integer status;
+
     @ApiModelProperty("创建人")
     private String createBy;
 
