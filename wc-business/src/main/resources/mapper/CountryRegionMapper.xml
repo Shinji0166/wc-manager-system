@@ -1,0 +1,56 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.wudskq.mapper.CountryRegionMapper">
+
+    <!--地区信息模型字段映射-->
+    <resultMap id="resInfo" type="cn.com.wudskq.model.CountryRegion">
+        <id column="id" property="id" jdbcType="BIGINT"></id>
+        <result column="province_name" property="provinceName" jdbcType="VARCHAR"/>
+        <result column="city_name" property="cityName" jdbcType="VARCHAR"/>
+        <result column="region_name" property="regionName" jdbcType="VARCHAR"/>
+        <result column="location" property="location" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="DATE"/>
+    </resultMap>
+
+    <!-- 查询地区信息列表 -->
+    <select id="getRegionList" resultMap="resInfo">
+        select id, province_name, city_name, region_name, status, create_by, create_time, update_by, update_time from country_region
+        <where>
+            <!--排除已删除状态-->
+            status != 1
+            <if test="query.provinceName != null and query.provinceName != ''">
+                and province_name like concat('%',#{query.provinceName},'%')
+            </if>
+            <if test="query.cityName != null and query.cityName != ''">
+                and city_name like concat('%',#{query.cityName},'%')
+            </if>
+            <if test="query.regionName != null and query.regionName != ''">
+                and region_name like concat('%',#{query.regionName},'%')
+            </if>
+        </where>
+    </select>
+
+    <!-- 获取地区详细信息 -->
+    <select id="getRegionDetail" resultMap="resInfo">
+        select id, province_name, city_name, region_name, location, status, create_by, create_time, update_by, update_time from country_region
+        where id = #{id}
+    </select>
+
+    <!-- 删除地区信息(逻辑删除) -->
+    <update id="removeRegion">
+        update country_region set status = 1
+        <where>
+            id in
+            <if test="ids != null and ids.size() != 0">
+                <foreach collection="ids" open="(" separator="," close=")" item="item">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </update>
+</mapper>

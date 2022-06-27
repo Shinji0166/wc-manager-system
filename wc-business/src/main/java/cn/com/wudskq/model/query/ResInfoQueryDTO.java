@@ -1,6 +1,6 @@
 package cn.com.wudskq.model.query;
 
-import cn.com.wudskq.model.PageDTO;
+import cn.com.wudskq.model.common.PageDTO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package cn.com.wudskq.model;
+package cn.com.wudskq.model.common;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
