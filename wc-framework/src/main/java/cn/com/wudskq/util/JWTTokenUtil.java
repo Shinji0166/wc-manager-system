@@ -30,7 +30,7 @@ public class JWTTokenUtil {
     public static String createAccessToken(SysUserDetails sysUserDetails) {
         String token =
                 //设置JWT 用户Id
-                Jwts.builder().setId(sysUserDetails.getId())//主题
+                Jwts.builder().setId(String.valueOf(sysUserDetails.getId()))//主题
                 .setSubject(sysUserDetails.getUsername())
                 .setIssuedAt(new Date()) // 签发时间
                 .setIssuer("wudskq") // 签发者
@@ -57,7 +57,7 @@ public class JWTTokenUtil {
 
                 // 获取用户信息
                 sysUserDetails = new SysUserDetails();
-                sysUserDetails.setId(claims.getId());
+                sysUserDetails.setId(Long.valueOf(claims.getId()));
                 sysUserDetails.setUsername(claims.getSubject());
                 // 获取角色
                 Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();

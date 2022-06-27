@@ -25,7 +25,7 @@ public class TSysUser extends CreateInfoModel implements Serializable {
  
     @TableId
     @ApiModelProperty("主键ID")
-    private String id;
+    private Long id;
 
     @ApiModelProperty("用户名")
     private String userName;

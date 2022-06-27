@@ -55,7 +55,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         //管理员账户
         if("admin".equals(username)){
             TSysUser tSysUser = new TSysUser();
-            tSysUser.setId("admin");
+            tSysUser.setId(0L);
             tSysUser.setUserName("admin");
             tSysUser.setNickName("系统管理员");
             SysUserDetails sysUserDetails = new SysUserDetails();
@@ -82,7 +82,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             sysUserDetails.setPassword(tSysUser.getPassWord());
             Set<GrantedAuthority> authorities = new HashSet<>(); // 角色集合
  
-            resList = tSysResService.findResByUserId(sysUserDetails.getId());//当前用户有的资源集合
+            resList = tSysResService.findResByUserId(String.valueOf(sysUserDetails.getId()));//当前用户有的资源集合
             if(resList != null){
                 for (int i = 0; i < resList.size() ; i++) {
                     if(StringUtil.isNotEmpty(resList.get(i).getPermission())){

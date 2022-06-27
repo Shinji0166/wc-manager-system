@@ -29,7 +29,7 @@ public class TSysUserServiceImpl implements TSysUserService {
 
 
     @Override
-    @DataSource(DataSourceType.SLAVE)
+    @DataSource(DataSourceType.MASTER)
     public TSysUser findByUsername(String username) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("user_name",username);
@@ -37,33 +37,33 @@ public class TSysUserServiceImpl implements TSysUserService {
     }
 
     @Override
-    @DataSource(DataSourceType.SLAVE)
+    @DataSource(DataSourceType.MASTER)
     public List<TSysUser> getUserInfoList(UserInfoQueryDTO userInfoQuery) {
         PageHelper.startPage(userInfoQuery.getPageNum(),userInfoQuery.getPageSize());
         return tSysUserMapper.getUserInfoList(userInfoQuery);
     }
 
     @Override
-    @DataSource(DataSourceType.SLAVE)
-    public TSysUser getUserDetail(String id) {
+    @DataSource(DataSourceType.MASTER)
+    public TSysUser getUserDetail(Long id) {
         return tSysUserMapper.getUserDetail(id);
     }
 
     @Override
-    @DataSource(DataSourceType.MASTER)
+    @DataSource(DataSourceType.SLAVE)
     public void saveUser(TSysUser sysUser) {
-        sysUser.setId(String.valueOf(idGeneratorSnowflake.snowflakeId()));
+        sysUser.setId(idGeneratorSnowflake.snowflakeId());
         tSysUserMapper.insert(sysUser);
     }
 
     @Override
-    @DataSource(DataSourceType.MASTER)
+    @DataSource(DataSourceType.SLAVE)
     public void updateUser(TSysUser sysUser) {
         tSysUserMapper.updateById(sysUser);
     }
 
     @Override
-    @DataSource(DataSourceType.MASTER)
+    @DataSource(DataSourceType.SLAVE)
     public void removeUser(List<String> ids) {
         tSysUserMapper.removeUser(ids);
     }

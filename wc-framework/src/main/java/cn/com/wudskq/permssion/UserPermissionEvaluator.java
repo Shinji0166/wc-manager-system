@@ -33,7 +33,7 @@ public class UserPermissionEvaluator implements PermissionEvaluator {
  
         Set<String> permissions = new HashSet<String>(); // 用户权限
  
-        List<TSysRes> authList = tSysResService.findResByUserId(sysUserDetails.getId());
+        List<TSysRes> authList = tSysResService.findResByUserId(String.valueOf(sysUserDetails.getId()));
  
         for (int i = 0; i < authList.size() ; i++) {
             permissions.add(authList.get(i).getPermission());

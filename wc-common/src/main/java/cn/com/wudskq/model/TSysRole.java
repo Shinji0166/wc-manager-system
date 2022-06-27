@@ -23,12 +23,18 @@ public class TSysRole extends CreateInfoModel {
  
     @TableId
     @ApiModelProperty("主键")
-    private String id;
+    private Long id;
 
     @ApiModelProperty("角色名称")
     private String roleName;
 
+    @ApiModelProperty("角色代码")
+    private String roleCode;
+
     @ApiModelProperty("角色描述")
     private String roleExplain;
+
+    @ApiModelProperty("状态(0-正常,1-删除)")
+    private Integer status;
 }
 

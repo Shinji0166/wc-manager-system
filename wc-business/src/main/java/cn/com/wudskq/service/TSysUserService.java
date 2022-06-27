@@ -2,6 +2,7 @@ package cn.com.wudskq.service;
 
 import cn.com.wudskq.model.TSysUser;
 import cn.com.wudskq.model.query.UserInfoQueryDTO;
+import cn.hutool.extra.template.engine.velocity.SimpleStringResourceLoader;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public interface TSysUserService {
      * @param id
      * @return
      */
-    TSysUser getUserDetail(String id);
+    TSysUser getUserDetail(Long id);
 
     /**
      * 保存用户信息

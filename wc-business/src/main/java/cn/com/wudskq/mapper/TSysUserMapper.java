@@ -26,7 +26,7 @@ public interface TSysUserMapper extends BaseMapper<TSysUser> {
      * @param id
      * @return
      */
-    TSysUser getUserDetail(@Param("id") String id);
+    TSysUser getUserDetail(@Param("id") Long id);
 
     /**
      * 逻辑删除用户信息

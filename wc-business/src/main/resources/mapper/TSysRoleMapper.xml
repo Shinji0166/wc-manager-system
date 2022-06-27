@@ -1,0 +1,53 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.wudskq.mapper.TSysRoleMapper">
+
+    <!--角色信息模型字段映射-->
+    <resultMap id="roleInfo" type="cn.com.wudskq.model.TSysRole">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+        <result column="role_code" property="roleCode" jdbcType="VARCHAR"/>
+        <result column="role_explain" property="roleExplain" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="DATE"/>
+    </resultMap>
+
+    <!-- 获取角色信息列表 -->
+    <select id="getRoleInfoList" resultType="cn.com.wudskq.model.TSysRole">
+        select id, role_name, role_code, role_explain, status, create_by, create_time, update_by, update_time from sys_role
+        <where>
+            <!--排除已删除状态-->
+            status != 1
+            <if test="query.roleName != null and query.roleName != ''">
+                and role_name like concat('%',#{query.roleName},'%')
+            </if>
+            <if test="query.roleCode != null and query.roleCode != ''">
+                and role_code like concat('%',#{query.roleCode},'%')
+            </if>
+        </where>
+    </select>
+
+    <!-- 获取角色详细信息 -->
+    <select id="getRoleDetail" resultMap="roleInfo">
+        select id, role_name, role_code, role_explain, status, create_by, create_time, update_by, update_time from sys_role where status != 1
+        and id = #{id}
+    </select>
+
+    <!--删除角色信息(逻辑删除)-->
+    <update id="removeRole">
+        update sys_role set status = 1
+        <where>
+            id in
+            <if test="ids != null and ids.size() != 0">
+                <foreach collection="ids" open="(" separator="," close=")" item="item">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </update>
+
+</mapper>
