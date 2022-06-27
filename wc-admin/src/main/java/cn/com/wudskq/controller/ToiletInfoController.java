@@ -21,7 +21,7 @@ import java.util.List;
  * @description: TODO
  * @date 2022/6/28 2:59 AM
  */
-@Api("公厕管理")
+@Api(value= "公厕管理")
 @RestController
 @RequestMapping("/system")
 public class ToiletInfoController {
@@ -55,14 +55,14 @@ public class ToiletInfoController {
         return Response.success();
     }
 
-    @ApiOperation("更新公厕信息")
+    @ApiOperation(value= "更新公厕信息")
     @PutMapping("/update/toilet")
     public Response updateToilet(@RequestBody ToiletInfo toiletInfo){
         toiletInfoService.updateToilet(toiletInfo);
         return Response.success();
     }
 
-    @ApiOperation("删除公厕信息(逻辑删除)")
+    @ApiOperation(value= "删除公厕信息(逻辑删除)")
     @DeleteMapping("/remove/toilet")
     public Response removeToilet(@RequestParam("ids")List<Long> ids){
         toiletInfoService.removeToilet(ids);

@@ -21,7 +21,7 @@ import java.util.List;
  * @description: TODO
  * @date 2022/6/23 2:32 PM
  */
-@Api("用户管理")
+@Api(value= "用户管理")
 @RestController
 @RequestMapping("/system")
 public class UserController {
@@ -30,7 +30,7 @@ public class UserController {
     @Autowired
     private TSysUserService sysUserService;
 
-    @ApiOperation("获取用户信息列表")
+    @ApiOperation(value= "获取用户信息列表")
     @PostMapping("/user/list")
     public Response getUserInfoList(@RequestBody(required = false) UserInfoQueryDTO userInfoQuery){
         List<TSysUser> userInfoList = sysUserService.getUserInfoList(userInfoQuery);
@@ -41,28 +41,28 @@ public class UserController {
         return Response.success();
     }
 
-    @ApiOperation("获取用户详情信息")
+    @ApiOperation(value= "获取用户详情信息")
     @GetMapping("/user/detail")
     public Response getUserDetail(@RequestParam("id") Long id){
         TSysUser userDetail =sysUserService.getUserDetail(id);
         return Response.success(userDetail);
     }
 
-    @ApiOperation("新增用户信息")
+    @ApiOperation(value= "新增用户信息")
     @PostMapping("/save/user")
     public Response saveUser(@RequestBody TSysUser sysUser){
         sysUserService.saveUser(sysUser);
         return Response.success();
     }
 
-    @ApiOperation("更新用户信息")
+    @ApiOperation(value= "更新用户信息")
     @PutMapping("/update/user")
     public Response updateUser(@RequestBody TSysUser sysUser){
         sysUserService.updateUser(sysUser);
         return Response.success();
     }
 
-    @ApiOperation("删除用户信息(逻辑删除)")
+    @ApiOperation(value= "删除用户信息(逻辑删除)")
     @DeleteMapping("/remove/user")
     public Response removeUser(@RequestParam("ids")List<String> ids){
         sysUserService.removeUser(ids);

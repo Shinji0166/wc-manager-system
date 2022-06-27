@@ -20,7 +20,7 @@ import java.util.List;
  * @description: TODO
  * @date 2022/6/27 11:17 AM
  */
-@Api("菜单权限管理")
+@Api(value= "菜单权限管理")
 @RestController
 @RequestMapping("/system")
 public class ResController {
@@ -29,7 +29,7 @@ public class ResController {
     private TSysResService sysResService;
 
 
-    @ApiOperation("获取菜单权限列表")
+    @ApiOperation(value= "获取菜单权限列表")
     @PostMapping("/res/list")
     public Response getResLIst(@RequestBody(required = false) ResInfoQueryDTO resInfoQuery){
         List<TSysRes> resInfoList = sysResService.getResLIst(resInfoQuery);
@@ -40,28 +40,28 @@ public class ResController {
         return Response.success();
     }
 
-    @ApiOperation("获取菜单详细信息")
+    @ApiOperation(value= "获取菜单详细信息")
     @GetMapping("/res/detail")
     public Response getResDetail(@RequestParam("id")Long id){
         TSysRes roleDetail = sysResService.getResDetail(id);
         return Response.success(roleDetail);
     }
 
-    @ApiOperation("新增菜单信息")
+    @ApiOperation(value= "新增菜单信息")
     @PostMapping("/save/res")
     public Response saveRes(@RequestBody TSysRes sysRes){
         sysResService.saveRes(sysRes);
         return Response.success();
     }
 
-    @ApiOperation("更新菜单信息")
+    @ApiOperation(value= "更新菜单信息")
     @PutMapping("/update/res")
     public Response updateRes(@RequestBody TSysRes sysRes){
         sysResService.updateRes(sysRes);
         return Response.success();
     }
 
-    @ApiOperation("删除菜单信息(逻辑删除)")
+    @ApiOperation(value= "删除菜单信息(逻辑删除)")
     @DeleteMapping("/remove/res")
     public Response removeRes(@RequestParam("ids")List<Long> ids){
         sysResService.removeRes(ids);

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  * @description: TODO
  * @date 2022/6/23 3:51 PM
  */
-@Api("系统登录接口")
+@Api(value = "系统登录接口")
 @RestController
 @RequestMapping("/wc/system")
 public class LoginController {
@@ -23,7 +23,7 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    @ApiModelProperty("登录接口")
+    @ApiModelProperty(value = "登录接口")
     @PostMapping("/doLogin")
     public Response doLogin(@RequestBody LoginDTO login){
         return Response.success(loginService.doLogin(login));

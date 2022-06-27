@@ -20,7 +20,7 @@ import java.util.List;
  * @description: TODO
  * @date 2022/6/27 7:58 PM
  */
-@Api("地区管理")
+@Api(value = "地区管理")
 @RestController
 @RequestMapping("/system")
 public class RegionController {
@@ -28,7 +28,7 @@ public class RegionController {
     @Autowired
     private CountryRegionService countryRegionService;
 
-    @ApiOperation("获取地区信息列表")
+    @ApiOperation(value= "获取地区信息列表")
     @PostMapping("/region/list")
     public Response getRegionList(@RequestBody(required = false) RegionQueryDTO regionQuery){
         List<CountryRegion> regionList = countryRegionService.getRegionList(regionQuery);
@@ -40,28 +40,28 @@ public class RegionController {
     }
 
 
-    @ApiOperation("获取地区详细信息")
+    @ApiOperation(value= "获取地区详细信息")
     @GetMapping("/region/detail")
     public Response getRegionDetail(@RequestParam("id")Long id){
         CountryRegion regionDetail = countryRegionService.getRegionDetail(id);
         return Response.success(regionDetail);
     }
 
-    @ApiOperation("新增地区信息")
+    @ApiOperation(value= "新增地区信息")
     @PostMapping("/save/region")
     public Response saveRegion(@RequestBody CountryRegion countryRegion){
         countryRegionService.saveRegion(countryRegion);
         return Response.success();
     }
 
-    @ApiOperation("更新地区信息")
+    @ApiOperation(value= "更新地区信息")
     @PutMapping("/update/region")
     public Response updateRegion(@RequestBody CountryRegion countryRegion){
         countryRegionService.updateRegion(countryRegion);
         return Response.success();
     }
 
-    @ApiOperation("删除地区信息(逻辑删除)")
+    @ApiOperation(value= "删除地区信息(逻辑删除)")
     @DeleteMapping("/remove/region")
     public Response removeRegion(@RequestParam("ids")List<Long> ids){
         countryRegionService.removeRegion(ids);

@@ -1,0 +1,46 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.wudskq.mapper.PositionMapper">
+
+    <!--坑位信息模型字段映射-->
+    <resultMap id="resInfo" type="cn.com.wudskq.model.Position">
+        <id column="id" property="id" jdbcType="BIGINT"></id>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="number" property="number" jdbcType="VARCHAR"/>
+        <result column="toilet_id" property="toiletId" jdbcType="TINYINT"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="DATE"/>
+    </resultMap>
+
+    <!-- 查询坑位信息列表 -->
+    <select id="getPositionList" resultMap="resInfo">
+        select  id, name, number, toilet_id, status, create_by, update_by, create_time, update_time from pit_position_info
+        <where>
+            <!--排除已删除状态-->
+            status != 1
+        </where>
+    </select>
+
+    <!-- 获取坑位详细信息 -->
+    <select id="getPositionDetail" resultMap="resInfo">
+        select  id, name, number, toilet_id, status, create_by, update_by, create_time, update_time from pit_position_info
+        where id = #{id}
+    </select>
+
+    <!-- 删除坑位信息(逻辑删除) -->
+    <update id="removePosition">
+        update pit_position_info set status = 1
+        <where>
+            id in
+            <if test="ids != null and ids.size() != 0">
+                <foreach collection="ids" open="(" separator="," close=")" item="item">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </update>
+</mapper>
