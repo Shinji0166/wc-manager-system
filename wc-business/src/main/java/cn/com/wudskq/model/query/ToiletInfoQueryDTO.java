@@ -3,6 +3,7 @@ package cn.com.wudskq.model.query;
 import cn.com.wudskq.model.common.PageDTO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -13,6 +14,7 @@ import java.io.Serializable;
  * @description: TODO 公厕信息查询模型
  * @date 2022/6/28 3:00 AM
  */
+@Data
 @ApiModel(value = "公厕信息查询模型")
 public class ToiletInfoQueryDTO extends PageDTO implements Serializable {
 

@@ -24,7 +24,7 @@
             <!--排除已删除状态-->
             status != 1
             <if test="query.toiletName != null and query.toiletName != ''">
-                and toilet_info.name like concat('%',#{query.toiletName},'%')
+                and  name like concat('%',#{query.toiletName},'%')
             </if>
             <if test="query.toiletType != null and query.toiletType != ''">
                 and type  = #{query.toiletType}
