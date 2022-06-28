@@ -1,0 +1,55 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.wudskq.mapper.DeviceMapper">
+
+    <!--地区信息模型字段映射-->
+    <resultMap id="resInfo" type="cn.com.wudskq.model.Device">
+        <id column="id" property="id" jdbcType="BIGINT"></id>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="index_code" property="indexCode" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="DATE"/>
+    </resultMap>
+
+    <!-- 查询地区信息列表 -->
+    <select id="getDeviceList" resultMap="resInfo">
+        select id, name, code, index_code, status, create_by, create_time, update_by, update_time from device_info
+        <where>
+            <!--排除已删除状态-->
+            status != 1
+            <if test="query.deviceName != null and query.deviceName != ''">
+                and device_info.name like concat('%',#{query.deviceName},'%')
+            </if>
+            <if test="query.deviceCode != null and query.deviceCode != ''">
+                and device_info.code like concat('%',#{query.deviceCode},'%')
+            </if>
+            <if test="query.deviceStatus != null and query.deviceStatus != ''">
+                and status = #{query.deviceStatus}
+            </if>
+        </where>
+    </select>
+
+    <!-- 获取地区详细信息 -->
+    <select id="getDeviceDetail" resultMap="resInfo">
+        select id, name, code, index_code, status, create_by, create_time, update_by, update_time from device_info
+        where id = #{id}
+    </select>
+
+    <!-- 删除地区信息(逻辑删除) -->
+    <update id="removeDevice">
+        update device_info set status = 1
+        <where>
+            id in
+            <if test="ids != null and ids.size() != 0">
+                <foreach collection="ids" open="(" separator="," close=")" item="item">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </update>
+</mapper>
