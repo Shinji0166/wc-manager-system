@@ -31,11 +31,11 @@ public class SysDictData extends CreateInfoModel implements Serializable {
     private String dictLabel;
 
     @ApiModelProperty(name = "字典值")
-    private  String dictValue;
+    private String dictValue;
 
     @ApiModelProperty(name = "字典类型")
-    private  String dictType;
+    private String dictType;
 
     @ApiModelProperty(name = "状态(0启用 1禁用)")
-    private  Integer status;
+    private Integer status;
 }
