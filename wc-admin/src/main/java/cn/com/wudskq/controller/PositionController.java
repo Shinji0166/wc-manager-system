@@ -20,7 +20,7 @@ import java.util.List;
  * @description: TODO
  * @date 2022/6/28 3:22 AM
  */
-@Api(value = "坑位管理")
+@Api(tags = "坑位管理")
 @RestController
 @RequestMapping("/system")
 public class PositionController {

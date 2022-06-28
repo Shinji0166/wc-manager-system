@@ -20,7 +20,7 @@ import java.util.List;
  * @description: TODO
  * @date 2022/6/27 11:17 AM
  */
-@Api(value= "菜单权限管理")
+@Api(tags= "菜单权限管理")
 @RestController
 @RequestMapping("/system")
 public class ResController {

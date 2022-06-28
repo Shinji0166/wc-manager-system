@@ -20,7 +20,7 @@ import java.util.List;
  * @description: TODO
  * @date 2022/6/27 7:58 PM
  */
-@Api(value = "地区管理")
+@Api(tags = "地区管理")
 @RestController
 @RequestMapping("/system")
 public class RegionController {

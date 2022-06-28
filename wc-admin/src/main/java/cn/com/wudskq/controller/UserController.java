@@ -21,7 +21,7 @@ import java.util.List;
  * @description: TODO
  * @date 2022/6/23 2:32 PM
  */
-@Api(value= "用户管理")
+@Api(tags= "用户管理")
 @RestController
 @RequestMapping("/system")
 public class UserController {

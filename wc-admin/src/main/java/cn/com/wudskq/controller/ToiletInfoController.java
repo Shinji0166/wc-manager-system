@@ -21,7 +21,7 @@ import java.util.List;
  * @description: TODO
  * @date 2022/6/28 2:59 AM
  */
-@Api(value= "公厕管理")
+@Api(tags= "公厕管理")
 @RestController
 @RequestMapping("/system")
 public class ToiletInfoController {
