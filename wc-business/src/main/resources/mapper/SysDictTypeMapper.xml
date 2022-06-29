@@ -3,4 +3,43 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.com.wudskq.mapper.SysDictTypeMapper">
 
+    <!-- 字典视图模型映射 -->
+    <resultMap id="SysDictVo" type="cn.com.wudskq.model.vo.SysDictVo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="label" property="dictName" jdbcType="VARCHAR"/>
+        <result column="type" property="dictCode" jdbcType="VARCHAR"/>
+        <result column="classify" property="classify" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+    </resultMap>
+
+
+    <!-- 删除字典类型数据(逻辑删除) -->
+    <update id="removeDictType">
+        update sys_dict_type set status = 1
+        <where>
+            <if test="ids != null and ids.size() != 0">
+                id in
+                <foreach collection="ids" open="(" separator="," close=")" item="item">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </update>
+
+    <!-- 查询字典顶级节点下属数据 -->
+    <select id="getDictTypeTopData" resultMap="SysDictVo">
+        select id,label,type,status,classify from sys_dict_type
+        <where>
+             status = 0
+             <if test="query.id != null">
+                 and pid = #{query.id}
+             </if>
+            <if test="query.dictName != null and query.dictName != ''">
+                and label like concat('%',#{query.dictName},'%')
+            </if>
+            <if test="query.dictCode != null and query.dictCode != ''">
+                and type like concat('%',#{query.dictCode},'%')
+            </if>
+        </where>
+    </select>
 </mapper>

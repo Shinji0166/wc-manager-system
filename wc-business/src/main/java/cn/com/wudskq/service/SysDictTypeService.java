@@ -1,5 +1,8 @@
 package cn.com.wudskq.service;
 
+import cn.com.wudskq.model.SysDictType;
+import cn.com.wudskq.model.query.SysDictQueryDTO;
+import cn.com.wudskq.model.vo.SysDictVo;
 import cn.com.wudskq.model.vo.TreeSelectVo;
 
 import java.util.List;
@@ -18,4 +21,29 @@ public interface SysDictTypeService {
      * @return
      */
     List<TreeSelectVo> getDictTree();
+
+    /**
+     * 新增字典类型
+     * @param sysDictType
+     */
+    void saveDictType(SysDictType sysDictType);
+
+    /**
+     * 更新字典类型
+     * @param sysDictType
+     */
+    void updateDictType(SysDictType sysDictType);
+
+    /**
+     * 删除字典类型
+     * @param ids
+     */
+    void removeDictType(List<Long> ids);
+
+    /**
+     * 查询字典顶级节点下属数据
+     * @param sysDictQuery
+     * @return
+     */
+    List<SysDictVo> getDictTypeTopData(SysDictQueryDTO sysDictQuery);
 }

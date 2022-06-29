@@ -2,6 +2,8 @@ package cn.com.wudskq.service.impl;
 
 import cn.com.wudskq.mapper.SysDictTypeMapper;
 import cn.com.wudskq.model.SysDictType;
+import cn.com.wudskq.model.query.SysDictQueryDTO;
+import cn.com.wudskq.model.vo.SysDictVo;
 import cn.com.wudskq.model.vo.TreeSelectVo;
 import cn.com.wudskq.service.SysDictTypeService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -35,6 +37,26 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
         List<SysDictType> sysDictTypeList = sysDictTypeMapper.selectList(queryWrapper);
         //构建字典类型树
         return buildSysDictTypeTree(sysDictTypeList);
+    }
+
+    @Override
+    public void saveDictType(SysDictType sysDictType) {
+        sysDictTypeMapper.insert(sysDictType);
+    }
+
+    @Override
+    public void updateDictType(SysDictType sysDictType) {
+        sysDictTypeMapper.updateById(sysDictType);
+    }
+
+    @Override
+    public void removeDictType(List<Long> ids) {
+        sysDictTypeMapper.removeDictType(ids);
+    }
+
+    @Override
+    public List<SysDictVo> getDictTypeTopData(SysDictQueryDTO sysDictQuery) {
+        return sysDictTypeMapper.getDictTypeTopData(sysDictQuery);
     }
 
 
