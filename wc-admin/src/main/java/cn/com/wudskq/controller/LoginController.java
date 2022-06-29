@@ -1,6 +1,6 @@
 package cn.com.wudskq.controller;
 
-import cn.com.wudskq.model.LoginDTO;
+import cn.com.wudskq.model.common.LoginDTO;
 import cn.com.wudskq.web.LoginService;
 import cn.com.wudskq.vo.Response;
 import io.swagger.annotations.Api;

@@ -32,9 +32,9 @@ public class SysDictType extends CreateInfoModel implements Serializable {
     private String type;
 
     @ApiModelProperty(name = "字典分类(0系统字典 1模块字典 2公共字典)")
-    private  Integer classify;
+    private Integer classify;
 
-    @ApiModelProperty(name = "父级ID")
+    @ApiModelProperty(name = "父级ID 顶级节点pid默认为0")
     private Integer pid;
 
     @ApiModelProperty(name = "状态(0正常 1删除 2禁用)")

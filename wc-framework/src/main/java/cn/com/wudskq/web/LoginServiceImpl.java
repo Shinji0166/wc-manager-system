@@ -1,7 +1,6 @@
 package cn.com.wudskq.web;
 
-import cn.com.wudskq.model.LoginDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import cn.com.wudskq.model.common.LoginDTO;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

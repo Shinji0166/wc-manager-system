@@ -1,6 +1,6 @@
 package cn.com.wudskq.web;
 
-import cn.com.wudskq.model.LoginDTO;
+import cn.com.wudskq.model.common.LoginDTO;
 import org.springframework.stereotype.Service;
 
 /**
