@@ -1,6 +1,7 @@
 package cn.com.wudskq.expection;
 
 import cn.com.wudskq.vo.Response;
+import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
@@ -52,5 +53,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = NullPointerException.class)
     public Response handleNullPointerException(NullPointerException e){
         return  Response.error(500,"空指针异常");
+    }
+
+    //数据库字段超长
+    @ExceptionHandler(value = MysqlDataTruncation.class)
+    public Response handleMysqlDataTruncation(MysqlDataTruncation e){
+        return  Response.error(500,"数据库字段超长");
     }
 }

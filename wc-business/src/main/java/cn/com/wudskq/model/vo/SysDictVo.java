@@ -1,5 +1,7 @@
 package cn.com.wudskq.model.vo;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -19,6 +21,8 @@ import java.io.Serializable;
 public class SysDictVo implements Serializable {
 
     @ApiModelProperty(value = "ID")
+    //防止返回前端数据失真
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @ApiModelProperty(value = "字典名称")
