@@ -7,6 +7,7 @@ import cn.com.wudskq.model.vo.SysDictVo;
 import cn.com.wudskq.model.vo.TreeSelectVo;
 import cn.com.wudskq.service.SysDictTypeService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,6 +57,7 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
 
     @Override
     public List<SysDictVo> getDictTypeTopData(SysDictQueryDTO sysDictQuery) {
+        PageHelper.startPage(sysDictQuery.getPageNum(),sysDictQuery.getPageSize());
         return sysDictTypeMapper.getDictTypeTopData(sysDictQuery);
     }
 
