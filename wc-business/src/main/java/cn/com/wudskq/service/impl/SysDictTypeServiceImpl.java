@@ -78,7 +78,7 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     {
         // 得到子节点列表
         List<TreeSelectVo> childList = getChildList(list, t);
-        t.setChildrenList(childList);
+        t.setChildren(childList);
     }
 
     /**

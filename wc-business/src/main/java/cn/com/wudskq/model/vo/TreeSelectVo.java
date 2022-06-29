@@ -35,7 +35,7 @@ public class TreeSelectVo implements Serializable {
     private String colum;
 
     @ApiModelProperty(value = "节点列表")
-    private List<TreeSelectVo> childrenList;
+    private List<TreeSelectVo> children;
 
     public TreeSelectVo(){
 
@@ -47,5 +47,13 @@ public class TreeSelectVo implements Serializable {
         this.label = sysDictType.getLabel();
     };
 
+
+    public List<TreeSelectVo> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<TreeSelectVo> children) {
+        this.children = children;
+    }
 
 }
