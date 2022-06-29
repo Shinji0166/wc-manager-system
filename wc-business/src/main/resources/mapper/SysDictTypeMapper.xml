@@ -42,4 +42,8 @@
             </if>
         </where>
     </select>
+
+    <select id="getDictTypeDetail" resultMap="SysDictVo">
+        select id,label,type,status,classify from sys_dict_type where id = #{id}
+    </select>
 </mapper>

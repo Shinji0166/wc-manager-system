@@ -29,4 +29,11 @@ public interface SysDictDataMapper extends BaseMapper<SysDictData> {
      * @param ids
      */
     void removeDictData(@Param("ids") List<Long> ids);
+
+    /**
+     * 获取字典数据详情
+     * @param id
+     * @return
+     */
+    SysDictVo getDictDataDetail(@Param("id") Long id);
 }

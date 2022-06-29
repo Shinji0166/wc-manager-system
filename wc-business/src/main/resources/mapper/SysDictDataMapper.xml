@@ -9,18 +9,17 @@
         <result column="dict_label" property="dictName" jdbcType="VARCHAR"/>
         <result column="dict_type" property="dictCode" jdbcType="VARCHAR"/>
         <result column="dict_value" property="dictValue" jdbcType="VARCHAR"/>
-        <result column="classify" property="classify" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="TINYINT"/>
     </resultMap>
 
     <!-- 根据字典类型查询字典数据列表 -->
-    <select id="getDictDataList" resultType="cn.com.wudskq.model.vo.SysDictVo">
+    <select id="getDictDataList" resultMap="SysDictVo">
         select id,dict_label,dict_type,status,dict_value from sys_dict_data
         <where>
             status = 0
             <!-- 字典类型 -->
             <if test="query.dictCode != null and query.dictCode != ''">
-                and dict_type = #{query.dictCode}
+                and dict_type like concat('%',#{query.dictCode},'%')
             </if>
             <if test="query.dictName != null and query.dictName != ''">
                 and dict_label like concat('%',#{query.dictName},'%')
@@ -40,4 +39,10 @@
             </if>
         </where>
     </update>
+
+    <!-- 获取字典数据详情 -->
+    <select id="getDictDataDetail" resultMap="SysDictVo">
+        select id,dict_label,dict_type,dict_value,status,dict_value from sys_dict_data
+        where id = #{id}
+    </select>
 </mapper>

@@ -39,4 +39,11 @@ public interface SysDictDataService {
      * @param ids
      */
     void removeDictData(List<Long> ids);
+
+    /**
+     * 获取字典数据详情
+     * @param id
+     * @return
+     */
+    SysDictVo getDictDataDetail(Long id);
 }

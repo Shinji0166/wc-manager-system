@@ -30,7 +30,7 @@ public class SysDictVo implements Serializable {
     @ApiModelProperty(value = "字典值")
     private String dictValue;
 
-    @ApiModelProperty(value = "字典分类(0系统字典 1模块字典 2公共字典)")
+    @ApiModelProperty(value = "字典分类(0系统字典 1模块字典 2公共字典 3其他)")
     private Integer classify;
 
     @ApiModelProperty(value = "状态(0正常 1删除 2禁用)")

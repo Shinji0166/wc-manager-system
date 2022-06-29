@@ -29,4 +29,11 @@ public interface SysDictTypeMapper extends BaseMapper<SysDictType> {
      * @return
      */
     List<SysDictVo> getDictTypeTopData(@Param("query") SysDictQueryDTO sysDictQuery);
+
+    /**
+     * 查询字典类型信息详情
+     * @param id
+     * @return
+     */
+    SysDictVo getDictTypeDetail(@Param("id") Long id);
 }

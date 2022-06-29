@@ -38,8 +38,8 @@ public class SysDictTypeController {
         return Response.success(dictTree);
     }
 
-    @ApiOperation(value = "查询字典顶级节点下属字典数据")
-    @PostMapping("/dict/type/top/data")
+    @ApiOperation(value = "查询字典顶级节点下属字典数据列表")
+    @PostMapping("/dict/type/top/data/list")
     public Response getDictTypeTopData(@RequestBody SysDictQueryDTO sysDictQuery){
         List<SysDictVo> sysDictVoList = sysDictTypeService.getDictTypeTopData(sysDictQuery);
         if(null != sysDictVoList && 0 < sysDictVoList.size()){
@@ -47,6 +47,13 @@ public class SysDictTypeController {
             return Response.success(Collections.singletonList(pageInfo.getList()),pageInfo.getTotal());
         }
         return Response.success();
+    }
+
+    @ApiOperation(value = "查看字典类型详情")
+    @GetMapping("/dict/type/detail")
+    public Response getDictTypeDetail(@RequestParam("id")Long id){
+        SysDictVo sysDictDetail = sysDictTypeService.getDictTypeDetail(id);
+        return Response.success(sysDictDetail);
     }
 
     @ApiOperation(value = "新增字典类型")

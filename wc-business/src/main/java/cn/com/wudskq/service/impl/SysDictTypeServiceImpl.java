@@ -58,7 +58,15 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     @Override
     public List<SysDictVo> getDictTypeTopData(SysDictQueryDTO sysDictQuery) {
         PageHelper.startPage(sysDictQuery.getPageNum(),sysDictQuery.getPageSize());
-        return sysDictTypeMapper.getDictTypeTopData(sysDictQuery);
+        List<SysDictVo> dictTypeTopList = sysDictTypeMapper.getDictTypeTopData(sysDictQuery);
+        //设置节点级别为3(其他)
+        dictTypeTopList.forEach(obj ->{obj.setClassify(3);});
+        return dictTypeTopList;
+    }
+
+    @Override
+    public SysDictVo getDictTypeDetail(Long id) {
+        return sysDictTypeMapper.getDictTypeDetail(id);
     }
 
 
@@ -78,6 +86,8 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
             if(!idList.contains(Long.valueOf(sysDictType.getPid()))){
                 //生成顶级节点
                 TreeSelectVo treeSelectNode = new TreeSelectVo(sysDictType);
+                //设置顶级节点级别为0
+                treeSelectNode.setLevel(0);
                 //递归查找顶级节点下属所有子节点
                 recursionFn(dictTypes, treeSelectNode);
                 //结果中添加顶级节点
@@ -102,6 +112,8 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     {
         // 得到子节点列表
         List<TreeSelectVo> childList = getChildList(list, t);
+        //设置子节点列表级别为3(其他)
+        childList.forEach(obj->{obj.setLevel(3);});
         t.setChildren(childList);
     }
 

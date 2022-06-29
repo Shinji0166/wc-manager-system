@@ -28,8 +28,11 @@ public class TreeSelectVo implements Serializable {
     @ApiModelProperty(value = "节点名称")
     private String label;
 
-    @ApiModelProperty(value = "节点级别")
-    private String level;
+    @ApiModelProperty(value = "节点级别(0系统字典 1模块字典 2公共字典 3其他)")
+    private Integer level;
+
+    @ApiModelProperty(value = "字典代码")
+    private String code;
 
     @ApiModelProperty(value = "冗余字段")
     private String colum;
@@ -45,6 +48,7 @@ public class TreeSelectVo implements Serializable {
     public TreeSelectVo(SysDictType sysDictType){
         this.id = sysDictType.getId();
         this.label = sysDictType.getLabel();
+        this.code = sysDictType.getType();
     };
 
 

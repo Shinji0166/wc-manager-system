@@ -40,6 +40,14 @@ public class SysDictDataController {
         return Response.success();
     }
 
+
+    @ApiOperation(value = "获取字典数据详情")
+    @GetMapping("/dict/data/detail")
+    public Response getDictDataDetail(@RequestParam("id")Long id){
+        SysDictVo sysDictDetail = sysDictDataService.getDictDataDetail(id);
+        return Response.success(sysDictDetail);
+    }
+
     @ApiOperation(value = "新增字典数据")
     @PostMapping("/save/dict/data")
     public Response saveDictData(@RequestBody SysDictData sysDictData){

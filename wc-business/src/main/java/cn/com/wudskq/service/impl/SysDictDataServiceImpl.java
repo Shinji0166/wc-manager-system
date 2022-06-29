@@ -44,4 +44,9 @@ public class SysDictDataServiceImpl implements SysDictDataService {
     public void removeDictData(List<Long> ids) {
         sysDictDataMapper.removeDictData(ids);
     }
+
+    @Override
+    public SysDictVo getDictDataDetail(Long id) {
+        return sysDictDataMapper.getDictDataDetail(id);
+    }
 }

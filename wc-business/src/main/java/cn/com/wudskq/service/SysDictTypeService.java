@@ -46,4 +46,11 @@ public interface SysDictTypeService {
      * @return
      */
     List<SysDictVo> getDictTypeTopData(SysDictQueryDTO sysDictQuery);
+
+    /**
+     * 查看字典类型详情信息
+     * @param id
+     * @return
+     */
+    SysDictVo getDictTypeDetail(Long id);
 }
