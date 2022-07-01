@@ -9,9 +9,7 @@ import cn.com.wudskq.model.TSysRes;
 import cn.com.wudskq.model.TSysRole;
 import cn.com.wudskq.model.query.ResInfoQueryDTO;
 import cn.com.wudskq.service.TSysResService;
-import cn.com.wudskq.snowflake.IdGeneratorSnowflake;
 import com.github.pagehelper.PageHelper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -34,9 +32,6 @@ public class TSysResServiceImpl implements TSysResService {
  
     @Resource
     private TSysRoleResMapper tSysRoleResMapper;
-
-    @Resource
-    private IdGeneratorSnowflake idGeneratorSnowflake;
 
 
     /**
@@ -82,8 +77,6 @@ public class TSysResServiceImpl implements TSysResService {
     @Override
 //    @DataSource(DataSourceType.SLAVE)
     public void saveRes(TSysRes sysRes) {
-         sysRes.setStatus(0);
-         sysRes.setId(idGeneratorSnowflake.snowflakeId());
          tSysResMapper.insert(sysRes);
     }
 

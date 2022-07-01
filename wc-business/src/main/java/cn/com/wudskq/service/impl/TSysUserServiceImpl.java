@@ -9,7 +9,6 @@ import cn.com.wudskq.service.TSysUserService;
 import cn.com.wudskq.snowflake.IdGeneratorSnowflake;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
@@ -50,8 +49,6 @@ public class TSysUserServiceImpl implements TSysUserService {
     @Override
 //    @DataSource(DataSourceType.SLAVE)
     public void saveUser(TSysUser sysUser) {
-        sysUser.setStatus(0);
-        sysUser.setId(idGeneratorSnowflake.snowflakeId());
         tSysUserMapper.insert(sysUser);
     }
 

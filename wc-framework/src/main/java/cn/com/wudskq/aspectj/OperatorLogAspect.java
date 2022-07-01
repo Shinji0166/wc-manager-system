@@ -4,7 +4,6 @@ import cn.com.wudskq.annotation.OperatorLog;
 import cn.com.wudskq.config.JWTConfig;
 import cn.com.wudskq.expection.GlobalExceptionHandler;
 import cn.com.wudskq.mapper.SysOperatorLogMapper;
-import cn.com.wudskq.mapper.TSysUserMapper;
 import cn.com.wudskq.model.SysOperatorLog;
 import cn.com.wudskq.model.SysUserDetails;
 import cn.com.wudskq.model.TSysUser;
@@ -34,9 +33,6 @@ import java.util.Date;
 @Aspect
 @Component
 public class OperatorLogAspect {
-
-    @Autowired
-    private TSysUserMapper tSysUserMapper;
 
     @Autowired
     private SysOperatorLogMapper sysOperatorLogMapper;
@@ -75,7 +71,7 @@ public class OperatorLogAspect {
                 //是否为管理员,管理员直接跳过查询
                 if(!"admin".equals(sysUserDetails.getUsername())){
                     //根据用户ID查询用户
-                      tSysUser = tSysUserMapper.selectById(sysUserDetails.getId());
+                      tSysUser.setNickName(sysUserDetails.getNickName());
                 }else {
                       tSysUser.setNickName("系统管理员");
                 }

@@ -80,9 +80,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (tSysUser != null) {
             SysUserDetails sysUserDetails = new SysUserDetails();
             BeanUtils.copyProperties(tSysUser, sysUserDetails);
-            //处理账户名密码
+            //处理账户名密码 昵称
             sysUserDetails.setUsername(tSysUser.getUserName());
             sysUserDetails.setPassword(tSysUser.getPassWord());
+            sysUserDetails.setNickName(tSysUser.getNickName());
             Set<GrantedAuthority> authorities = new HashSet<>(); // 角色集合
  
             resList = tSysResService.findResByUserId(String.valueOf(sysUserDetails.getId()));//当前用户有的资源集合

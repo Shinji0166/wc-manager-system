@@ -1,6 +1,5 @@
 package cn.com.wudskq.mapper;
 
-
 import cn.com.wudskq.model.TSysUser;
 import cn.com.wudskq.model.query.UserInfoQueryDTO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

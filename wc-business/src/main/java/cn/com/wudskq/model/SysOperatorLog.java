@@ -20,7 +20,6 @@ import java.io.Serializable;
  */
 
 @Data
-@EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "系统操作日志表模型")
 @TableName("sys_operator_log")

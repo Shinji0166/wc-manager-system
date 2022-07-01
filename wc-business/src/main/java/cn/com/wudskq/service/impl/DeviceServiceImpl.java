@@ -6,12 +6,10 @@ import cn.com.wudskq.mapper.DeviceMapper;
 import cn.com.wudskq.model.Device;
 import cn.com.wudskq.model.query.DeviceQueryDTO;
 import cn.com.wudskq.service.DeviceService;
-import cn.com.wudskq.snowflake.IdGeneratorSnowflake;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -26,9 +24,6 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Autowired
     private DeviceMapper deviceMapper;
-
-    @Resource
-    private IdGeneratorSnowflake idGeneratorSnowflake;
 
     @Override
 //    @DataSource(DataSourceType.MASTER)
@@ -46,9 +41,6 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
 //    @DataSource(DataSourceType.SLAVE)
     public void saveDevice(Device deviceInfo) {
-        //新增状态为正常
-        deviceInfo.setStatus(0);
-        deviceInfo.setId(idGeneratorSnowflake.snowflakeId());
         deviceMapper.insert(deviceInfo);
     }
 

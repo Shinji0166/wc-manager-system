@@ -1,7 +1,6 @@
 package cn.com.wudskq.util;
 
 import cn.com.wudskq.config.JWTConfig;
-import cn.com.wudskq.expection.BusinessException;
 import cn.com.wudskq.model.SysUserDetails;
 import cn.com.wudskq.utils.StringUtils;
 import com.alibaba.fastjson.JSON;
@@ -14,7 +13,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.*;
- 
 
 /**
  * @author wudskq
@@ -36,7 +34,9 @@ public class JWTTokenUtil {
                 .setIssuer("wudskq") // 签发者
                 .setExpiration(new Date(System.currentTimeMillis() + JWTConfig.expiration)) // 过期时间
                 .signWith(SignatureAlgorithm.HS512, JWTConfig.secret) // 签名算法、密钥
-                .claim("authorities", JSON.toJSONString(sysUserDetails.getAuthorities())).compact(); // 自定义其他属性，如用户组织机构ID，用户所拥有的角色，用户权限信息等
+                .claim("authorities", JSON.toJSONString(sysUserDetails.getAuthorities()))
+                .claim("nickName",sysUserDetails.getNickName())
+                .compact(); // 自定义其他属性，如用户组织机构ID，用户所拥有的角色，用户权限信息等
         return JWTConfig.tokenPrefix + token;
     }
  
@@ -53,12 +53,12 @@ public class JWTTokenUtil {
                 token = token.substring(JWTConfig.tokenPrefix.length());
                 // 解析Token
                 Claims claims = Jwts.parser().setSigningKey(JWTConfig.secret).parseClaimsJws(token).getBody();
-
-
                 // 获取用户信息
                 sysUserDetails = new SysUserDetails();
                 sysUserDetails.setId(Long.valueOf(claims.getId()));
                 sysUserDetails.setUsername(claims.getSubject());
+                sysUserDetails.setNickName(String.valueOf(claims.get("nickName")));
+
                 // 获取角色
                 Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
                 String authority = claims.get("authorities").toString();

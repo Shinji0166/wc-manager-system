@@ -1,6 +1,5 @@
 package cn.com.wudskq.controller;
 
-import cn.com.wudskq.model.Position;
 import cn.com.wudskq.model.SysOperatorLog;
 import cn.com.wudskq.model.query.OperatorQueryDTO;
 import cn.com.wudskq.service.SysOperatorLogService;

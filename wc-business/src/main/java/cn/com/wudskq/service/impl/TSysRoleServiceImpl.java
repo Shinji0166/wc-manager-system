@@ -6,12 +6,10 @@ import cn.com.wudskq.mapper.TSysRoleMapper;
 import cn.com.wudskq.model.TSysRole;
 import cn.com.wudskq.model.query.RoleInfoQueryDTO;
 import cn.com.wudskq.service.TSysRoleService;
-import cn.com.wudskq.snowflake.IdGeneratorSnowflake;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -22,9 +20,6 @@ public class TSysRoleServiceImpl implements TSysRoleService {
 
     @Autowired
     private TSysRoleMapper sysRoleMapper;
-
-    @Resource
-    private IdGeneratorSnowflake idGeneratorSnowflake;
 
     @Override
 //    @DataSource(DataSourceType.MASTER)
@@ -43,8 +38,6 @@ public class TSysRoleServiceImpl implements TSysRoleService {
     @Override
 //    @DataSource(DataSourceType.SLAVE)
     public void saveRole(TSysRole sysRole) {
-        sysRole.setStatus(0);
-        sysRole.setId(idGeneratorSnowflake.snowflakeId());
         sysRoleMapper.insert(sysRole);
     }
 

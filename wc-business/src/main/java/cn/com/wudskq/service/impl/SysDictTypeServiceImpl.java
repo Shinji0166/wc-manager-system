@@ -6,13 +6,11 @@ import cn.com.wudskq.model.query.SysDictQueryDTO;
 import cn.com.wudskq.model.vo.SysDictVo;
 import cn.com.wudskq.model.vo.TreeSelectVo;
 import cn.com.wudskq.service.SysDictTypeService;
-import cn.com.wudskq.snowflake.IdGeneratorSnowflake;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -31,11 +29,6 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     @Autowired
     private SysDictTypeMapper sysDictTypeMapper;
 
-
-    @Resource
-    private IdGeneratorSnowflake idGeneratorSnowflake;
-
-
     @Override
     public List<TreeSelectVo> getDictTree() {
         //获取全部字典类型数据;
@@ -48,8 +41,6 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
 
     @Override
     public void saveDictType(SysDictType sysDictType) {
-        sysDictType.setStatus(0);
-        sysDictType.setId(idGeneratorSnowflake.snowflakeId());
         sysDictTypeMapper.insert(sysDictType);
     }
 
