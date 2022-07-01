@@ -13,14 +13,12 @@
         <result column="result" property="result" jdbcType="VARCHAR"/>
         <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="DATE"/>
-        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
-        <result column="update_time" property="updateTime" jdbcType="DATE"/>
     </resultMap>
 
 
     <!-- 查询系统操作日志列表 -->
     <select id="getOperatorLogList" resultMap="sysOperatorLogInfo">
         select  id, operator_module, operator_function, operator_action, request_mode, result,
-                create_by, create_time, update_by, update_time from sys_operator_log
+                create_by, create_time from sys_operator_log
     </select>
 </mapper>

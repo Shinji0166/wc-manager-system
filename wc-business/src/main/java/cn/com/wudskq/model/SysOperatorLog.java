@@ -45,4 +45,7 @@ public class SysOperatorLog extends CreateInfoModel implements Serializable {
     @ApiModelProperty(name = "响应结果")
     private  String result;
 
+    @ApiModelProperty("失败原因")
+    private String failureReason;
+
 }

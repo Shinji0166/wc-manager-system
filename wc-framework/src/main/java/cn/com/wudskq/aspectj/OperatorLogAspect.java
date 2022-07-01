@@ -10,9 +10,7 @@ import cn.com.wudskq.model.SysUserDetails;
 import cn.com.wudskq.model.TSysUser;
 import cn.com.wudskq.snowflake.IdGeneratorSnowflake;
 import cn.com.wudskq.util.JWTTokenUtil;
-import cn.com.wudskq.vo.Response;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -89,6 +87,7 @@ public class OperatorLogAspect {
         } catch (Throwable e) {
             //异常代表请求失败
             sysOperatorLog.setResult("请求失败");
+            sysOperatorLog.setFailureReason("异常:"+e+"异常位置:"+e.getStackTrace()[0].toString());
             return globalExceptionHandler.handle((Exception) e);
         }finally {
             //最后数据入库
