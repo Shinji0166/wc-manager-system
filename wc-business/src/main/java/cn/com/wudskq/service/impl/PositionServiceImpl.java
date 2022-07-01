@@ -6,10 +6,12 @@ import cn.com.wudskq.mapper.PositionMapper;
 import cn.com.wudskq.model.Position;
 import cn.com.wudskq.model.query.PositionQueryDTO;
 import cn.com.wudskq.service.PositionService;
+import cn.com.wudskq.snowflake.IdGeneratorSnowflake;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -25,33 +27,38 @@ public class PositionServiceImpl implements PositionService {
     @Autowired
     private PositionMapper positionMapper;
 
+    @Resource
+    private IdGeneratorSnowflake idGeneratorSnowflake;
+
     @Override
-    @DataSource(DataSourceType.MASTER)
+//    @DataSource(DataSourceType.MASTER)
     public List<Position> getPositionList(PositionQueryDTO positionQuery) {
         PageHelper.startPage(positionQuery.getPageNum(),positionQuery.getPageSize());
         return positionMapper.getPositionList(positionQuery);
     }
 
     @Override
-    @DataSource(DataSourceType.MASTER)
+//    @DataSource(DataSourceType.MASTER)
     public Position getPositionDetail(Long id) {
         return positionMapper.getPositionDetail(id);
     }
 
     @Override
-    @DataSource(DataSourceType.SLAVE)
+//    @DataSource(DataSourceType.SLAVE)
     public void savePosition(Position positionInfo) {
+        positionInfo.setStatus(0);
+        positionInfo.setId(idGeneratorSnowflake.snowflakeId());
         positionMapper.insert(positionInfo);
     }
 
     @Override
-    @DataSource(DataSourceType.SLAVE)
+//    @DataSource(DataSourceType.SLAVE)
     public void updatePosition(Position positionInfo) {
         positionMapper.updateById(positionInfo);
     }
 
     @Override
-    @DataSource(DataSourceType.SLAVE)
+//    @DataSource(DataSourceType.SLAVE)
     public void removePosition(List<Long> ids) {
         positionMapper.removePosition(ids);
     }

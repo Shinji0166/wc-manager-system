@@ -1,5 +1,6 @@
 package cn.com.wudskq.controller;
 
+import cn.com.wudskq.annotation.OperatorLog;
 import cn.com.wudskq.model.TSysRes;
 import cn.com.wudskq.model.query.ResInfoQueryDTO;
 import cn.com.wudskq.service.TSysResService;
@@ -20,7 +21,7 @@ import java.util.List;
  * @description: TODO
  * @date 2022/6/27 11:17 AM
  */
-@Api(tags= "菜单权限管理")
+@Api(tags = "菜单权限管理")
 @RestController
 @RequestMapping("/system")
 public class ResController {
@@ -29,41 +30,46 @@ public class ResController {
     private TSysResService sysResService;
 
 
-    @ApiOperation(value= "获取菜单权限列表")
+    @ApiOperation(value = "获取菜单权限列表")
+    @OperatorLog(module = "菜单管理", function = "菜单信息", action = "获取菜单权限列表", requestMode = "POST")
     @PostMapping("/res/list")
-    public Response getResLIst(@RequestBody(required = false) ResInfoQueryDTO resInfoQuery){
+    public Response getResLIst(@RequestBody(required = false) ResInfoQueryDTO resInfoQuery) {
         List<TSysRes> resInfoList = sysResService.getResLIst(resInfoQuery);
-        if(null != resInfoList && 0 < resInfoList.size()){
+        if (null != resInfoList && 0 < resInfoList.size()) {
             PageInfo<TSysRes> pageInfo = new PageInfo<TSysRes>(resInfoList);
-            return Response.success(Collections.singletonList(pageInfo.getList()),pageInfo.getTotal());
+            return Response.success(Collections.singletonList(pageInfo.getList()), pageInfo.getTotal());
         }
         return Response.success();
     }
 
-    @ApiOperation(value= "获取菜单详细信息")
+    @ApiOperation(value = "获取菜单详细信息")
+    @OperatorLog(module = "菜单管理", function = "菜单信息", action = "获取菜单详细信息", requestMode = "GET")
     @GetMapping("/res/detail")
-    public Response getResDetail(@RequestParam("id")Long id){
+    public Response getResDetail(@RequestParam("id") Long id) {
         TSysRes roleDetail = sysResService.getResDetail(id);
         return Response.success(roleDetail);
     }
 
-    @ApiOperation(value= "新增菜单信息")
+    @ApiOperation(value = "新增菜单信息")
+    @OperatorLog(module = "菜单管理", function = "菜单信息", action = "新增菜单信息", requestMode = "POST")
     @PostMapping("/save/res")
-    public Response saveRes(@RequestBody TSysRes sysRes){
+    public Response saveRes(@RequestBody TSysRes sysRes) {
         sysResService.saveRes(sysRes);
         return Response.success();
     }
 
-    @ApiOperation(value= "更新菜单信息")
+    @ApiOperation(value = "更新菜单信息")
+    @OperatorLog(module = "菜单管理", function = "菜单信息", action = "更新菜单信息", requestMode = "PUT")
     @PutMapping("/update/res")
-    public Response updateRes(@RequestBody TSysRes sysRes){
+    public Response updateRes(@RequestBody TSysRes sysRes) {
         sysResService.updateRes(sysRes);
         return Response.success();
     }
 
-    @ApiOperation(value= "删除菜单信息(逻辑删除)")
+    @ApiOperation(value = "删除菜单信息(逻辑删除)")
+    @OperatorLog(module = "菜单管理", function = "菜单信息", action = "删除菜单信息", requestMode = "DELETE")
     @DeleteMapping("/remove/res")
-    public Response removeRes(@RequestParam("ids")List<Long> ids){
+    public Response removeRes(@RequestParam("ids") List<Long> ids) {
         sysResService.removeRes(ids);
         return Response.success();
     }

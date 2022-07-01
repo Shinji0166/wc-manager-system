@@ -11,6 +11,7 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -22,38 +23,39 @@ public class TSysRoleServiceImpl implements TSysRoleService {
     @Autowired
     private TSysRoleMapper sysRoleMapper;
 
-    @Autowired
+    @Resource
     private IdGeneratorSnowflake idGeneratorSnowflake;
 
     @Override
-    @DataSource(DataSourceType.MASTER)
+//    @DataSource(DataSourceType.MASTER)
     public List<TSysRole> getRoleInfoList(RoleInfoQueryDTO roleInfoQuery) {
         PageHelper.startPage(roleInfoQuery.getPageNum(),roleInfoQuery.getPageSize());
         return sysRoleMapper.getRoleInfoList(roleInfoQuery);
     }
 
     @Override
-    @DataSource(DataSourceType.MASTER)
+//    @DataSource(DataSourceType.MASTER)
     public TSysRole getRoleDetail(Long id) {
         return sysRoleMapper.getRoleDetail(id);
     }
 
 
     @Override
-    @DataSource(DataSourceType.SLAVE)
+//    @DataSource(DataSourceType.SLAVE)
     public void saveRole(TSysRole sysRole) {
+        sysRole.setStatus(0);
         sysRole.setId(idGeneratorSnowflake.snowflakeId());
         sysRoleMapper.insert(sysRole);
     }
 
     @Override
-    @DataSource(DataSourceType.SLAVE)
+//    @DataSource(DataSourceType.SLAVE)
     public void updateRole(TSysRole sysRole) {
         sysRoleMapper.updateById(sysRole);
     }
 
     @Override
-    @DataSource(DataSourceType.SLAVE)
+//    @DataSource(DataSourceType.SLAVE)
     public void removeRole(List<Long> ids) {
         sysRoleMapper.removeRole(ids);
     }

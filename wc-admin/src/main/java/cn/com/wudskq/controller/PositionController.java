@@ -1,5 +1,6 @@
 package cn.com.wudskq.controller;
 
+import cn.com.wudskq.annotation.OperatorLog;
 import cn.com.wudskq.model.Position;
 import cn.com.wudskq.model.query.PositionQueryDTO;
 import cn.com.wudskq.service.PositionService;
@@ -29,41 +30,46 @@ public class PositionController {
     private PositionService positionService;
 
     @ApiOperation(value = "获取坑位信息列表")
+    @OperatorLog(module = "坑位管理", function = "坑位信息", action = "获取坑位信息列表", requestMode = "POST")
     @PostMapping("/position/list")
-    public Response getPositionList(@RequestBody(required = false) PositionQueryDTO positionQuery){
+    public Response getPositionList(@RequestBody(required = false) PositionQueryDTO positionQuery) {
         List<Position> positionList = positionService.getPositionList(positionQuery);
-        if(null != positionList && 0 < positionList.size()){
+        if (null != positionList && 0 < positionList.size()) {
             PageInfo<Position> pageInfo = new PageInfo<Position>(positionList);
-            return Response.success(Collections.singletonList(pageInfo.getList()),pageInfo.getTotal());
+            return Response.success(Collections.singletonList(pageInfo.getList()), pageInfo.getTotal());
         }
         return Response.success();
     }
 
 
     @ApiOperation(value = "获取坑位详细信息")
+    @OperatorLog(module = "坑位管理", function = "坑位信息", action = "获取坑位详细信息", requestMode = "GET")
     @GetMapping("/position/detail")
-    public Response getPositionDetail(@RequestParam("id")Long id){
+    public Response getPositionDetail(@RequestParam("id") Long id) {
         Position positionDetail = positionService.getPositionDetail(id);
         return Response.success(positionDetail);
     }
 
     @ApiOperation(value = "新增坑位信息")
+    @OperatorLog(module = "坑位管理", function = "坑位信息", action = "新增坑位信息", requestMode = "POST")
     @PostMapping("/save/position")
-    public Response savePosition(@RequestBody Position positionInfo){
+    public Response savePosition(@RequestBody Position positionInfo) {
         positionService.savePosition(positionInfo);
         return Response.success();
     }
 
-    @ApiOperation(value= "更新坑位信息")
+    @ApiOperation(value = "更新坑位信息")
+    @OperatorLog(module = "坑位管理", function = "坑位信息", action = "更新坑位信息", requestMode = "PUT")
     @PutMapping("/update/position")
-    public Response updatePosition(@RequestBody Position positionInfo){
+    public Response updatePosition(@RequestBody Position positionInfo) {
         positionService.updatePosition(positionInfo);
         return Response.success();
     }
 
-    @ApiOperation(value= "删除坑位信息(逻辑删除)")
+    @ApiOperation(value = "删除坑位信息(逻辑删除)")
+    @OperatorLog(module = "坑位管理", function = "坑位信息", action = "删除坑位信息", requestMode = "DELETE")
     @DeleteMapping("/remove/position")
-    public Response removePosition(@RequestParam("ids")List<Long> ids){
+    public Response removePosition(@RequestParam("ids") List<Long> ids) {
         positionService.removePosition(ids);
         return Response.success();
     }

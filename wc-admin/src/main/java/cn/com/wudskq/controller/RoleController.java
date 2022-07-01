@@ -1,5 +1,6 @@
 package cn.com.wudskq.controller;
 
+import cn.com.wudskq.annotation.OperatorLog;
 import cn.com.wudskq.model.TSysRole;
 import cn.com.wudskq.model.query.RoleInfoQueryDTO;
 import cn.com.wudskq.service.TSysRoleService;
@@ -20,7 +21,7 @@ import java.util.List;
  * @description: TODO
  * @date 2022/6/27 8:51 AM
  */
-@Api(tags= "角色管理")
+@Api(tags = "角色管理")
 @RestController
 @RequestMapping("/system")
 public class RoleController {
@@ -29,41 +30,46 @@ public class RoleController {
     private TSysRoleService sysRoleService;
 
 
-    @ApiOperation(value= "获取角色信息列表")
+    @ApiOperation(value = "获取角色信息列表")
+    @OperatorLog(module = "角色管理", function = "角色信息", action = "获取角色信息列表", requestMode = "POST")
     @PostMapping("/role/list")
-    public Response getRoleInfoList(@RequestBody(required = false) RoleInfoQueryDTO roleInfoQuery){
+    public Response getRoleInfoList(@RequestBody(required = false) RoleInfoQueryDTO roleInfoQuery) {
         List<TSysRole> roleInfoList = sysRoleService.getRoleInfoList(roleInfoQuery);
-        if(null != roleInfoList && 0 < roleInfoList.size()){
+        if (null != roleInfoList && 0 < roleInfoList.size()) {
             PageInfo<TSysRole> pageInfo = new PageInfo<TSysRole>(roleInfoList);
-            return Response.success(Collections.singletonList(pageInfo.getList()),pageInfo.getTotal());
+            return Response.success(Collections.singletonList(pageInfo.getList()), pageInfo.getTotal());
         }
         return Response.success();
     }
 
-    @ApiOperation(value= "获取角色详细信息")
+    @ApiOperation(value = "获取角色详细信息")
+    @OperatorLog(module = "角色管理", function = "角色信息", action = "获取角色详细信息", requestMode = "GET")
     @GetMapping("/role/detail")
-    public Response getRoleDetail(@RequestParam("id")Long id){
+    public Response getRoleDetail(@RequestParam("id") Long id) {
         TSysRole roleDetail = sysRoleService.getRoleDetail(id);
         return Response.success(roleDetail);
     }
 
-    @ApiOperation(value= "新增角色信息")
+    @ApiOperation(value = "新增角色信息")
+    @OperatorLog(module = "角色管理", function = "角色信息", action = "新增角色信息", requestMode = "POST")
     @PostMapping("/save/role")
-    public Response saveRole(@RequestBody TSysRole sysRole){
+    public Response saveRole(@RequestBody TSysRole sysRole) {
         sysRoleService.saveRole(sysRole);
         return Response.success();
     }
 
-    @ApiOperation(value= "更新角色信息")
+    @ApiOperation(value = "更新角色信息")
+    @OperatorLog(module = "角色管理", function = "角色信息", action = "更新角色信息", requestMode = "PUT")
     @PutMapping("/update/role")
-    public Response updateRole(@RequestBody TSysRole sysRole){
+    public Response updateRole(@RequestBody TSysRole sysRole) {
         sysRoleService.updateRole(sysRole);
         return Response.success();
     }
 
-    @ApiOperation(value= "删除角色信息(逻辑删除)")
+    @ApiOperation(value = "删除角色信息(逻辑删除)")
+    @OperatorLog(module = "角色管理", function = "角色信息", action = "删除角色信息", requestMode = "DELETE")
     @DeleteMapping("/remove/role")
-    public Response removeRole(@RequestParam("ids")List<Long> ids){
+    public Response removeRole(@RequestParam("ids") List<Long> ids) {
         sysRoleService.removeRole(ids);
         return Response.success();
     }

@@ -11,6 +11,7 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -26,11 +27,12 @@ public class CountryRegionServiceImpl implements CountryRegionService {
     @Autowired
     private CountryRegionMapper countryRegionMapper;
 
-    @Autowired
+    @Resource
     private IdGeneratorSnowflake idGeneratorSnowflake;
 
+
     @Override
-    @DataSource(DataSourceType.MASTER)
+//    @DataSource(DataSourceType.MASTER)
     public List<CountryRegion> getRegionList(RegionQueryDTO regionQuery) {
         PageHelper.startPage(regionQuery.getPageNum(),regionQuery.getPageSize());
         return countryRegionMapper.getRegionList(regionQuery);
@@ -38,28 +40,29 @@ public class CountryRegionServiceImpl implements CountryRegionService {
 
 
     @Override
-    @DataSource(DataSourceType.MASTER)
+//    @DataSource(DataSourceType.MASTER)
     public CountryRegion getRegionDetail(Long id) {
         return countryRegionMapper.getRegionDetail(id);
     }
 
 
     @Override
-    @DataSource(DataSourceType.SLAVE)
+//    @DataSource(DataSourceType.SLAVE)
     public void saveRegion(CountryRegion countryRegion) {
-        countryRegion.setId(idGeneratorSnowflake.snowflakeId());
+        //新增状态为正常
         countryRegion.setStatus(0);
+        countryRegion.setId(idGeneratorSnowflake.snowflakeId());
         countryRegionMapper.insert(countryRegion);
     }
 
     @Override
-    @DataSource(DataSourceType.SLAVE)
+//    @DataSource(DataSourceType.SLAVE)
     public void updateRegion(CountryRegion countryRegion) {
         countryRegionMapper.updateById(countryRegion);
     }
 
     @Override
-    @DataSource(DataSourceType.SLAVE)
+//    @DataSource(DataSourceType.SLAVE)
     public void removeRegion(List<Long> ids) {
         countryRegionMapper.removeRegion(ids);
     }

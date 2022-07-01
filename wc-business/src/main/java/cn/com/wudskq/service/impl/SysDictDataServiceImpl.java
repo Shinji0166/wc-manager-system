@@ -5,10 +5,12 @@ import cn.com.wudskq.model.SysDictData;
 import cn.com.wudskq.model.query.SysDictQueryDTO;
 import cn.com.wudskq.model.vo.SysDictVo;
 import cn.com.wudskq.service.SysDictDataService;
+import cn.com.wudskq.snowflake.IdGeneratorSnowflake;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -24,6 +26,9 @@ public class SysDictDataServiceImpl implements SysDictDataService {
     @Autowired
     private SysDictDataMapper sysDictDataMapper;
 
+    @Resource
+    private IdGeneratorSnowflake idGeneratorSnowflake;
+
     @Override
     public List<SysDictVo> getDictDataList(SysDictQueryDTO sysDictQuery) {
         PageHelper.startPage(sysDictQuery.getPageNum(),sysDictQuery.getPageSize());
@@ -32,6 +37,8 @@ public class SysDictDataServiceImpl implements SysDictDataService {
 
     @Override
     public void saveDictData(SysDictData sysDictData) {
+        sysDictData.setStatus(0);
+        sysDictData.setId(idGeneratorSnowflake.snowflakeId());
         sysDictDataMapper.insert(sysDictData);
     }
 

@@ -35,7 +35,7 @@ public class TSysResServiceImpl implements TSysResService {
     @Resource
     private TSysRoleResMapper tSysRoleResMapper;
 
-    @Autowired
+    @Resource
     private IdGeneratorSnowflake idGeneratorSnowflake;
 
 
@@ -45,8 +45,8 @@ public class TSysResServiceImpl implements TSysResService {
      * @return {@link List< TSysRes>}
      * @throws
      */
-    @DataSource(DataSourceType.MASTER)
     @Override
+    //@DataSource(DataSourceType.MASTER)
     public List<TSysRes> findResByUserId(String userId) {
         //获取用户有的角色
         //根据当前登录用户获取角色
@@ -67,33 +67,34 @@ public class TSysResServiceImpl implements TSysResService {
     }
 
     @Override
-    @DataSource(DataSourceType.MASTER)
+//    @DataSource(DataSourceType.MASTER)
     public List<TSysRes> getResLIst(ResInfoQueryDTO resInfoQuery) {
         PageHelper.startPage(resInfoQuery.getPageNum(),resInfoQuery.getPageSize());
         return tSysResMapper.getResLIst(resInfoQuery);
     }
 
     @Override
-    @DataSource(DataSourceType.MASTER)
+//    @DataSource(DataSourceType.MASTER)
     public TSysRes getResDetail(Long id) {
         return tSysResMapper.getResDetail(id);
     }
 
     @Override
-    @DataSource(DataSourceType.SLAVE)
+//    @DataSource(DataSourceType.SLAVE)
     public void saveRes(TSysRes sysRes) {
+         sysRes.setStatus(0);
          sysRes.setId(idGeneratorSnowflake.snowflakeId());
          tSysResMapper.insert(sysRes);
     }
 
     @Override
-    @DataSource(DataSourceType.SLAVE)
+//    @DataSource(DataSourceType.SLAVE)
     public void updateRes(TSysRes sysRes) {
         tSysResMapper.updateById(sysRes);
     }
 
     @Override
-    @DataSource(DataSourceType.SLAVE)
+//    @DataSource(DataSourceType.SLAVE)
     public void removeRes(List<Long> ids) {
         tSysResMapper.removeRes(ids);
     }

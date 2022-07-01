@@ -1,5 +1,6 @@
 package cn.com.wudskq.controller;
 
+import cn.com.wudskq.annotation.OperatorLog;
 import cn.com.wudskq.model.common.LoginDTO;
 import cn.com.wudskq.web.LoginService;
 import cn.com.wudskq.vo.Response;
@@ -24,8 +25,9 @@ public class LoginController {
     private LoginService loginService;
 
     @ApiModelProperty(value = "登录接口")
+    @OperatorLog(module = "系统功能", function = "登录功能", action = "登录", requestMode = "POST")
     @PostMapping("/doLogin")
-    public Response doLogin(@RequestBody LoginDTO login){
+    public Response doLogin(@RequestBody LoginDTO login) {
         return Response.success(loginService.doLogin(login));
     }
 }

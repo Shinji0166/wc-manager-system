@@ -11,6 +11,7 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -26,36 +27,39 @@ public class DeviceServiceImpl implements DeviceService {
     @Autowired
     private DeviceMapper deviceMapper;
 
-    @Autowired
+    @Resource
     private IdGeneratorSnowflake idGeneratorSnowflake;
 
     @Override
-    @DataSource(DataSourceType.MASTER)
+//    @DataSource(DataSourceType.MASTER)
     public List<Device> getDeviceList(DeviceQueryDTO deviceQuery) {
         PageHelper.startPage(deviceQuery.getPageNum(),deviceQuery.getPageSize());
         return deviceMapper.getDeviceList(deviceQuery);
     }
 
     @Override
-    @DataSource(DataSourceType.MASTER)
+//    @DataSource(DataSourceType.MASTER)
     public Device getDeviceDetail(Long id) {
         return deviceMapper.getDeviceDetail(id);
     }
 
     @Override
-    @DataSource(DataSourceType.SLAVE)
+//    @DataSource(DataSourceType.SLAVE)
     public void saveDevice(Device deviceInfo) {
+        //新增状态为正常
+        deviceInfo.setStatus(0);
+        deviceInfo.setId(idGeneratorSnowflake.snowflakeId());
         deviceMapper.insert(deviceInfo);
     }
 
     @Override
-    @DataSource(DataSourceType.SLAVE)
+//    @DataSource(DataSourceType.SLAVE)
     public void updateDevice(Device deviceInfo) {
         deviceMapper.updateById(deviceInfo);
     }
 
     @Override
-    @DataSource(DataSourceType.SLAVE)
+//    @DataSource(DataSourceType.SLAVE)
     public void removeDevice(List<Long> ids) {
         deviceMapper.removeDevice(ids);
     }

@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
  
  
 
+/**
+ * @author wudskq
+ */
 @Service
 public class TSysRoleResServiceImpl implements TSysRoleResService {
  

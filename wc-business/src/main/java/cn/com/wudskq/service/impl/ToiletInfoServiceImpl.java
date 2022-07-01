@@ -11,6 +11,7 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -26,24 +27,24 @@ public class ToiletInfoServiceImpl implements ToiletInfoService {
     @Autowired
     private ToiletInfoMapper toiletInfoMapper;
 
-    @Autowired
+    @Resource
     private IdGeneratorSnowflake idGeneratorSnowflake;
 
     @Override
-    @DataSource(DataSourceType.MASTER)
+//    @DataSource(DataSourceType.MASTER)
     public List<ToiletInfo> getToiletList(ToiletInfoQueryDTO toiletInfoQuery) {
         PageHelper.startPage(toiletInfoQuery.getPageNum(),toiletInfoQuery.getPageSize());
         return toiletInfoMapper.getToiletList(toiletInfoQuery);
     }
 
     @Override
-    @DataSource(DataSourceType.MASTER)
+//    @DataSource(DataSourceType.MASTER)
     public ToiletInfo getToiletDetail(Long id) {
         return toiletInfoMapper.getToiletDetail(id);
     }
 
     @Override
-    @DataSource(DataSourceType.SLAVE)
+//    @DataSource(DataSourceType.SLAVE)
     public void saveToilet(ToiletInfo toiletInfo) {
         toiletInfo.setStatus(0);
         toiletInfo.setId(idGeneratorSnowflake.snowflakeId());
@@ -51,13 +52,13 @@ public class ToiletInfoServiceImpl implements ToiletInfoService {
     }
 
     @Override
-    @DataSource(DataSourceType.SLAVE)
+//    @DataSource(DataSourceType.SLAVE)
     public void updateToilet(ToiletInfo toiletInfo) {
         toiletInfoMapper.updateById(toiletInfo);
     }
 
     @Override
-    @DataSource(DataSourceType.SLAVE)
+//    @DataSource(DataSourceType.SLAVE)
     public void removeToilet(List<Long> ids) {
         toiletInfoMapper.removeToilet(ids);
     }

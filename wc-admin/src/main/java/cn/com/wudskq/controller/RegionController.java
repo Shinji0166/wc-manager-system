@@ -1,5 +1,6 @@
 package cn.com.wudskq.controller;
 
+import cn.com.wudskq.annotation.OperatorLog;
 import cn.com.wudskq.model.CountryRegion;
 import cn.com.wudskq.model.query.RegionQueryDTO;
 import cn.com.wudskq.service.CountryRegionService;
@@ -28,42 +29,47 @@ public class RegionController {
     @Autowired
     private CountryRegionService countryRegionService;
 
-    @ApiOperation(value= "获取地区信息列表")
+    @ApiOperation(value = "获取地区信息列表")
+    @OperatorLog(module = "地区管理", function = "地区信息", action = "获取地区信息列表", requestMode = "POST")
     @PostMapping("/region/list")
-    public Response getRegionList(@RequestBody(required = false) RegionQueryDTO regionQuery){
+    public Response getRegionList(@RequestBody(required = false) RegionQueryDTO regionQuery) {
         List<CountryRegion> regionList = countryRegionService.getRegionList(regionQuery);
-        if(null != regionList && 0 < regionList.size()){
+        if (null != regionList && 0 < regionList.size()) {
             PageInfo<CountryRegion> pageInfo = new PageInfo<CountryRegion>(regionList);
-            return Response.success(Collections.singletonList(pageInfo.getList()),pageInfo.getTotal());
+            return Response.success(Collections.singletonList(pageInfo.getList()), pageInfo.getTotal());
         }
         return Response.success();
     }
 
 
-    @ApiOperation(value= "获取地区详细信息")
+    @ApiOperation(value = "获取地区详细信息")
+    @OperatorLog(module = "地区管理", function = "地区信息", action = "获取地区详细信息", requestMode = "GET")
     @GetMapping("/region/detail")
-    public Response getRegionDetail(@RequestParam("id")Long id){
+    public Response getRegionDetail(@RequestParam("id") Long id) {
         CountryRegion regionDetail = countryRegionService.getRegionDetail(id);
         return Response.success(regionDetail);
     }
 
-    @ApiOperation(value= "新增地区信息")
+    @ApiOperation(value = "新增地区信息")
+    @OperatorLog(module = "地区管理", function = "地区信息", action = "新增地区信息", requestMode = "POST")
     @PostMapping("/save/region")
-    public Response saveRegion(@RequestBody CountryRegion countryRegion){
+    public Response saveRegion(@RequestBody CountryRegion countryRegion) {
         countryRegionService.saveRegion(countryRegion);
         return Response.success();
     }
 
-    @ApiOperation(value= "更新地区信息")
+    @ApiOperation(value = "更新地区信息")
+    @OperatorLog(module = "地区管理", function = "地区信息", action = "更新地区信息", requestMode = "PUT")
     @PutMapping("/update/region")
-    public Response updateRegion(@RequestBody CountryRegion countryRegion){
+    public Response updateRegion(@RequestBody CountryRegion countryRegion) {
         countryRegionService.updateRegion(countryRegion);
         return Response.success();
     }
 
-    @ApiOperation(value= "删除地区信息(逻辑删除)")
+    @ApiOperation(value = "删除地区信息(逻辑删除)")
+    @OperatorLog(module = "地区管理", function = "地区信息", action = "删除地区信息", requestMode = "DELETE")
     @DeleteMapping("/remove/region")
-    public Response removeRegion(@RequestParam("ids")List<Long> ids){
+    public Response removeRegion(@RequestParam("ids") List<Long> ids) {
         countryRegionService.removeRegion(ids);
         return Response.success();
     }
