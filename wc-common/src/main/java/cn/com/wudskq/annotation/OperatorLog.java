@@ -24,7 +24,6 @@ public @interface OperatorLog {
     //执行的动作
     String action();
 
-
     //请求的方式
     String requestMode();
 
