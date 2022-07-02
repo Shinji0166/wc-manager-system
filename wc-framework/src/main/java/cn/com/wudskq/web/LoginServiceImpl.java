@@ -56,7 +56,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public void doLogOut(HttpServletRequest request, HttpServletResponse response) {
+    public void doLogout(HttpServletRequest request, HttpServletResponse response) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         logoutSuccessHandler.onLogoutSuccess(request,response,authentication);
 

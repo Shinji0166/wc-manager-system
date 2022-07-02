@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  * @author chenfangchao
@@ -29,5 +28,5 @@ public interface LoginService {
     /**
      * 执行登出操作
      */
-    void doLogOut(HttpServletRequest request, HttpServletResponse response);
+    void doLogout(HttpServletRequest request, HttpServletResponse response);
 }

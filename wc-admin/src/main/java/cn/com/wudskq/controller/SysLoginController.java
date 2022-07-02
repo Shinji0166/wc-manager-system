@@ -3,7 +3,6 @@ package cn.com.wudskq.controller;
 import cn.com.wudskq.annotation.OperatorLog;
 import cn.com.wudskq.model.common.LoginDTO;
 import cn.com.wudskq.web.LoginService;
-import cn.com.wudskq.vo.Response;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,7 @@ public class SysLoginController {
     @OperatorLog(module = "系统功能", function = "登出功能", action = "登出", requestMode = "GET")
     @GetMapping("/doLogout")
     public void doLogOut(HttpServletRequest request, HttpServletResponse response) {
-        loginService.doLogOut(request,response);
+        loginService.doLogout(request,response);
     }
 
 

@@ -35,23 +35,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserNotLoginHandler userNotLoginHandler;
 
-    /**
-     * 用户登录成功处理类
-     */
-    @Autowired
-    private UserLoginSuccessHandler userLoginSuccessHandler;
-
-    /**
-     * 用户登录失败处理类
-     */
-    @Autowired
-    private UserLoginFailureHandler userLoginFailureHandler;
-
-    /**
-     * 用户登出成功处理类
-     */
-    @Autowired
-    private UserLogoutSuccessHandler userLogoutSuccessHandler;
 
     /**
      * 用户登录验证
