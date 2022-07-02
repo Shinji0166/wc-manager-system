@@ -8,7 +8,7 @@ import cn.com.wudskq.model.SysOperatorLog;
 import cn.com.wudskq.model.SysUserDetails;
 import cn.com.wudskq.model.TSysUser;
 import cn.com.wudskq.snowflake.IdGeneratorSnowflake;
-import cn.com.wudskq.util.JWTTokenUtil;
+import cn.com.wudskq.utils.JWTTokenUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

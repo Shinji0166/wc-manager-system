@@ -1,4 +1,4 @@
-package cn.com.wudskq.util;
+package cn.com.wudskq.utils;
 
 import cn.com.wudskq.config.JWTConfig;
 import cn.com.wudskq.model.SysUserDetails;

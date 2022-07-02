@@ -1,9 +1,9 @@
 package cn.com.wudskq.handler;
 
 import cn.com.wudskq.model.SysUserDetails;
-import cn.com.wudskq.util.JWTTokenUtil;
+import cn.com.wudskq.utils.JWTTokenUtil;
 import cn.com.wudskq.web.UserDetailsServiceImpl;
-import cn.com.wudskq.util.Md5Util;
+import cn.com.wudskq.utils.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;

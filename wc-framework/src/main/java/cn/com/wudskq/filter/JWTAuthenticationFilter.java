@@ -3,7 +3,7 @@ package cn.com.wudskq.filter;
 
 import cn.com.wudskq.config.JWTConfig;
 import cn.com.wudskq.model.SysUserDetails;
-import cn.com.wudskq.util.JWTTokenUtil;
+import cn.com.wudskq.utils.JWTTokenUtil;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

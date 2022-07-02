@@ -21,6 +21,6 @@
         select  id, operator_module, operator_function, operator_action, request_mode, result,
                 create_by, create_time from sys_operator_log
         where operator_module != '' and operator_function != '' and operator_action !=''
-        order by  create_time desc 
+        order by  create_time desc
     </select>
 </mapper>

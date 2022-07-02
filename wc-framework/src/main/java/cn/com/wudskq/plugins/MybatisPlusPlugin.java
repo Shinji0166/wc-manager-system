@@ -4,7 +4,7 @@ import cn.com.wudskq.config.JWTConfig;
 import cn.com.wudskq.model.SysUserDetails;
 import cn.com.wudskq.model.TSysUser;
 import cn.com.wudskq.snowflake.IdGeneratorSnowflake;
-import cn.com.wudskq.util.JWTTokenUtil;
+import cn.com.wudskq.utils.JWTTokenUtil;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
 import org.slf4j.Logger;
