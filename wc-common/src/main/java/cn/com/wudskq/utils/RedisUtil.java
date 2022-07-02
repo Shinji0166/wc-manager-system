@@ -171,6 +171,7 @@ public class RedisUtil {
         ZSetOperations<String, Object> zset = redisTemplate.opsForZSet();
         zset.add(key,value,scoure);
     }
+
     /**
      * 有序集合获取
      * @param key
@@ -181,5 +182,32 @@ public class RedisUtil {
     public Set<Object> rangeByScore(String key,double scoure,double scoure1){
         ZSetOperations<String, Object> zset = redisTemplate.opsForZSet();
         return zset.rangeByScore(key, scoure, scoure1);
+    }
+
+
+    /**
+     * 有序集合获取
+     * @param key
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    public Set<Object> rangeByLimit(String key, Integer pageNum, Integer pageSize){
+        try {
+            if (redisTemplate.hasKey(key)) {
+                int start = (pageNum - 1) * pageSize;
+                int end = pageNum * pageSize - 1;
+                Long size = redisTemplate.opsForZSet().size(key);
+                if (end > size) {
+                    end = -1;
+                }
+                return redisTemplate.opsForZSet().range(key, start, end);
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

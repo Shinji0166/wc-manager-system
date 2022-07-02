@@ -1,8 +1,11 @@
 package cn.com.wudskq.model;
 
+import cn.hutool.core.bean.BeanUtil;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -18,6 +21,7 @@ import java.util.Date;
 @ApiModel(value = "系统在线用户模型")
 @Data
 @Accessors(chain = true)
+@NoArgsConstructor
 public class SysOnlineUser implements Serializable {
 
     @ApiModelProperty(value = "用户ID")
@@ -44,7 +48,25 @@ public class SysOnlineUser implements Serializable {
     @ApiModelProperty(value = "地点")
     private String address;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @ApiModelProperty(value = "登录时间")
     private Date loginTime;
 
+    @ApiModelProperty("状态(0在线,1注销)")
+    private Integer status=0;
+
+
+    public SysOnlineUser(Object object) {
+        SysOnlineUser source = (SysOnlineUser) object;
+        this.setId(source.getId());
+        this.setNickName(source.getNickName());
+        this.setJti(source.getJti());
+        this.setBrowserName(source.getBrowserName());
+        this.setBrowserVersion(source.getBrowserVersion());
+        this.setOperatorSystem(source.getOperatorSystem());
+        this.setLoginIp(source.getLoginIp());
+        this.setAddress(source.getAddress());
+        this.setLoginTime(source.getLoginTime());
+        this.setStatus(source.getStatus());
+    }
 }

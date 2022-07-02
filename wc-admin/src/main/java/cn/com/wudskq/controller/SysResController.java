@@ -24,7 +24,7 @@ import java.util.List;
 @Api(tags = "菜单权限管理")
 @RestController
 @RequestMapping("/system")
-public class ResController {
+public class SysResController {
 
     @Autowired
     private TSysResService sysResService;

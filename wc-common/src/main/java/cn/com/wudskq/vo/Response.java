@@ -3,6 +3,7 @@ package cn.com.wudskq.vo;
 import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.servlet.ServletResponse;
 import java.io.PrintWriter;
@@ -16,6 +17,7 @@ import java.util.List;
  * @date 2022/6/23 10:56 AM
  */
 @Data
+@Accessors(chain = true)
 public class Response {
 
     @ApiModelProperty(value = "返回码")

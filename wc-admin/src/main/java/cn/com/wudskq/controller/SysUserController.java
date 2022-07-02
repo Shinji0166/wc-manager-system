@@ -9,7 +9,6 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -25,7 +24,7 @@ import java.util.List;
 @Api(tags = "用户管理")
 @RestController
 @RequestMapping("/system")
-public class UserController {
+public class SysUserController {
 
     /**
      * 用户组件
