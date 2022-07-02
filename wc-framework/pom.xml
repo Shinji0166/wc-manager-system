@@ -54,6 +54,12 @@
             <artifactId>commons-pool2</artifactId>
         </dependency>
 
+        <!-- 获取浏览器信息 -->
+        <dependency>
+            <groupId>nl.bitwalker</groupId>
+            <artifactId>UserAgentUtils</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

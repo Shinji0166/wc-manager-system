@@ -3,6 +3,8 @@ package cn.com.wudskq.web;
 import cn.com.wudskq.model.common.LoginDTO;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author chenfangchao
  * @title: LoginService
@@ -13,6 +15,10 @@ import org.springframework.stereotype.Service;
 @Service
 public interface LoginService {
 
-    /** 登录 **/
+    /**
+     * 登录
+     * @param login
+     * @return
+     */
     String doLogin(LoginDTO login);
 }

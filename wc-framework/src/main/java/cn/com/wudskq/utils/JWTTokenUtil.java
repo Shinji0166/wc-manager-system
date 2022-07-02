@@ -2,7 +2,6 @@ package cn.com.wudskq.utils;
 
 import cn.com.wudskq.config.JWTConfig;
 import cn.com.wudskq.model.SysUserDetails;
-import cn.com.wudskq.utils.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import io.jsonwebtoken.Claims;

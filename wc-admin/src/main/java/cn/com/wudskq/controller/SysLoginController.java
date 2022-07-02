@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(tags = "系统登录接口")
 @RestController
 @RequestMapping("/wc/system")
-public class LoginController {
+public class SysLoginController {
 
     @Autowired
     private LoginService loginService;
