@@ -36,6 +36,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
             if (sysUserDetails != null) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         sysUserDetails, sysUserDetails.getId(), sysUserDetails.getAuthorities());
+                // 将Authentication对象（用户信息、已认证状态、权限信息）存入 SecurityContextHolder
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }

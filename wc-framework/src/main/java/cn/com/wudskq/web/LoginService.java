@@ -3,6 +3,8 @@ package cn.com.wudskq.web;
 import cn.com.wudskq.model.common.LoginDTO;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -15,10 +17,17 @@ import java.util.List;
 @Service
 public interface LoginService {
 
+
     /**
-     * 登录
+     * 执行登录接口
      * @param login
-     * @return
+     * @param request
+     * @param response
      */
-    String doLogin(LoginDTO login);
+    void doLogin(LoginDTO login, HttpServletRequest request, HttpServletResponse response);
+
+    /**
+     * 执行登出操作
+     */
+    void doLogOut(HttpServletRequest request, HttpServletResponse response);
 }

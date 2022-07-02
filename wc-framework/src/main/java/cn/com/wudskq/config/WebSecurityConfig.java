@@ -114,17 +114,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 //获取白名单（不进行权限验证）
                 .antMatchers(antMatchers.split(",")).permitAll()
-                .antMatchers("/wc/system/doLogin").permitAll()
+                //放行登录接口
+                .antMatchers("/system/doLogin").permitAll()
                 // 其他的需要登陆后才能访问
                 .anyRequest().authenticated()
                 // 开启跨域 禁用跨站请求伪造防护
                 .and().cors().and().csrf().disable();
-        //配置登录处理器
-        http.formLogin().successHandler(userLoginSuccessHandler).failureHandler(userLoginFailureHandler);
         //配置未登录处理器
         http.exceptionHandling().authenticationEntryPoint(userNotLoginHandler);
-        //配置登出处理器
-        http.logout().logoutUrl("/logout").logoutSuccessHandler(userLogoutSuccessHandler);
         //配置无权限处理器
         http.exceptionHandling().accessDeniedHandler(userAccessDeniedHandler);
         // 禁用session（使用Token认证）

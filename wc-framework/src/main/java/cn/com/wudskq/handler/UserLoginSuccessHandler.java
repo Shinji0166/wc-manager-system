@@ -23,9 +23,10 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) {
         SysUserDetails sysUserDetails = (SysUserDetails) authentication.getPrincipal();
+        //创建token
         String token = JWTTokenUtil.createAccessToken(sysUserDetails);
-        Map<String, String> tokenMap = new HashMap<>();
+        Map<String, String> tokenMap = new HashMap<>(10);
         tokenMap.put("token", token);
-        Response.responseJson(response, Response.response(0, "登录成功", tokenMap));
+        Response.responseJson(response, Response.response(200, "登录成功", tokenMap));
     }
 }

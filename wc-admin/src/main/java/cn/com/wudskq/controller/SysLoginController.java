@@ -9,6 +9,9 @@ import io.swagger.annotations.ApiModelProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * @author chenfangchao
  * @title: LoginController
@@ -18,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Api(tags = "系统登录接口")
 @RestController
-@RequestMapping("/wc/system")
+@RequestMapping("/system")
 public class SysLoginController {
 
     @Autowired
@@ -27,7 +30,17 @@ public class SysLoginController {
     @ApiModelProperty(value = "登录接口")
     @OperatorLog(module = "系统功能", function = "登录功能", action = "登录", requestMode = "POST")
     @PostMapping("/doLogin")
-    public Response doLogin(@RequestBody LoginDTO login) {
-        return Response.success(loginService.doLogin(login));
+    public void doLogin(@RequestBody LoginDTO login, HttpServletRequest request, HttpServletResponse response) {
+        loginService.doLogin(login,request,response);
     }
+
+
+    @ApiModelProperty(value = "登出接口")
+    @OperatorLog(module = "系统功能", function = "登出功能", action = "登出", requestMode = "GET")
+    @GetMapping("/doLogout")
+    public void doLogOut(HttpServletRequest request, HttpServletResponse response) {
+        loginService.doLogOut(request,response);
+    }
+
+
 }

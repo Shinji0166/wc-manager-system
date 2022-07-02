@@ -1,7 +1,6 @@
 package cn.com.wudskq.handler;
 
 import cn.com.wudskq.model.SysUserDetails;
-import cn.com.wudskq.utils.JWTTokenUtil;
 import cn.com.wudskq.web.UserDetailsServiceImpl;
 import cn.com.wudskq.utils.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +37,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         }
         if("admin".equals(username) && "123456".equals(password)){
             SysUserDetails sysUserDetails = (SysUserDetails) userDetailsService.loadUserByUsername(username);
-            //创建token
-            String accessToken = JWTTokenUtil.createAccessToken(sysUserDetails);
-            UsernamePasswordAuthenticationToken usernamePasswordAuthentication = new UsernamePasswordAuthenticationToken(null,null);
-            usernamePasswordAuthentication.setDetails(accessToken);
+            UsernamePasswordAuthenticationToken usernamePasswordAuthentication = new UsernamePasswordAuthenticationToken(sysUserDetails, sysUserDetails.getId(), sysUserDetails.getAuthorities());
             return usernamePasswordAuthentication;
         } else if ("admin".equals(username) && !"123456".equals(password)){
             throw new BadCredentialsException("用户名或密码错误");
@@ -53,10 +49,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
             if(!sysUserDetails.getPassword().equals(Md5Util.MD5(password))){
                 throw new BadCredentialsException("用户名或密码错误");
             }
-            //创建token
-            String accessToken = JWTTokenUtil.createAccessToken(sysUserDetails);
-            UsernamePasswordAuthenticationToken usernamePasswordAuthentication = new UsernamePasswordAuthenticationToken(null,null);
-            usernamePasswordAuthentication.setDetails(accessToken);
+            UsernamePasswordAuthenticationToken usernamePasswordAuthentication = new UsernamePasswordAuthenticationToken(sysUserDetails, sysUserDetails.getId(), sysUserDetails.getAuthorities());
             return usernamePasswordAuthentication;
         }
     }
