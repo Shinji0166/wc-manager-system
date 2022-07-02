@@ -9,6 +9,8 @@
         <result column="browser_name" property="browserName"/>
         <result column="browser_version" property="browserVersion"/>
         <result column="operator_system" property="operatorSystem"/>
+        <result column="result" property="result" jdbcType="VARCHAR"/>
+        <result column="failure_reason" property="failureReason" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="TINYINT"/>
         <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime"/>
@@ -18,7 +20,7 @@
 
     <!-- 查询系统登录日志列表 -->
     <select id="getLoginLogList" resultMap="resInfo">
-        select id, browser_name, browser_version, operator_system, status, create_by, create_time, update_by, update_time from sys_login_info
+        select id, browser_name, browser_version, operator_system, result, failure_reason, status, create_by, create_time, update_by, update_time from sys_login_info
         <where>
             <!--排除已删除状态-->
             status != 1
@@ -28,7 +30,7 @@
 
     <!-- 获取系统登录日志详细信息 -->
     <select id="getLoginLogDetail" resultMap="resInfo">
-        select id, browser_name, browser_version, operator_system, status, create_by, create_time, update_by, update_time from sys_login_info
+        select id, browser_name, browser_version, operator_system, result, failure_reason, status, create_by, create_time, update_by, update_time from sys_login_info
         where id = #{id}
     </select>
 </mapper>
