@@ -12,7 +12,7 @@
         <result column="request_mode" property="requestMode" jdbcType="VARCHAR"/>
         <result column="result" property="result" jdbcType="VARCHAR"/>
         <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
-        <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="create_time" property="createTime"/>
     </resultMap>
 
 
@@ -20,5 +20,7 @@
     <select id="getOperatorLogList" resultMap="sysOperatorLogInfo">
         select  id, operator_module, operator_function, operator_action, request_mode, result,
                 create_by, create_time from sys_operator_log
+        where operator_module != '' and operator_function != '' and operator_action !=''
+        order by  create_time desc 
     </select>
 </mapper>

@@ -3,11 +3,14 @@ package cn.com.wudskq.model;
 import cn.com.wudskq.common.CreateInfoModel;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,6 +21,7 @@ import java.util.Date;
  * @description: TODO 用户表模型
  * @date 2022/6/23 10:56 AM
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @TableName("sys_user")
 @ApiModel("用户表模型")
@@ -46,6 +50,7 @@ public class TSysUser extends CreateInfoModel implements Serializable {
     @ApiModelProperty("邮件")
     private String mail;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @ApiModelProperty("生日")
     private Date birthday;
 
@@ -69,7 +74,6 @@ public class TSysUser extends CreateInfoModel implements Serializable {
 
     @ApiModelProperty("用户头像")
     private String pictureId;
-
 
 }
 

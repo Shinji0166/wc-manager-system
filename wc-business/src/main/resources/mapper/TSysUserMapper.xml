@@ -11,7 +11,7 @@
         <result column="pass_word" property="passWord" jdbcType="VARCHAR"/>
         <result column="cell_phone" property="cellPhone" jdbcType="VARCHAR"/>
         <result column="mail" property="mail" jdbcType="VARCHAR"/>
-        <result column="birthday" property="birthday" jdbcType="DATE"/>
+        <result column="birthday" property="birthday"/>
         <result column="status" property="status" jdbcType="TINYINT"/>
         <result column="account_type" property="accountType" jdbcType="TINYINT"/>
         <result column="invite_code" property="inviteCode" jdbcType="VARCHAR"/>
@@ -20,9 +20,9 @@
         <result column="sign" property="sign" jdbcType="VARCHAR"/>
         <result column="picture_id" property="pictureId" jdbcType="VARCHAR"/>
         <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
-        <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="create_time" property="createTime"/>
         <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
-        <result column="update_time" property="updateTime" jdbcType="DATE"/>
+        <result column="update_time" property="updateTime"/>
     </resultMap>
 
     <!-- 查询用户信息列表 -->
