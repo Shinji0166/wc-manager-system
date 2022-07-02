@@ -80,7 +80,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (tSysUser != null) {
             SysUserDetails sysUserDetails = new SysUserDetails();
             BeanUtils.copyProperties(tSysUser, sysUserDetails);
-            //处理账户名密码 昵称
+            //处理账户名密码 昵称等
             sysUserDetails.setUsername(tSysUser.getUserName());
             sysUserDetails.setPassword(tSysUser.getPassWord());
             sysUserDetails.setNickName(tSysUser.getNickName());

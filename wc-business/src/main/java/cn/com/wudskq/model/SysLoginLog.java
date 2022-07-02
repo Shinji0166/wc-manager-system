@@ -3,6 +3,8 @@ package cn.com.wudskq.model;
 import cn.com.wudskq.common.CreateInfoModel;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -27,15 +29,23 @@ public class SysLoginLog extends CreateInfoModel  implements Serializable {
     private static final long serialVersionUID = 5676393563140726127L;
 
     @TableId("id")
+    //防止ID失真
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
-    @ApiModelProperty(name = "浏览器名称")
+    @ApiModelProperty(value = "浏览器名称")
     private String browserName;
 
-    @ApiModelProperty(name = "浏览器版本")
+    @ApiModelProperty(value = "浏览器版本")
     private String browserVersion;
 
-    @ApiModelProperty(name = "操作系统")
+    @ApiModelProperty(value = "操作系统")
     private String operatorSystem;
+
+    @ApiModelProperty(name = "响应结果")
+    private  String result;
+
+    @ApiModelProperty("失败原因")
+    private String failureReason;
 
 }

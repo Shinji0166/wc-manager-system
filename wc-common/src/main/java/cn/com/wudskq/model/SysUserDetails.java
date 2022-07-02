@@ -41,6 +41,12 @@ public class SysUserDetails extends TSysUser implements UserDetails, Serializabl
  
     @ApiModelProperty("账号是否有效(启用-禁用)")
     private boolean isEnabled = true;
+
+    @ApiModelProperty(value = "jti")
+    private String jti;
+
+    @ApiModelProperty(value = "token过期时间")
+    private Long expirationTime;
  
     @ApiModelProperty("获得用户权限")
     @Override

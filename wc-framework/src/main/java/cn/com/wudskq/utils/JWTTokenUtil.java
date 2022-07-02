@@ -2,6 +2,7 @@ package cn.com.wudskq.utils;
 
 import cn.com.wudskq.config.JWTConfig;
 import cn.com.wudskq.model.SysUserDetails;
+import cn.com.wudskq.snowflake.IdGeneratorSnowflake;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import io.jsonwebtoken.Claims;
@@ -26,14 +27,16 @@ public class JWTTokenUtil {
      */
     public static String createAccessToken(SysUserDetails sysUserDetails) {
         String token =
-                //设置JWT 用户Id
-                Jwts.builder().setId(String.valueOf(sysUserDetails.getId()))//主题
+                //设置JWT
+                Jwts.builder()
+                .setId(String.valueOf(new IdGeneratorSnowflake().snowflakeId())) //jwt唯一ID
                 .setSubject(sysUserDetails.getUsername())
                 .setIssuedAt(new Date()) // 签发时间
                 .setIssuer("wudskq") // 签发者
                 .setExpiration(new Date(System.currentTimeMillis() + JWTConfig.expiration)) // 过期时间
                 .signWith(SignatureAlgorithm.HS512, JWTConfig.secret) // 签名算法、密钥
                 .claim("authorities", JSON.toJSONString(sysUserDetails.getAuthorities()))
+                .claim("userid",sysUserDetails.getId())
                 .claim("nickName",sysUserDetails.getNickName())
                 .compact(); // 自定义其他属性，如用户组织机构ID，用户所拥有的角色，用户权限信息等
         return JWTConfig.tokenPrefix + token;
@@ -52,9 +55,16 @@ public class JWTTokenUtil {
                 token = token.substring(JWTConfig.tokenPrefix.length());
                 // 解析Token
                 Claims claims = Jwts.parser().setSigningKey(JWTConfig.secret).parseClaimsJws(token).getBody();
+                //过期时间
+                long expirationTime = claims.getExpiration().getTime();
+
                 // 获取用户信息
                 sysUserDetails = new SysUserDetails();
-                sysUserDetails.setId(Long.valueOf(claims.getId()));
+                //token相关信息
+                sysUserDetails.setJti(claims.getId());
+                sysUserDetails.setExpirationTime(expirationTime);
+                //用户相关信息
+                sysUserDetails.setId(Long.valueOf(String.valueOf(claims.get("userid"))));
                 sysUserDetails.setUsername(claims.getSubject());
                 sysUserDetails.setNickName(String.valueOf(claims.get("nickName")));
 

@@ -51,6 +51,7 @@ public class LoginServiceImpl implements LoginService {
             loginSuccessHandler.onAuthenticationSuccess(request,response,authentication);
         } catch (AuthenticationException e) {
             //认证失败
+            request.setAttribute("username",login.getUsername());
             loginFailureHandler.onAuthenticationFailure(request,response,e);
         }
     }

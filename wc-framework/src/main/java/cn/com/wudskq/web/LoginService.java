@@ -27,6 +27,8 @@ public interface LoginService {
 
     /**
      * 执行登出操作
+     * @param request
+     * @param response
      */
     void doLogout(HttpServletRequest request, HttpServletResponse response);
 }
