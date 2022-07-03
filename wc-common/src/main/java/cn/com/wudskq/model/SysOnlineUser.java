@@ -52,6 +52,9 @@ public class SysOnlineUser implements Serializable {
     @ApiModelProperty(value = "登录时间")
     private Date loginTime;
 
+    @ApiModelProperty(value = "过期时间戳")
+    private Long expirationTime;
+
     @ApiModelProperty("状态(0在线,1注销)")
     private Integer status=0;
 
@@ -67,6 +70,7 @@ public class SysOnlineUser implements Serializable {
         this.setLoginIp(source.getLoginIp());
         this.setAddress(source.getAddress());
         this.setLoginTime(source.getLoginTime());
+        this.setExpirationTime(source.getExpirationTime());
         this.setStatus(source.getStatus());
     }
 }

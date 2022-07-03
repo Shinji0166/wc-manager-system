@@ -68,7 +68,8 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
                 .setBrowserVersion(String.valueOf(userAgent.getBrowserVersion()))
                 .setOperatorSystem(userAgent.getOperatingSystem().getName())
                 .setLoginIp(request.getRemoteHost())
-                .setLoginTime(new Date());
+                .setLoginTime(new Date())
+                .setExpirationTime(loginUser.getExpirationTime());
         //存入redis,zset集合中
         redisUtil.zAdd(SystemConstants.OLINE_USER_KEY,sysOnlineUser,sysOnlineUser.getLoginTime().getTime());
     }
