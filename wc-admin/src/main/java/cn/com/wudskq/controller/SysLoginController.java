@@ -5,7 +5,6 @@ import cn.com.wudskq.model.common.LoginDTO;
 import cn.com.wudskq.vo.Response;
 import cn.com.wudskq.web.LoginService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +28,6 @@ public class SysLoginController {
     private LoginService loginService;
 
     @ApiOperation(value = "登录接口")
-    @OperatorLog(module = "系统功能", function = "登录功能", action = "登录", requestMode = "POST")
     @PostMapping("/doLogin")
     public void doLogin(@RequestBody LoginDTO login, HttpServletRequest request, HttpServletResponse response) {
         loginService.doLogin(login,request,response);
@@ -37,7 +35,6 @@ public class SysLoginController {
 
 
     @ApiOperation(value = "登出接口")
-    @OperatorLog(module = "系统功能", function = "登出功能", action = "登出", requestMode = "GET")
     @GetMapping("/doLogout")
     public Response doLogOut(HttpServletRequest request, HttpServletResponse response) {
         loginService.doLogout(request,response);
