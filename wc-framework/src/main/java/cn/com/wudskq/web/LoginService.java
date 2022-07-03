@@ -31,4 +31,10 @@ public interface LoginService {
      * @param response
      */
     void doLogout(HttpServletRequest request, HttpServletResponse response);
+
+    /**
+     * 执行强制退出功能
+     * @param sessionId
+     */
+    void doForceLogout(String sessionId);
 }

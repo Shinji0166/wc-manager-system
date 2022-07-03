@@ -83,7 +83,7 @@ public class OperatorLogAspect {
         } catch (Throwable e) {
             //异常代表请求失败
             sysOperatorLog.setResult("请求失败");
-            sysOperatorLog.setFailureReason("异常:"+e + "异常位置:"+e.getStackTrace()[0].toString());
+            sysOperatorLog.setFailureReason("异常:"+e + " 异常位置:"+e.getStackTrace()[0].toString());
             return globalExceptionHandler.handle((Exception) e);
         }finally {
             //最后数据入库

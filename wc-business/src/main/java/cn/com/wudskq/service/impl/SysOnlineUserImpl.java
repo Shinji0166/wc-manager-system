@@ -54,8 +54,8 @@ public class SysOnlineUserImpl implements SysOnlineUserServie {
                 boolean equals = onlineUser.getLoginIp().contains(query.getIp());
                 return equals;
             }
-            //退出过滤
-            return true;
+            //过滤出在线用户
+            return onlineUser.getStatus() == 0;
         }).collect(Collectors.toList());
 
         return onlineUserList;

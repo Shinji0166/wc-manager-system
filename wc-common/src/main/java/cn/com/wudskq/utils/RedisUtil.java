@@ -92,6 +92,7 @@ public class RedisUtil {
     public boolean exists(final String key) {
         return redisTemplate.hasKey(key);
     }
+
     /**
      * 读取缓存
      * @param key
@@ -184,9 +185,21 @@ public class RedisUtil {
         return zset.rangeByScore(key, scoure, scoure1);
     }
 
+    /**
+     * 获取有序集合所有元素个数
+     * @param key
+     * @return
+     */
+    public Integer getZSetSize(String key){
+        ZSetOperations zSetOperations = redisTemplate.opsForZSet();
+        Integer aLong = Math.toIntExact(zSetOperations.zCard(key));
+        return aLong;
+    }
+
+
 
     /**
-     * 有序集合获取
+     * 有序集合获取 分页
      * @param key
      * @param pageNum
      * @param pageSize
