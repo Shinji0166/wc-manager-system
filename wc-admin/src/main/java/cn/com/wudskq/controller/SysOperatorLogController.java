@@ -1,5 +1,7 @@
 package cn.com.wudskq.controller;
 
+import cn.com.wudskq.annotation.InterfaceCall;
+import cn.com.wudskq.annotation.OperatorLog;
 import cn.com.wudskq.model.SysOperatorLog;
 import cn.com.wudskq.model.query.OperatorQueryDTO;
 import cn.com.wudskq.service.SysOperatorLogService;
@@ -30,6 +32,8 @@ public class SysOperatorLogController {
 
 
     @ApiOperation(value = "系统操作日志列表")
+    @InterfaceCall(interfaceName = "系统操作日志列表",requestMode = "POST")
+    @OperatorLog(module = "公共模块",function = "系统操作日志",action = "系统操作日志列表",requestMode = "POST")
     @PostMapping("/operator/log/list")
     public Response getOperatorLogList(@RequestBody OperatorQueryDTO operatorQuery){
         List<SysOperatorLog> operatorLogList = sysOperatorLogService.getOperatorLogList(operatorQuery);

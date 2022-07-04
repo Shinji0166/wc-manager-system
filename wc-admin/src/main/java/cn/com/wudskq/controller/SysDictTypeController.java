@@ -1,5 +1,6 @@
 package cn.com.wudskq.controller;
 
+import cn.com.wudskq.annotation.InterfaceCall;
 import cn.com.wudskq.annotation.OperatorLog;
 import cn.com.wudskq.model.SysDictType;
 import cn.com.wudskq.model.query.SysDictQueryDTO;
@@ -33,6 +34,7 @@ public class SysDictTypeController {
 
 
     @ApiOperation(value = "查询字典类型树")
+    @InterfaceCall(interfaceName = "查询字典类型树",requestMode = "GET")
     @OperatorLog(module = "字典类型管理", function = "字典信息", action = "查询字典类型树", requestMode = "GET")
     @GetMapping("/dict/type/tree")
     public Response getDictTree() {
@@ -41,6 +43,7 @@ public class SysDictTypeController {
     }
 
     @ApiOperation(value = "查询字典顶级节点下属字典数据列表")
+    @InterfaceCall(interfaceName = "查询字典顶级节点下属字典数据列表",requestMode = "POST")
     @OperatorLog(module = "字典类型管理", function = "字典信息", action = "查询字典顶级节点下属字典数据列表", requestMode = "POST")
     @PostMapping("/dict/type/top/data/list")
     public Response getDictTypeTopData(@RequestBody SysDictQueryDTO sysDictQuery) {
@@ -53,6 +56,7 @@ public class SysDictTypeController {
     }
 
     @ApiOperation(value = "查看字典类型详情")
+    @InterfaceCall(interfaceName = "查看字典类型详情",requestMode = "GET")
     @OperatorLog(module = "字典类型管理", function = "字典信息", action = "查看字典类型详情", requestMode = "GET")
     @GetMapping("/dict/type/detail")
     public Response getDictTypeDetail(@RequestParam("id") Long id) {
@@ -61,6 +65,7 @@ public class SysDictTypeController {
     }
 
     @ApiOperation(value = "新增字典类型")
+    @InterfaceCall(interfaceName = "新增字典类型",requestMode = "POST")
     @OperatorLog(module = "字典类型管理", function = "字典信息", action = "新增字典类型", requestMode = "POST")
     @PostMapping("/save/dict/type")
     public Response saveDictType(@RequestBody SysDictType sysDictType) {
@@ -69,6 +74,7 @@ public class SysDictTypeController {
     }
 
     @ApiOperation(value = "更新字典类型")
+    @InterfaceCall(interfaceName = "更新字典类型",requestMode = "PUT")
     @OperatorLog(module = "字典类型管理", function = "字典信息", action = "更新字典类型", requestMode = "PUT")
     @PutMapping("/update/dict/type")
     public Response updateDictType(@RequestBody SysDictType sysDictType) {
@@ -77,6 +83,7 @@ public class SysDictTypeController {
     }
 
     @ApiOperation(value = "删除字典类型(逻辑删除)")
+    @InterfaceCall(interfaceName = "删除字典类型",requestMode = "DELETE")
     @OperatorLog(module = "字典类型管理", function = "字典信息", action = "删除字典类型", requestMode = "DELETE")
     @DeleteMapping("/remove/dict/type")
     public Response removeDictType(@RequestParam("ids") List<Long> ids) {

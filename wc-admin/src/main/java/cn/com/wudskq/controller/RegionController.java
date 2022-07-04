@@ -1,5 +1,6 @@
 package cn.com.wudskq.controller;
 
+import cn.com.wudskq.annotation.InterfaceCall;
 import cn.com.wudskq.annotation.OperatorLog;
 import cn.com.wudskq.model.CountryRegion;
 import cn.com.wudskq.model.query.RegionQueryDTO;
@@ -30,6 +31,7 @@ public class RegionController {
     private CountryRegionService countryRegionService;
 
     @ApiOperation(value = "获取地区信息列表")
+    @InterfaceCall(interfaceName = "获取地区信息列表",requestMode = "POST")
     @OperatorLog(module = "地区管理", function = "地区信息", action = "获取地区信息列表", requestMode = "POST")
     @PostMapping("/region/list")
     public Response getRegionList(@RequestBody(required = false) RegionQueryDTO regionQuery) {
@@ -43,6 +45,7 @@ public class RegionController {
 
 
     @ApiOperation(value = "获取地区详细信息")
+    @InterfaceCall(interfaceName = "获取地区详细信息",requestMode = "GET")
     @OperatorLog(module = "地区管理", function = "地区信息", action = "获取地区详细信息", requestMode = "GET")
     @GetMapping("/region/detail")
     public Response getRegionDetail(@RequestParam("id") Long id) {
@@ -51,6 +54,7 @@ public class RegionController {
     }
 
     @ApiOperation(value = "新增地区信息")
+    @InterfaceCall(interfaceName = "新增地区信息",requestMode = "POST")
     @OperatorLog(module = "地区管理", function = "地区信息", action = "新增地区信息", requestMode = "POST")
     @PostMapping("/save/region")
     public Response saveRegion(@RequestBody CountryRegion countryRegion) {
@@ -59,6 +63,7 @@ public class RegionController {
     }
 
     @ApiOperation(value = "更新地区信息")
+    @InterfaceCall(interfaceName = "更新地区信息",requestMode = "PUT")
     @OperatorLog(module = "地区管理", function = "地区信息", action = "更新地区信息", requestMode = "PUT")
     @PutMapping("/update/region")
     public Response updateRegion(@RequestBody CountryRegion countryRegion) {
@@ -67,6 +72,7 @@ public class RegionController {
     }
 
     @ApiOperation(value = "删除地区信息(逻辑删除)")
+    @InterfaceCall(interfaceName = "删除地区信息",requestMode = "DELETE")
     @OperatorLog(module = "地区管理", function = "地区信息", action = "删除地区信息", requestMode = "DELETE")
     @DeleteMapping("/remove/region")
     public Response removeRegion(@RequestParam("ids") List<Long> ids) {

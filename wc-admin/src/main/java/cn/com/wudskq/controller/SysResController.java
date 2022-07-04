@@ -1,5 +1,6 @@
 package cn.com.wudskq.controller;
 
+import cn.com.wudskq.annotation.InterfaceCall;
 import cn.com.wudskq.annotation.OperatorLog;
 import cn.com.wudskq.model.TSysRes;
 import cn.com.wudskq.model.query.ResInfoQueryDTO;
@@ -31,6 +32,7 @@ public class SysResController {
 
 
     @ApiOperation(value = "获取菜单权限列表")
+    @InterfaceCall(interfaceName = "获取菜单权限列表",requestMode = "POST")
     @OperatorLog(module = "菜单管理", function = "菜单信息", action = "获取菜单权限列表", requestMode = "POST")
     @PostMapping("/res/list")
     public Response getResLIst(@RequestBody(required = false) ResInfoQueryDTO resInfoQuery) {
@@ -43,6 +45,7 @@ public class SysResController {
     }
 
     @ApiOperation(value = "获取菜单详细信息")
+    @InterfaceCall(interfaceName = "获取菜单详细信息",requestMode = "GET")
     @OperatorLog(module = "菜单管理", function = "菜单信息", action = "获取菜单详细信息", requestMode = "GET")
     @GetMapping("/res/detail")
     public Response getResDetail(@RequestParam("id") Long id) {
@@ -51,6 +54,7 @@ public class SysResController {
     }
 
     @ApiOperation(value = "新增菜单信息")
+    @InterfaceCall(interfaceName = "新增菜单信息",requestMode = "POST")
     @OperatorLog(module = "菜单管理", function = "菜单信息", action = "新增菜单信息", requestMode = "POST")
     @PostMapping("/save/res")
     public Response saveRes(@RequestBody TSysRes sysRes) {
@@ -59,6 +63,7 @@ public class SysResController {
     }
 
     @ApiOperation(value = "更新菜单信息")
+    @InterfaceCall(interfaceName = "更新菜单信息",requestMode = "PUT")
     @OperatorLog(module = "菜单管理", function = "菜单信息", action = "更新菜单信息", requestMode = "PUT")
     @PutMapping("/update/res")
     public Response updateRes(@RequestBody TSysRes sysRes) {
@@ -67,6 +72,7 @@ public class SysResController {
     }
 
     @ApiOperation(value = "删除菜单信息(逻辑删除)")
+    @InterfaceCall(interfaceName = "删除菜单信息",requestMode = "DELETE")
     @OperatorLog(module = "菜单管理", function = "菜单信息", action = "删除菜单信息", requestMode = "DELETE")
     @DeleteMapping("/remove/res")
     public Response removeRes(@RequestParam("ids") List<Long> ids) {

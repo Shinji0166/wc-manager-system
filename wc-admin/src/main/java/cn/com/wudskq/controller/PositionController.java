@@ -1,5 +1,6 @@
 package cn.com.wudskq.controller;
 
+import cn.com.wudskq.annotation.InterfaceCall;
 import cn.com.wudskq.annotation.OperatorLog;
 import cn.com.wudskq.model.Position;
 import cn.com.wudskq.model.query.PositionQueryDTO;
@@ -30,6 +31,7 @@ public class PositionController {
     private PositionService positionService;
 
     @ApiOperation(value = "获取坑位信息列表")
+    @InterfaceCall(interfaceName = "获取坑位信息列表",requestMode = "POST")
     @OperatorLog(module = "坑位管理", function = "坑位信息", action = "获取坑位信息列表", requestMode = "POST")
     @PostMapping("/position/list")
     public Response getPositionList(@RequestBody(required = false) PositionQueryDTO positionQuery) {
@@ -43,6 +45,7 @@ public class PositionController {
 
 
     @ApiOperation(value = "获取坑位详细信息")
+    @InterfaceCall(interfaceName = "获取坑位详细信息",requestMode = "GET")
     @OperatorLog(module = "坑位管理", function = "坑位信息", action = "获取坑位详细信息", requestMode = "GET")
     @GetMapping("/position/detail")
     public Response getPositionDetail(@RequestParam("id") Long id) {
@@ -51,6 +54,7 @@ public class PositionController {
     }
 
     @ApiOperation(value = "新增坑位信息")
+    @InterfaceCall(interfaceName = "新增坑位信息",requestMode = "POST")
     @OperatorLog(module = "坑位管理", function = "坑位信息", action = "新增坑位信息", requestMode = "POST")
     @PostMapping("/save/position")
     public Response savePosition(@RequestBody Position positionInfo) {
@@ -59,6 +63,7 @@ public class PositionController {
     }
 
     @ApiOperation(value = "更新坑位信息")
+    @InterfaceCall(interfaceName = "更新坑位信息",requestMode = "PUT")
     @OperatorLog(module = "坑位管理", function = "坑位信息", action = "更新坑位信息", requestMode = "PUT")
     @PutMapping("/update/position")
     public Response updatePosition(@RequestBody Position positionInfo) {
@@ -67,6 +72,7 @@ public class PositionController {
     }
 
     @ApiOperation(value = "删除坑位信息(逻辑删除)")
+    @InterfaceCall(interfaceName = "删除坑位信息",requestMode = "DELETE")
     @OperatorLog(module = "坑位管理", function = "坑位信息", action = "删除坑位信息", requestMode = "DELETE")
     @DeleteMapping("/remove/position")
     public Response removePosition(@RequestParam("ids") List<Long> ids) {

@@ -1,5 +1,6 @@
 package cn.com.wudskq.controller;
 
+import cn.com.wudskq.annotation.InterfaceCall;
 import cn.com.wudskq.annotation.OperatorLog;
 import cn.com.wudskq.model.TSysRole;
 import cn.com.wudskq.model.query.RoleInfoQueryDTO;
@@ -31,6 +32,7 @@ public class SysRoleController {
 
 
     @ApiOperation(value = "获取角色信息列表")
+    @InterfaceCall(interfaceName = "获取角色信息列表",requestMode = "POST")
     @OperatorLog(module = "角色管理", function = "角色信息", action = "获取角色信息列表", requestMode = "POST")
     @PostMapping("/role/list")
     public Response getRoleInfoList(@RequestBody(required = false) RoleInfoQueryDTO roleInfoQuery) {
@@ -43,6 +45,7 @@ public class SysRoleController {
     }
 
     @ApiOperation(value = "获取角色详细信息")
+    @InterfaceCall(interfaceName = "获取角色详细信息",requestMode = "GET")
     @OperatorLog(module = "角色管理", function = "角色信息", action = "获取角色详细信息", requestMode = "GET")
     @GetMapping("/role/detail")
     public Response getRoleDetail(@RequestParam("id") Long id) {
@@ -51,6 +54,7 @@ public class SysRoleController {
     }
 
     @ApiOperation(value = "新增角色信息")
+    @InterfaceCall(interfaceName = "新增角色信息",requestMode = "POST")
     @OperatorLog(module = "角色管理", function = "角色信息", action = "新增角色信息", requestMode = "POST")
     @PostMapping("/save/role")
     public Response saveRole(@RequestBody TSysRole sysRole) {
@@ -59,6 +63,7 @@ public class SysRoleController {
     }
 
     @ApiOperation(value = "更新角色信息")
+    @InterfaceCall(interfaceName = "更新角色信息",requestMode = "PUT")
     @OperatorLog(module = "角色管理", function = "角色信息", action = "更新角色信息", requestMode = "PUT")
     @PutMapping("/update/role")
     public Response updateRole(@RequestBody TSysRole sysRole) {
@@ -67,6 +72,7 @@ public class SysRoleController {
     }
 
     @ApiOperation(value = "删除角色信息(逻辑删除)")
+    @InterfaceCall(interfaceName = "删除角色信息",requestMode = "DELETE")
     @OperatorLog(module = "角色管理", function = "角色信息", action = "删除角色信息", requestMode = "DELETE")
     @DeleteMapping("/remove/role")
     public Response removeRole(@RequestParam("ids") List<Long> ids) {

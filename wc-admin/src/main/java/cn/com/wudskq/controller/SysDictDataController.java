@@ -1,5 +1,6 @@
 package cn.com.wudskq.controller;
 
+import cn.com.wudskq.annotation.InterfaceCall;
 import cn.com.wudskq.annotation.OperatorLog;
 import cn.com.wudskq.model.SysDictData;
 import cn.com.wudskq.model.query.SysDictQueryDTO;
@@ -31,6 +32,7 @@ public class SysDictDataController {
     private SysDictDataService sysDictDataService;
 
     @ApiOperation(value = "根据字典类型查询字典数据列表")
+    @InterfaceCall(interfaceName = "根据字典类型查询字典数据列表",requestMode = "POST")
     @OperatorLog(module = "字典管理", function = "字典信息", action = "根据字典类型查询字典数据列表", requestMode = "POST")
     @PostMapping("/dict/data/list")
     public Response getDictDataList(@RequestBody SysDictQueryDTO sysDictQuery) {
@@ -44,6 +46,7 @@ public class SysDictDataController {
 
 
     @ApiOperation(value = "获取字典数据详情")
+    @InterfaceCall(interfaceName = "获取字典数据详情",requestMode = "GET")
     @OperatorLog(module = "字典管理", function = "字典信息", action = "获取字典数据详情", requestMode = "GET")
     @GetMapping("/dict/data/detail")
     public Response getDictDataDetail(@RequestParam("id") Long id) {
@@ -52,6 +55,7 @@ public class SysDictDataController {
     }
 
     @ApiOperation(value = "新增字典数据")
+    @InterfaceCall(interfaceName = "新增字典数据",requestMode = "POST")
     @OperatorLog(module = "字典管理", function = "字典信息", action = "新增字典数据", requestMode = "POST")
     @PostMapping("/save/dict/data")
     public Response saveDictData(@RequestBody SysDictData sysDictData) {
@@ -60,6 +64,7 @@ public class SysDictDataController {
     }
 
     @ApiOperation(value = "更新字典数据")
+    @InterfaceCall(interfaceName = "更新字典数据",requestMode = "PUT")
     @OperatorLog(module = "字典管理", function = "字典信息", action = "更新字典数据", requestMode = "PUT")
     @PutMapping("/update/dict/data")
     public Response updateDictData(@RequestBody SysDictData sysDictData) {
@@ -68,6 +73,7 @@ public class SysDictDataController {
     }
 
     @ApiOperation(value = "删除字典数据")
+    @InterfaceCall(interfaceName = "删除字典数据",requestMode = "DELETE")
     @OperatorLog(module = "字典管理", function = "字典信息", action = "删除字典数据", requestMode = "DELETE")
     @DeleteMapping("/remove/dict/data")
     public Response removeDictData(@RequestParam("ids") List<Long> ids) {

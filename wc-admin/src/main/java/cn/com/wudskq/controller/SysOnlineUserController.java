@@ -1,5 +1,6 @@
 package cn.com.wudskq.controller;
 
+import cn.com.wudskq.annotation.InterfaceCall;
 import cn.com.wudskq.annotation.OperatorLog;
 import cn.com.wudskq.model.SysOnlineUser;
 import cn.com.wudskq.model.query.SysOnlineUserQueryDTO;
@@ -31,6 +32,7 @@ public class SysOnlineUserController {
     private SysOnlineUserServie sysOnlineUserServie;
 
     @ApiOperation(value = "获取系统在线用户列表")
+    @InterfaceCall(interfaceName = "获取系统在线用户列表",requestMode = "POST")
     @OperatorLog(module = "用户管理",function = "在线用户",action = "查询系统在线用户列表",requestMode = "POST")
     @PostMapping("/online/user/list")
     public Response getSysOnlineUserList(@RequestBody SysOnlineUserQueryDTO sysOnlineUserQuery){

@@ -1,5 +1,6 @@
 package cn.com.wudskq.controller;
 
+import cn.com.wudskq.annotation.InterfaceCall;
 import cn.com.wudskq.annotation.OperatorLog;
 import cn.com.wudskq.model.Device;
 import cn.com.wudskq.model.query.DeviceQueryDTO;
@@ -31,6 +32,7 @@ public class DeviceController {
 
 
     @ApiOperation(value = "获取设备信息列表")
+    @InterfaceCall(interfaceName = "获取设备信息列表",requestMode = "POST")
     @OperatorLog(module = "设备管理", function = "设备信息", action = "查看设备信息列表", requestMode = "POST")
     @PostMapping("/device/list")
     public Response getDeviceList(@RequestBody(required = false) DeviceQueryDTO deviceQuery) {
@@ -44,6 +46,7 @@ public class DeviceController {
 
 
     @ApiOperation(value = "获取设备详细信息")
+    @InterfaceCall(interfaceName = "获取设备详细信息",requestMode = "GET")
     @OperatorLog(module = "设备管理", function = "设备信息", action = "获取设备详细信息", requestMode = "GET")
     @GetMapping("/device/detail")
     public Response getDeviceDetail(@RequestParam("id") Long id) {
@@ -52,6 +55,7 @@ public class DeviceController {
     }
 
     @ApiOperation(value = "新增设备信息")
+    @InterfaceCall(interfaceName = "新增设备信息",requestMode = "POST")
     @OperatorLog(module = "设备管理", function = "设备信息", action = "新增设备信息", requestMode = "POST")
     @PostMapping("/save/device")
     public Response saveDevice(@RequestBody Device deviceInfo) {
@@ -60,6 +64,7 @@ public class DeviceController {
     }
 
     @ApiOperation(value = "更新设备信息")
+    @InterfaceCall(interfaceName = "更新设备信息",requestMode = "PUT")
     @OperatorLog(module = "设备管理", function = "设备信息", action = "更新设备信息", requestMode = "PUT")
     @PutMapping("/update/device")
     public Response updateDevice(@RequestBody Device deviceInfo) {
@@ -68,6 +73,7 @@ public class DeviceController {
     }
 
     @ApiOperation(value = "删除设备信息(逻辑删除)")
+    @InterfaceCall(interfaceName = "删除设备信息",requestMode = "DELETE")
     @OperatorLog(module = "设备管理", function = "设备信息", action = "删除设备信息", requestMode = "DELETE")
     @DeleteMapping("/remove/device")
     public Response removeDevice(@RequestParam("ids") List<Long> ids) {

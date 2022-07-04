@@ -1,5 +1,6 @@
 package cn.com.wudskq.controller;
 
+import cn.com.wudskq.annotation.InterfaceCall;
 import cn.com.wudskq.annotation.OperatorLog;
 import cn.com.wudskq.model.common.LoginDTO;
 import cn.com.wudskq.vo.Response;
@@ -28,6 +29,7 @@ public class SysLoginController {
     private LoginService loginService;
 
     @ApiOperation(value = "登录接口")
+    @InterfaceCall(interfaceName = "登录接口",requestMode = "POST")
     @PostMapping("/doLogin")
     public void doLogin(@RequestBody LoginDTO login, HttpServletRequest request, HttpServletResponse response) {
         loginService.doLogin(login,request,response);
@@ -35,6 +37,7 @@ public class SysLoginController {
 
 
     @ApiOperation(value = "登出接口")
+    @InterfaceCall(interfaceName = "登出接口",requestMode = "GET")
     @GetMapping("/doLogout")
     public Response doLogOut(HttpServletRequest request, HttpServletResponse response) {
         loginService.doLogout(request,response);
@@ -42,6 +45,7 @@ public class SysLoginController {
     }
 
     @ApiOperation(value = "强制退出")
+    @InterfaceCall(interfaceName = "强制退出",requestMode = "GET")
     @OperatorLog(module = "系统功能", function = "登出功能", action = "强制退出", requestMode = "GET")
     @GetMapping("/force/logout")
     public Response doForceLogout(@RequestParam("sessionId")String sessionId){

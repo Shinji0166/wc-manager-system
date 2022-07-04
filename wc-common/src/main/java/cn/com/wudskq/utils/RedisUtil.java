@@ -1,11 +1,13 @@
 package cn.com.wudskq.utils;
 
+import cn.com.wudskq.model.SysInterfaceCall;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -56,6 +58,8 @@ public class RedisUtil {
         }
         return result;
     }
+
+
     /**
      * 批量删除对应的value
      * @param keys
@@ -114,6 +118,18 @@ public class RedisUtil {
         HashOperations<String, Object, Object> hash = redisTemplate.opsForHash();
         hash.put(key,hashKey,value);
     }
+
+
+    /**
+     * 哈希新增hashMap
+     * @param key
+     * @param hashMap
+     */
+    public void hSet(String key,Map<String, SysInterfaceCall> hashMap){
+        redisTemplate.boundHashOps(key).putAll(hashMap);
+    }
+
+
     /**
      * 哈希获取数据
      * @param key
@@ -124,6 +140,18 @@ public class RedisUtil {
         HashOperations<String, Object, Object>  hash = redisTemplate.opsForHash();
         return hash.get(key,hashKey);
     }
+
+    /**
+     * 获取hash表所有键值对
+     * @param key
+     * @return
+     */
+    public Map<String, SysInterfaceCall> hGet(String key){
+        Map<String, SysInterfaceCall> entries = redisTemplate.boundHashOps(key).entries();
+        return entries;
+    }
+
+
     /**
      * 列表添加
      * @param k
@@ -133,6 +161,8 @@ public class RedisUtil {
         ListOperations<String, Object> list = redisTemplate.opsForList();
         list.rightPush(k,v);
     }
+
+
     /**
      * 列表获取
      * @param k
