@@ -35,4 +35,17 @@ jwt:
   antMatchers: /swagger-resources/**,/swagger-ui.html,/v2/api-docs,/webjars/**,/doc.html,/druid/**
 
 
+## xxl-job
+xxl:
+  job:
+    accessToken:
+    admin:
+      addresses: http://localhost:8082/xxl-job-admin
+    executor:
+      address:
+      appname: wc-manager-system
+      ip:
+      logpath: ./logs/xxl-job/jobhandler
+      logretentiondays: 30
+      port: 6887
 

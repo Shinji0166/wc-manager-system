@@ -1,6 +1,8 @@
 package cn.com.wudskq.mapper;
 
+import cn.com.wudskq.model.SysInterfaceCall;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
 
 /**
  * @author chenfangchao
@@ -9,5 +11,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @description: TODO 接口调用次数
  * @date 2022/7/5 2:51 PM
  */
-public interface SysInterfaceCallMapper extends BaseMapper<SysInterfaceCallMapper> {
+public interface SysInterfaceCallMapper extends BaseMapper<SysInterfaceCall> {
 }

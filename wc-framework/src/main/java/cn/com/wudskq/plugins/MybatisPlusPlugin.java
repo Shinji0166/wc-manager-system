@@ -10,6 +10,7 @@ import org.apache.ibatis.reflection.MetaObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -58,22 +59,33 @@ public class MybatisPlusPlugin implements MetaObjectHandler {
     //获取当前操作人信息
     public TSysUser getCurrentOperatorUser(){
         TSysUser tSysUser = new TSysUser();
-        //获取HttpRequest
-        ServletRequestAttributes attributes  = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
-        //获取当前操作的用户token
-        String token = request.getHeader(JWTConfig.tokenHeader);
-        if(null != token){
-            //解析token
-            SysUserDetails sysUserDetails = JWTTokenUtil.parseAccessToken(token);
-            //是否为管理员,管理员直接跳过查询
-            if(!"admin".equals(sysUserDetails.getUsername())){
-                tSysUser.setNickName(sysUserDetails.getNickName());
-            }else {
-                tSysUser.setNickName("系统管理员");
+        try {
+            //获取HttpRequest
+            ServletRequestAttributes attributes  = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            HttpServletRequest request = null;
+            if(null != attributes){
+                request = attributes.getRequest();
             }
-            return tSysUser;
+            String token = null;
+            if(null != request){
+                //获取当前操作的用户token
+                token = request.getHeader(JWTConfig.tokenHeader);
+            }
+            if(null != token){
+                //解析token
+                SysUserDetails sysUserDetails = JWTTokenUtil.parseAccessToken(token);
+                //是否为管理员,管理员直接跳过查询
+                if(!"admin".equals(sysUserDetails.getUsername())){
+                    tSysUser.setNickName(sysUserDetails.getNickName());
+                }else {
+                    tSysUser.setNickName("系统管理员");
+                }
+            }else {
+                tSysUser.setNickName("系统");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return null;
+        return tSysUser;
     }
 }
