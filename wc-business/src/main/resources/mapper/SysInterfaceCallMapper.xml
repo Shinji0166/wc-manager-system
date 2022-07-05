@@ -1,0 +1,35 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.wudskq.mapper.SysInterfaceCallMapper">
+
+    <!--接口调用次数模型字段映射-->
+    <resultMap id="interfaceCallList" type="cn.com.wudskq.model.SysInterfaceCall">
+        <id column="id" property="id" jdbcType="BIGINT"></id>
+        <result column="interface_name" property="interfaceName"/>
+        <result column="declaring_name" property="declaringName"/>
+        <result column="method_name" property="methodName"/>
+        <result column="request_mode" property="requestMode"/>
+        <result column="request_ip" property="requestIp"/>
+        <result column="interface_call_count" property="interfaceCallCount"/>
+        <result column="interface_call_success_count" property="interfaceCallSuccessCount"/>
+        <result column="interface_call_fail_count" property="interfaceCallFailCount"/>
+        <result column="interface_call_time" property="interfaceCallTime"/>
+        <result column="interface_call_min_time" property="interfaceCallMinTime"/>
+        <result column="interface_call_avg_time" property="interfaceCallAvgTime"/>
+        <result column="interface_call_max_time" property="interfaceCallMaxTime"/>
+        <result column="interface_request_time" property="interfaceRequestTime"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+
+    <!-- 查询系统操作日志列表 -->
+    <select id="getInterfaceCallList" resultMap="interfaceCallList">
+        select id, interface_name, declaring_name, method_name, request_mode, request_ip,
+               interface_call_count, interface_call_success_count, interface_call_fail_count,
+               interface_call_time, interface_call_total_time, interface_call_min_time,
+               interface_call_avg_time, interface_call_max_time, interface_request_time, status,
+               create_by, create_time, update_by, update_time from sys_interface_call
+    </select>
+</mapper>
