@@ -1,6 +1,7 @@
 package cn.com.wudskq.model.query;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -16,5 +17,8 @@ import java.io.Serializable;
 @ApiModel(value = "接口调用分析查询模型")
 public class SysInterfaceCallQueryDTO implements Serializable {
 
+
+    @ApiModelProperty(value = "当天日期")
+    private String currentDate;
 
 }

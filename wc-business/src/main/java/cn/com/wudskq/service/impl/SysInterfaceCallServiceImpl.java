@@ -30,7 +30,7 @@ public class SysInterfaceCallServiceImpl implements SysInterfaceCallService {
         List<String> interfaceNameList  = sysInterfaceCallMapper.getInterfaceNameByGroup(interfaceCallQuery);
         interfaceNameList.forEach(value->{
             //通过分组的接口名称查询调用数据
-             InterfaceCallVo interfaceCallVo = sysInterfaceCallMapper.getInterfaceCallData(value);
+             InterfaceCallVo interfaceCallVo = sysInterfaceCallMapper.getInterfaceCallData(value,interfaceCallQuery);
              interfaceCallVo.setInterfaceName(value);
              result.add(interfaceCallVo);
         });

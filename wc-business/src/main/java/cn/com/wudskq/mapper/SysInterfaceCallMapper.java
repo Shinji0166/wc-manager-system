@@ -21,9 +21,10 @@ public interface SysInterfaceCallMapper extends BaseMapper<SysInterfaceCall> {
     /**
      * 获取接口调用次数折线,饼状图数据
      * @param interfaceName
+     * @param interfaceCallQuery
      * @return
      */
-    InterfaceCallVo getInterfaceCallData(@Param("interfaceName") String interfaceName);
+    InterfaceCallVo getInterfaceCallData(@Param("interfaceName") String interfaceName,@Param("query")SysInterfaceCallQueryDTO interfaceCallQuery);
 
     /**
      * 获取分组后的接口数据
