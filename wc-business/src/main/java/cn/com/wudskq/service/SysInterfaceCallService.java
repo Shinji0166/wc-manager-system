@@ -1,7 +1,7 @@
 package cn.com.wudskq.service;
 
-import cn.com.wudskq.model.SysInterfaceCall;
 import cn.com.wudskq.model.query.SysInterfaceCallQueryDTO;
+import cn.com.wudskq.model.vo.InterfaceCallVo;
 
 import java.util.List;
 
@@ -19,5 +19,5 @@ public interface SysInterfaceCallService {
      * @param interfaceCallQuery
      * @return
      */
-    List<SysInterfaceCall> getInterfaceCallData(SysInterfaceCallQueryDTO interfaceCallQuery);
+    List<InterfaceCallVo> getInterfaceCallData(SysInterfaceCallQueryDTO interfaceCallQuery);
 }

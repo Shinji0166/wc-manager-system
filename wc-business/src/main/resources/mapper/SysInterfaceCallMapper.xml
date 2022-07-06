@@ -32,4 +32,14 @@
                interface_call_avg_time, interface_call_max_time, interface_request_time, status,
                create_by, create_time, update_by, update_time from sys_interface_call
     </select>
+
+    <select id="getInterfaceCallData" resultType="cn.com.wudskq.model.vo.InterfaceCallVo">
+        select sum(interface_call_success_count) as interfaceCallSuccessCount, sum(interface_call_fail_count) as interfaceCallFailCount
+        from sys_interface_call where interface_name =  #{interfaceName}
+    </select>
+
+    <!-- 获取分组后的接口数据 -->
+    <select id="getInterfaceNameByGroup" resultType="java.lang.String">
+        select interface_name from sys_interface_call group by interface_name
+    </select>
 </mapper>
