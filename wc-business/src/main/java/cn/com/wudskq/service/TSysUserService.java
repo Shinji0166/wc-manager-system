@@ -2,7 +2,6 @@ package cn.com.wudskq.service;
 
 import cn.com.wudskq.model.TSysUser;
 import cn.com.wudskq.model.query.UserInfoQueryDTO;
-import cn.hutool.extra.template.engine.velocity.SimpleStringResourceLoader;
 
 import java.util.List;
 

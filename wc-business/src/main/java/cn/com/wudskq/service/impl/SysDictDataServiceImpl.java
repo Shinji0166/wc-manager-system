@@ -23,7 +23,6 @@ public class SysDictDataServiceImpl implements SysDictDataService {
     @Autowired
     private SysDictDataMapper sysDictDataMapper;
 
-
     @Override
     public List<SysDictVo> getDictDataList(SysDictQueryDTO sysDictQuery) {
         PageHelper.startPage(sysDictQuery.getPageNum(),sysDictQuery.getPageSize());

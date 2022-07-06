@@ -20,9 +20,9 @@ public class Knife4jConfiguration {
     public Docket defaultApi2() {
         Docket docket=new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(new ApiInfoBuilder()
-                        .title("Wc-Manager-System RESTful APIs")
-                        .description("#Wc-Manager-System RESTful APIs")
-                        .termsOfServiceUrl("http://www.github.com/wudskq")
+                        .title("XXX管理平台系统接口文档")
+                        .description("XXX管理平台系统接口文档")
+                        .termsOfServiceUrl("https://www.github.com/wudskq")
                         .version("1.0")
                         .build())
                 //分组名称

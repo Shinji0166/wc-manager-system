@@ -1,6 +1,5 @@
 package cn.com.wudskq.controller;
 
-
 import cn.com.wudskq.annotation.InterfaceCall;
 import cn.com.wudskq.annotation.OperatorLog;
 import cn.com.wudskq.model.ToiletInfo;

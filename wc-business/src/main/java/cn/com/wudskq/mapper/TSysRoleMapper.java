@@ -4,10 +4,8 @@ package cn.com.wudskq.mapper;
 import cn.com.wudskq.model.TSysRole;
 import cn.com.wudskq.model.query.RoleInfoQueryDTO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.security.core.parameters.P;
 
 import java.util.List;
 

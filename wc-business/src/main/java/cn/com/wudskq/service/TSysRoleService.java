@@ -1,6 +1,5 @@
 package cn.com.wudskq.service;
 
-
 import cn.com.wudskq.model.TSysRole;
 import cn.com.wudskq.model.query.RoleInfoQueryDTO;
 

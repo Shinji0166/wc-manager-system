@@ -32,13 +32,11 @@ public class CountryRegionServiceImpl implements CountryRegionService {
         return countryRegionMapper.getRegionList(regionQuery);
     }
 
-
     @Override
 //    @DataSource(DataSourceType.MASTER)
     public CountryRegion getRegionDetail(Long id) {
         return countryRegionMapper.getRegionDetail(id);
     }
-
 
     @Override
 //    @DataSource(DataSourceType.SLAVE)
