@@ -1,6 +1,8 @@
 package cn.com.wudskq.model;
 
 import cn.com.wudskq.common.CreateInfoModel;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -37,6 +39,7 @@ public class SysDictType extends CreateInfoModel implements Serializable {
     @ApiModelProperty(name = "父级ID 顶级节点pid默认为0")
     private Integer pid;
 
+    @TableField(fill = FieldFill.INSERT,value = "status")
     @ApiModelProperty(name = "状态(0正常 1删除 2禁用)")
     private Integer status;
 
