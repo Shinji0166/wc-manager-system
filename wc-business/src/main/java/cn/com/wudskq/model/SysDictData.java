@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -27,6 +29,8 @@ public class SysDictData extends CreateInfoModel implements Serializable {
 
     @ApiModelProperty(name = "主键")
     @TableId("id")
+    //防止数据失真
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id ;
 
     @ApiModelProperty(name = "字典标签")

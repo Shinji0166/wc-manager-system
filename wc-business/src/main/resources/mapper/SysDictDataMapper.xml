@@ -10,19 +10,23 @@
         <result column="dict_type" property="dictCode" jdbcType="VARCHAR"/>
         <result column="dict_value" property="dictValue" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="create_time" property="createTime"/>
     </resultMap>
 
     <!-- 根据字典类型查询字典数据列表 -->
     <select id="getDictDataList" resultMap="SysDictVo">
-        select id,dict_label,dict_type,status,dict_value from sys_dict_data
+        select id,dict_label,dict_type,status,dict_value,create_time from sys_dict_data
         <where>
             status = 0
             <!-- 字典类型 -->
-            <if test="query.dictCode != null and query.dictCode != ''">
-                and dict_type like concat('%',#{query.dictCode},'%')
+            <if test="query.dictType != null and query.dictType != ''">
+                and dict_type = #{query.dictType}
             </if>
             <if test="query.dictName != null and query.dictName != ''">
                 and dict_label like concat('%',#{query.dictName},'%')
+            </if>
+            <if test="query.dictValue != null and query.dictValue != ''">
+                and dict_value like concat('%',#{query.dictValue},'%')
             </if>
         </where>
     </select>

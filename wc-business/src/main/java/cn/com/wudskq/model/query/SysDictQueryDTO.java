@@ -29,6 +29,9 @@ public class SysDictQueryDTO extends PageDTO implements Serializable {
     @ApiModelProperty(value = "字典名称")
     private String dictName;
 
-    @ApiModelProperty(value = "字典代码")
-    private String dictCode;
+    @ApiModelProperty(value = "字典值")
+    private String dictValue;
+
+    @ApiModelProperty(value = "字典类型")
+    private String dictType;
 }
