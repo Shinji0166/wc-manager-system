@@ -23,7 +23,7 @@ import java.util.List;
  * @description: TODO 系统在线用户管理
  * @date 2022/7/3 1:04 AM
  */
-@Api(value = "系统在线用户管理")
+@Api(tags = "系统在线用户管理")
 @RestController
 @RequestMapping("/system")
 public class SysOnlineUserController {
