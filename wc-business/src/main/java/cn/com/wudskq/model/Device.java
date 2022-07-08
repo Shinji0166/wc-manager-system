@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -21,7 +22,7 @@ import java.io.Serializable;
  * @date 2022/6/28 3:26 PM
  */
 @Data
-@Api(value = "设备表模型")
+@ApiModel(value = "设备表模型")
 @TableName("device_info")
 public class Device extends CreateInfoModel implements Serializable {
 

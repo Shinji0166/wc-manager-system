@@ -20,7 +20,7 @@ import java.io.Serializable;
  * @date 2022/6/27 8:02 PM
  */
 
-@ApiModel("地域表模型")
+@ApiModel(value = "地域表模型")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("country_region")

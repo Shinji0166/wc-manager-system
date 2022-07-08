@@ -18,7 +18,7 @@ import java.io.Serializable;
  * @description: TODO 公厕表模型
  * @date 2022/6/28 2:52 AM
  */
-@ApiModel("公厕表模型")
+@ApiModel(value ="公厕表模型")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("toilet_info")
