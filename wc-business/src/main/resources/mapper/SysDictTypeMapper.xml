@@ -6,16 +6,19 @@
     <!-- 字典视图模型映射 -->
     <resultMap id="SysDictVo" type="cn.com.wudskq.model.vo.SysDictVo">
         <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="order_number" property="orderNumber" jdbcType="BIGINT"/>
         <result column="label" property="dictName" jdbcType="VARCHAR"/>
         <result column="type" property="dictCode" jdbcType="VARCHAR"/>
         <result column="classify" property="classify" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="create_time" property="createTime"/>
     </resultMap>
 
 
     <!-- 查询字典类型数据列表 -->
     <select id="getDictList" resultMap="SysDictVo">
-        select id,label,type,status,classify from sys_dict_type
+        select id,order_number,label,type,status,classify,remark,create_time from sys_dict_type
         <where>
             status = 0
         </where>
@@ -52,6 +55,6 @@
     </select>
 
     <select id="getDictTypeDetail" resultMap="SysDictVo">
-        select id,label,type,status,classify from sys_dict_type where id = #{id}
+        select id,order_number,label,type,status,classify,remark,create_time from sys_dict_type where id = #{id}
     </select>
 </mapper>

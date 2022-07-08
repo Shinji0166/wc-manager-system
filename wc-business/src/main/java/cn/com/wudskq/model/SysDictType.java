@@ -27,6 +27,9 @@ public class SysDictType extends CreateInfoModel implements Serializable {
     @ApiModelProperty(name = "主键")
     private Long id;
 
+    @ApiModelProperty(name = "字段序号")
+    private Long orderNumber;
+
     @ApiModelProperty(name = "字典名称")
     private String label;
 
@@ -38,6 +41,9 @@ public class SysDictType extends CreateInfoModel implements Serializable {
 
     @ApiModelProperty(name = "父级ID 顶级节点pid默认为0")
     private Integer pid;
+
+    @ApiModelProperty(name = "备注")
+    private String remark;
 
     @TableField(fill = FieldFill.INSERT,value = "status")
     @ApiModelProperty(name = "状态(0正常 1删除 2禁用)")
