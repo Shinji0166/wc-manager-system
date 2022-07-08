@@ -40,6 +40,12 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
     }
 
     @Override
+    public List<SysDictVo> getDictList(SysDictQueryDTO sysDictQuery) {
+        PageHelper.startPage(sysDictQuery.getPageNum(),sysDictQuery.getPageSize());
+        return sysDictTypeMapper.getDictList(sysDictQuery);
+    }
+
+    @Override
     public void saveDictType(SysDictType sysDictType) {
         sysDictTypeMapper.insert(sysDictType);
     }

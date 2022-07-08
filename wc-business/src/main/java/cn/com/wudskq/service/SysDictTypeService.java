@@ -22,6 +22,14 @@ public interface SysDictTypeService {
      */
     List<TreeSelectVo> getDictTree();
 
+
+    /**
+     * 查询字典类型列表数据
+     * @param sysDictQuery
+     * @return
+     */
+    List<SysDictVo> getDictList(SysDictQueryDTO sysDictQuery);
+
     /**
      * 新增字典类型
      * @param sysDictType

@@ -13,6 +13,14 @@
     </resultMap>
 
 
+    <!-- 查询字典类型数据列表 -->
+    <select id="getDictList" resultMap="SysDictVo">
+        select id,label,type,status,classify from sys_dict_type
+        <where>
+            status = 0
+        </where>
+    </select>
+
     <!-- 删除字典类型数据(逻辑删除) -->
     <update id="removeDictType">
         update sys_dict_type set status = 1

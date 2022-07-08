@@ -17,6 +17,14 @@ import java.util.List;
  */
 public interface SysDictTypeMapper extends BaseMapper<SysDictType> {
 
+
+    /**
+     * 查询字典类型数据列表
+     * @param sysDictQuery
+     * @return
+     */
+    List<SysDictVo> getDictList(@Param("query") SysDictQueryDTO sysDictQuery);
+
     /**
      * 删除字典类型数据(逻辑删除）
      * @param ids

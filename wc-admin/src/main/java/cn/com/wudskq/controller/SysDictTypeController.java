@@ -42,6 +42,20 @@ public class SysDictTypeController {
         return Response.success(dictTree);
     }
 
+    @ApiOperation(value = "查询字典类型数据列表")
+    @InterfaceCall(interfaceName = "查询字典类型数据列表",requestMode = "POST")
+    @OperatorLog(module = "字典类型管理", function = "字典信息", action = "查询字典类型数据列表", requestMode = "POST")
+    @PostMapping("/dict/type/list")
+    public Response getDictList(@RequestBody(required = false) SysDictQueryDTO sysDictQuery){
+        List<SysDictVo> sysDictVoList = sysDictTypeService.getDictList(sysDictQuery);
+        if (null != sysDictVoList && 0 < sysDictVoList.size()) {
+            PageInfo<SysDictVo> pageInfo = new PageInfo<SysDictVo>(sysDictVoList);
+            return Response.success(Collections.singletonList(pageInfo.getList()), pageInfo.getTotal());
+        }
+        return Response.success();
+    }
+
+
     @ApiOperation(value = "查询字典顶级节点下属字典数据列表")
     @InterfaceCall(interfaceName = "查询字典顶级节点下属字典数据列表",requestMode = "POST")
     @OperatorLog(module = "字典类型管理", function = "字典信息", action = "查询字典顶级节点下属字典数据列表", requestMode = "POST")
