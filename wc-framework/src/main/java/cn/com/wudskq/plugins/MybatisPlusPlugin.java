@@ -1,6 +1,7 @@
 package cn.com.wudskq.plugins;
 
 import cn.com.wudskq.config.JWTConfig;
+import cn.com.wudskq.constants.SystemConstants;
 import cn.com.wudskq.model.SysUserDetails;
 import cn.com.wudskq.model.TSysUser;
 import cn.com.wudskq.snowflake.IdGeneratorSnowflake;
@@ -35,9 +36,19 @@ public class MybatisPlusPlugin implements MetaObjectHandler {
     //使用mp实现添加操作,这个方法会执行,metaObject元数据(表中的名字,表中的字段)
     @Override
     public void insertFill(MetaObject metaObject) {
-        TSysUser currentOperatorUser = getCurrentOperatorUser();
-        if(null != currentOperatorUser){
-            this.setFieldValByName("createBy",currentOperatorUser.getNickName(),metaObject);
+        //获取HttpRequest
+        ServletRequestAttributes attributes  = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = null;
+        if(null != attributes){
+            request = attributes.getRequest();
+        }
+        String requestURI = request.getRequestURI();
+        //如果为登录操作则跳过以下逻辑
+        if(!SystemConstants.SYSTEM_LOGIN_URI.equals(requestURI)){
+            TSysUser currentOperatorUser = getCurrentOperatorUser();
+            if(null != currentOperatorUser){
+                this.setFieldValByName("createBy",currentOperatorUser.getNickName(),metaObject);
+            }
         }
         //所有ID使用雪花算法
         this.setFieldValByName("id",idGeneratorSnowflake.snowflakeId(),metaObject);

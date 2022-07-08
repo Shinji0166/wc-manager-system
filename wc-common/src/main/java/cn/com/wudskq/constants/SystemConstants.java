@@ -9,6 +9,9 @@ package cn.com.wudskq.constants;
  */
 public class SystemConstants {
 
+    //系统登录接口
+    public static final String SYSTEM_LOGIN_URI = "/system/doLogin";
+
     //系统在线用户Key
     public static final String OLINE_USER_KEY = "online_user_#";
 
