@@ -8,7 +8,7 @@ server:
 
 spring:
   profiles:
-    active: local
+    active: dev
 
 
 ##mybatis-puls

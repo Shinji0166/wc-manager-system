@@ -30,8 +30,7 @@ public class SysFileUploadDownController {
     @PostMapping("/upload/file")
     public Response uploadFile(@RequestParam("file") MultipartFile multipartFile){
         File file = FileUtil.multipartFileToFile(multipartFile);
-        aliYunOSSUtil.uploadFile(file, file.getName());
-        return Response.success();
+        return Response.success( aliYunOSSUtil.uploadFile(file, file.getName()));
     }
 
     @PostMapping("/download/file")

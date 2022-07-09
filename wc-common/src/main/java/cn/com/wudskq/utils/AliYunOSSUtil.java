@@ -5,6 +5,7 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.OSSException;
 import com.aliyun.oss.model.OSSObject;
+import com.aliyun.oss.model.PutObjectResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -57,12 +58,16 @@ public class AliYunOSSUtil {
      * 上传文件到OSS
      * @param file
      */
-    public void uploadFile(File file,String objectName){
+    public String uploadFile(File file,String objectName){
         OSS ossClient = getOssInstance();
         String filePath = bucketDirName +"/"+ objectName;
         try {
             byte[] bytes = FileUtil.FileTobyte(file);
             ossClient.putObject(bucketName, filePath, new ByteArrayInputStream(bytes));
+            //截取endpoint数据
+            String endpointURL = endpoint.replace("https://", "");
+            String accessURL = "https://"+bucketName +"."+endpointURL+"/"+filePath;
+            return accessURL;
         } catch (OSSException oe) {
             logger.info("Caught an OSSException, which means your request made it to OSS, "
                     + "but was rejected with an error response for some reason.");
@@ -80,6 +85,7 @@ public class AliYunOSSUtil {
                 ossClient.shutdown();
             }
         }
+        return null;
     }
 
 
@@ -90,8 +96,9 @@ public class AliYunOSSUtil {
     public void downloadFile(String objectName){
         OSS ossClient = getOssInstance();
         try {
+            String filePath = bucketDirName +"/"+ objectName;
             // 调用ossClient.getObject返回一个OSSObject实例，该实例包含文件内容及文件元信息。
-            OSSObject ossObject = ossClient.getObject(bucketName, objectName);
+            OSSObject ossObject = ossClient.getObject(bucketName, filePath);
             // 调用ossObject.getObjectContent获取文件输入流，可读取此输入流获取其内容。
             InputStream content = ossObject.getObjectContent();
             if (content != null) {
