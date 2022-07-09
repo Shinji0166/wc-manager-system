@@ -65,7 +65,14 @@ public class TSysResServiceImpl implements TSysResService {
 //    @DataSource(DataSourceType.MASTER)
     public List<TSysRes> getResLIst(ResInfoQueryDTO resInfoQuery) {
         PageHelper.startPage(resInfoQuery.getPageNum(),resInfoQuery.getPageSize());
-        return tSysResMapper.getResLIst(resInfoQuery);
+        List<TSysRes> resLIst = tSysResMapper.getResLIst(resInfoQuery);
+        resLIst.forEach(obj->{
+            //判断是否为系统顶级菜单
+            if(null != obj && null != obj.getPid() && 0 == obj.getPid()){
+                obj.setHasChildren(true);
+            }
+        });
+        return  resLIst;
     }
 
     @Override

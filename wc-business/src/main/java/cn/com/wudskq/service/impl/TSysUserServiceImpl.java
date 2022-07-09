@@ -7,6 +7,7 @@ import cn.com.wudskq.model.TSysUser;
 import cn.com.wudskq.model.query.UserInfoQueryDTO;
 import cn.com.wudskq.service.TSysUserService;
 import cn.com.wudskq.snowflake.IdGeneratorSnowflake;
+import cn.com.wudskq.utils.Md5Util;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
@@ -49,6 +50,7 @@ public class TSysUserServiceImpl implements TSysUserService {
     @Override
 //    @DataSource(DataSourceType.SLAVE)
     public void saveUser(TSysUser sysUser) {
+        sysUser.setPassWord(Md5Util.MD5(sysUser.getPassWord()));
         tSysUserMapper.insert(sysUser);
     }
 

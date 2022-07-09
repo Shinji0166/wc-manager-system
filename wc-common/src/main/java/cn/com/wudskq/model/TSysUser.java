@@ -1,6 +1,8 @@
 package cn.com.wudskq.model;
 
 import cn.com.wudskq.common.CreateInfoModel;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -55,6 +57,7 @@ public class TSysUser extends CreateInfoModel implements Serializable {
     private Date birthday;
 
     @ApiModelProperty("状态（0-正常，1-删除，2-禁用)")
+    @TableField(fill = FieldFill.INSERT,value = "status")
     private Integer status;
 
     @ApiModelProperty("账户类型 1系统账号 2普通账号")

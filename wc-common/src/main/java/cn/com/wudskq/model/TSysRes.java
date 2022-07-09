@@ -39,10 +39,13 @@ public class TSysRes extends CreateInfoModel{
     @ApiModelProperty("资源类型:0菜单 1按钮")
     private String resType;
 
-    @ApiModelProperty("父级id")
-    private String pid;
+    @ApiModelProperty("父级id 等于0时为系统顶级菜单")
+    private Long pid;
 
     @ApiModelProperty("菜单图标")
     private String icon;
+
+    @ApiModelProperty("是否有子节点 默认为false")
+    private Boolean hasChildren=false;
 }
 
