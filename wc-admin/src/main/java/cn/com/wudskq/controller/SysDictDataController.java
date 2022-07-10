@@ -44,6 +44,15 @@ public class SysDictDataController {
         return Response.success();
     }
 
+    @ApiOperation(value = "根据字典类型查询字典数据")
+    @InterfaceCall(interfaceName = "根据字典类型查询字典数据",requestMode = "POST")
+    @OperatorLog(module = "字典管理", function = "字典信息", action = "根据字典类型查询字典数据", requestMode = "POST")
+    @PostMapping("/dict/data/by/type")
+    public Response getDictDataByType(@RequestBody SysDictQueryDTO sysDictQuery) {
+        List<SysDictVo> sysDictVoList = sysDictDataService.getDictDataByType(sysDictQuery);
+        return Response.success(sysDictVoList);
+    }
+
 
     @ApiOperation(value = "获取字典数据详情")
     @InterfaceCall(interfaceName = "获取字典数据详情",requestMode = "GET")

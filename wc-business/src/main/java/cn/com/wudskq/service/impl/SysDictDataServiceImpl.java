@@ -30,6 +30,11 @@ public class SysDictDataServiceImpl implements SysDictDataService {
     }
 
     @Override
+    public List<SysDictVo> getDictDataByType(SysDictQueryDTO sysDictQuery) {
+        return sysDictDataMapper.getDictDataList(sysDictQuery);
+    }
+
+    @Override
     public void saveDictData(SysDictData sysDictData) {
         sysDictDataMapper.insert(sysDictData);
     }

@@ -23,6 +23,13 @@ public interface SysDictDataService {
     List<SysDictVo> getDictDataList(SysDictQueryDTO sysDictQuery);
 
     /**
+     * 根据字典类型查询字典数据
+     * @param sysDictQuery
+     * @return
+     */
+    List<SysDictVo> getDictDataByType(SysDictQueryDTO sysDictQuery);
+
+    /**
      * 新增字典数据
      * @param sysDictData
      */
