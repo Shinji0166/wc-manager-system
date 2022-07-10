@@ -1,5 +1,6 @@
 package cn.com.wudskq.controller;
 
+import cn.com.wudskq.service.SysAppendixService;
 import cn.com.wudskq.utils.AliYunOSSUtil;
 import cn.com.wudskq.utils.FileUtil;
 import cn.com.wudskq.vo.Response;
@@ -24,18 +25,17 @@ import java.io.File;
 public class SysFileUploadDownController {
 
     @Autowired
-    private AliYunOSSUtil aliYunOSSUtil;
+    private SysAppendixService sysAppendixService;
 
     @ApiOperation(value = "上传文件")
     @PostMapping("/upload/file")
-    public Response uploadFile(@RequestParam("file") MultipartFile multipartFile){
-        File file = FileUtil.multipartFileToFile(multipartFile);
-        return Response.success( aliYunOSSUtil.uploadFile(file, file.getName()));
+    public Response uploadFile(@RequestParam("file") MultipartFile multipartFile,@RequestParam("dataSource")Integer dataSource ){
+        return Response.success(sysAppendixService.uploadFile(multipartFile,dataSource));
     }
 
     @PostMapping("/download/file")
     public Response downloadFile(@RequestParam("fileName")String fileName){
-        aliYunOSSUtil.downloadFile(fileName);
+//        aliYunOSSUtil.downloadFile(fileName);
         return Response.success();
     }
 

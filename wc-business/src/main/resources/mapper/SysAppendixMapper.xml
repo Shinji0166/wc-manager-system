@@ -1,0 +1,32 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.wudskq.mapper.SysAppendixMapper">
+
+    <!-- 系统附件模型映射 -->
+    <resultMap id="SysAppendix" type="cn.com.wudskq.model.SysAppendix">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="data_source" property="dataSource" jdbcType="TINYINT"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!-- 根据数据来源及ID查询附件列表 -->
+    <select id="getSysAppendixList" resultMap="SysAppendix">
+        select id, name, url, data_source, status, create_by, create_time, update_by, update_time from sys_appendix
+        <where>
+            status = 0
+        </where>
+    </select>
+
+    <!-- 根据数据来源及ID查询附件 -->
+    <select id="getSysAppendixDetail" resultMap="SysAppendix">
+        select id, name, url, data_source, status, create_by, create_time, update_by, update_time from sys_appendix
+        <where>
+            status = 0
+        </where>
+    </select>
+</mapper>
