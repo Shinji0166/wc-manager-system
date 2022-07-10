@@ -1,10 +1,8 @@
 package cn.com.wudskq.service;
 
 import cn.com.wudskq.model.SysAppendix;
-import com.sun.org.apache.xpath.internal.operations.Mult;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.util.List;
 
 /**
@@ -36,4 +34,11 @@ public interface SysAppendixService {
      * @return
      */
     SysAppendix uploadFile(MultipartFile multipartFile,Integer dataSource);
+
+    /**
+     * 根据附件ID查询附件
+     * @param id
+     * @return
+     */
+    SysAppendix queryFile(String id);
 }

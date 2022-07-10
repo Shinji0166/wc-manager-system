@@ -51,4 +51,9 @@ public class SysAppendixServiceImpl implements SysAppendixService {
         sysAppendixMapper.insert(sysAppendix);
         return sysAppendix;
     }
+
+    @Override
+    public SysAppendix queryFile(String id) {
+        return sysAppendixMapper.selectById(id);
+    }
 }
