@@ -1,7 +1,5 @@
 package cn.com.wudskq.service.impl;
 
-import cn.com.wudskq.annotation.DataSource;
-import cn.com.wudskq.enums.DataSourceType;
 import cn.com.wudskq.mapper.TSysUserMapper;
 import cn.com.wudskq.model.TSysUser;
 import cn.com.wudskq.model.query.UserInfoQueryDTO;
@@ -27,41 +25,36 @@ public class TSysUserServiceImpl implements TSysUserService {
     private IdGeneratorSnowflake idGeneratorSnowflake;
 
     @Override
-//    @DataSource(DataSourceType.MASTER)
     public TSysUser findByUsername(String username) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("user_name",username);
+        queryWrapper.eq("status",0);
         return tSysUserMapper.selectOne(queryWrapper);
     }
 
     @Override
-//    @DataSource(DataSourceType.MASTER)
     public List<TSysUser> getUserInfoList(UserInfoQueryDTO userInfoQuery) {
         PageHelper.startPage(userInfoQuery.getPageNum(),userInfoQuery.getPageSize());
         return tSysUserMapper.getUserInfoList(userInfoQuery);
     }
 
     @Override
-//    @DataSource(DataSourceType.MASTER)
     public TSysUser getUserDetail(Long id) {
         return tSysUserMapper.getUserDetail(id);
     }
 
     @Override
-//    @DataSource(DataSourceType.SLAVE)
     public void saveUser(TSysUser sysUser) {
         sysUser.setPassWord(Md5Util.MD5(sysUser.getPassWord()));
         tSysUserMapper.insert(sysUser);
     }
 
     @Override
-//    @DataSource(DataSourceType.SLAVE)
     public void updateUser(TSysUser sysUser) {
         tSysUserMapper.updateById(sysUser);
     }
 
     @Override
-//    @DataSource(DataSourceType.SLAVE)
     public void removeUser(List<String> ids) {
         tSysUserMapper.removeUser(ids);
     }

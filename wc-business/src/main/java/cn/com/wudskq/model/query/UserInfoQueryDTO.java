@@ -18,11 +18,15 @@ import java.io.Serializable;
 @ApiModel("用户信息查询模型")
 public class UserInfoQueryDTO extends PageDTO implements Serializable {
 
-    @ApiModelProperty("用户昵称")
+    @ApiModelProperty(value = "用户昵称")
     private String nickName;
 
-    @ApiModelProperty("账号")
+    @ApiModelProperty(value ="账号")
     private String userName;
 
+    @ApiModelProperty(value = "性别")
+    private Integer sex;
 
+    @ApiModelProperty(value = "状态")
+    private Integer status;
 }

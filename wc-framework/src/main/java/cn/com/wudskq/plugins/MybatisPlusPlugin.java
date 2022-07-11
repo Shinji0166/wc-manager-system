@@ -42,12 +42,14 @@ public class MybatisPlusPlugin implements MetaObjectHandler {
         if(null != attributes){
             request = attributes.getRequest();
         }
-        String requestURI = request.getRequestURI();
-        //如果为登录操作则跳过以下逻辑
-        if(!SystemConstants.SYSTEM_LOGIN_URI.equals(requestURI)){
-            TSysUser currentOperatorUser = getCurrentOperatorUser();
-            if(null != currentOperatorUser){
-                this.setFieldValByName("createBy",currentOperatorUser.getNickName(),metaObject);
+        if(null != request){
+            String requestURI = request.getRequestURI();
+            //如果为登录操作则跳过以下逻辑
+            if(!SystemConstants.SYSTEM_LOGIN_URI.equals(requestURI)){
+                TSysUser currentOperatorUser = getCurrentOperatorUser();
+                if(null != currentOperatorUser){
+                    this.setFieldValByName("createBy",currentOperatorUser.getNickName(),metaObject);
+                }
             }
         }
         //所有ID使用雪花算法

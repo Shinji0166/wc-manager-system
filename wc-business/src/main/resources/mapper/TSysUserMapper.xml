@@ -39,6 +39,12 @@
             <if test="query.userName != null and query.userName != ''">
                 and user_name like concat('%',#{query.userName},'%')
             </if>
+            <if test="query.sex !=null">
+                and sex = #{query.sex}
+            </if>
+            <if test="query.status != null">
+                and status = #{query.status}
+            </if>
         </where>
     </select>
 
