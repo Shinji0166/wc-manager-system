@@ -14,9 +14,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -60,11 +58,11 @@ public class TSysUser extends CreateInfoModel implements Serializable {
 
 
     @NotBlank(message = "手机号码不能为空")
-    @Length(min = 1,max = 11,message = "密码长度必须在1～11之间")
+    @Length(min = 0,max = 11,message = "手机号码长度必须在1～12之间")
     @ApiModelProperty("电话")
     private String cellPhone;
 
-    @Max(value = 30,message = "邮件长度最大为30")
+    @Length(min = 0,max = 100,message = "邮件长度必须在0～100之间")
     @ApiModelProperty("邮件")
     private String mail;
 
@@ -76,7 +74,7 @@ public class TSysUser extends CreateInfoModel implements Serializable {
     @TableField(fill = FieldFill.INSERT,value = "status")
     private Integer status;
 
-    @ApiModelProperty("账户类型 1系统账号 2普通账号")
+    @ApiModelProperty("账户类型 1管理员账号 2普通账号")
     private String accountType;
 
     @ApiModelProperty("邀请码")
@@ -85,11 +83,11 @@ public class TSysUser extends CreateInfoModel implements Serializable {
     @ApiModelProperty("性别：0男 1女")
     private String sex;
 
-    @Length(min = 1,max = 100,message = "地址最长为100个字符")
+    @Length(min = 0,max = 100,message = "地址长度必须在0～100之间")
     @ApiModelProperty("地址")
     private String address;
 
-    @Length(min = 1,max = 100,message = "个性签名最长为100个字符")
+    @Length(min = 0,max = 100,message = "个性签名长度必须在0～100之间")
     @ApiModelProperty("个人签名")
     private String sign;
 
