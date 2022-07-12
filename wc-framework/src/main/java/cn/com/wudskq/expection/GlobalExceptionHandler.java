@@ -6,9 +6,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author chenfangchao
@@ -27,6 +35,26 @@ public class GlobalExceptionHandler {
     public Response handle(Exception e){
         logger.error("系统日志",e);
         return Response.error(500,"业务繁忙");
+    }
+
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    public Response validateException(MethodArgumentNotValidException e) {
+        List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
+        List<String> list = new ArrayList<>();
+        for (FieldError error : fieldErrors) {
+            list.add(error.getDefaultMessage());
+        }
+        return Response.error(500,list.get(0));
+    }
+
+    @ExceptionHandler(value = ConstraintViolationException.class)
+    public Response validateException(ConstraintViolationException e) {
+        Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+        List<String> list = new ArrayList<>();
+        for (ConstraintViolation<?> item : violations) {
+            list.add(item.getMessage());
+        }
+        return Response.error(500,list.get(0));
     }
 
     //业务异常

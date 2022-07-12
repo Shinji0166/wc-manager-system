@@ -12,7 +12,11 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -37,18 +41,30 @@ public class TSysUser extends CreateInfoModel implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
-    @ApiModelProperty("用户名")
+    @Length(min = 5,max = 20,message = "账号长度必须在5～20之间")
+    @NotBlank(message = "账号不能为空")
+    @ApiModelProperty("账号")
     private String userName;
 
+
+    @NotBlank(message = "密码不能为空")
+    @Length(min = 5,max = 20,message = "密码长度必须在5～20之间")
     @ApiModelProperty("密码")
     private String passWord;
 
-    @ApiModelProperty("昵称")
+
+    @NotBlank(message = "用户名不能为空")
+    @Length(min = 5,max = 20,message = "用户名长度必须在5～20之间")
+    @ApiModelProperty("用户名")
     private String nickName;
 
+
+    @NotBlank(message = "手机号码不能为空")
+    @Length(min = 1,max = 11,message = "密码长度必须在1～11之间")
     @ApiModelProperty("电话")
     private String cellPhone;
 
+    @Max(value = 30,message = "邮件长度最大为30")
     @ApiModelProperty("邮件")
     private String mail;
 
@@ -69,9 +85,11 @@ public class TSysUser extends CreateInfoModel implements Serializable {
     @ApiModelProperty("性别：0男 1女")
     private String sex;
 
+    @Length(min = 1,max = 100,message = "地址最长为100个字符")
     @ApiModelProperty("地址")
     private String address;
 
+    @Length(min = 1,max = 100,message = "个性签名最长为100个字符")
     @ApiModelProperty("个人签名")
     private String sign;
 

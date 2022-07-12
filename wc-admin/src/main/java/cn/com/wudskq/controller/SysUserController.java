@@ -10,6 +10,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -59,7 +60,7 @@ public class SysUserController {
     @InterfaceCall(interfaceName = "新增用户信息",requestMode = "POST")
     @OperatorLog(module = "用户管理", function = "用户信息", action = "新增用户信息", requestMode = "POST")
     @PostMapping("/save/user")
-    public Response saveUser(@RequestBody TSysUser sysUser) {
+    public Response saveUser(@Validated @RequestBody TSysUser sysUser) {
         sysUserService.saveUser(sysUser);
         return Response.success();
     }
@@ -68,7 +69,7 @@ public class SysUserController {
     @InterfaceCall(interfaceName = "更新用户信息",requestMode = "PUT")
     @OperatorLog(module = "用户管理", function = "用户信息", action = "更新用户信息", requestMode = "PUT")
     @PutMapping("/update/user")
-    public Response updateUser(@RequestBody TSysUser sysUser) {
+    public Response updateUser(@Validated @RequestBody TSysUser sysUser) {
         sysUserService.updateUser(sysUser);
         return Response.success();
     }
