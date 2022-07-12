@@ -51,6 +51,14 @@ public class TSysUserServiceImpl implements TSysUserService {
 
     @Override
     public void updateUser(TSysUser sysUser) {
+        //判断更新密码是否与原密码相同
+        TSysUser datasourceUser = tSysUserMapper.selectById(sysUser.getId());
+        if(datasourceUser.getPassWord().equals(sysUser.getPassWord())){
+            sysUser.setPassWord(datasourceUser.getPassWord());
+        }else {
+            String currentPasswd = Md5Util.MD5(sysUser.getPassWord());
+            sysUser.setPassWord(currentPasswd);
+        }
         tSysUserMapper.updateById(sysUser);
     }
 

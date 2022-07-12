@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author chenfangchao
@@ -36,9 +38,11 @@ public class SysOnlineUserController {
     @OperatorLog(module = "用户管理",function = "在线用户",action = "查询系统在线用户列表",requestMode = "POST")
     @PostMapping("/online/user/list")
     public Response getSysOnlineUserList(@RequestBody SysOnlineUserQueryDTO sysOnlineUserQuery){
-        List<SysOnlineUser> sysOnlineUserList = sysOnlineUserServie.getSysOnlineUserList(sysOnlineUserQuery);
-        if(null != sysOnlineUserList && 0 <sysOnlineUserList.size()){
-            return Response.success(sysOnlineUserList);
+        Map<String, Object> resMap = sysOnlineUserServie.getSysOnlineUserList(sysOnlineUserQuery);
+        Integer total = (Integer) resMap.get("total");
+        List<SysOnlineUser> list = (List<SysOnlineUser>) resMap.get("data");
+        if(null != resMap && 0 <resMap.size()){
+            return Response.success(Collections.singletonList(list),total);
         }
         return Response.success();
     }

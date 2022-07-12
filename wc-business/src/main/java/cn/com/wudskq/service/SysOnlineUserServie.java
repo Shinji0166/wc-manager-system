@@ -1,9 +1,7 @@
 package cn.com.wudskq.service;
 
-import cn.com.wudskq.model.SysOnlineUser;
 import cn.com.wudskq.model.query.SysOnlineUserQueryDTO;
-
-import java.util.List;
+import java.util.Map;
 
 /**
  * @author chenfangchao
@@ -19,5 +17,5 @@ public interface SysOnlineUserServie {
      * @param sysOnlineUserQuery
      * @return
      */
-    List<SysOnlineUser> getSysOnlineUserList(SysOnlineUserQueryDTO sysOnlineUserQuery);
+    Map<String,Object> getSysOnlineUserList(SysOnlineUserQueryDTO sysOnlineUserQuery);
 }
