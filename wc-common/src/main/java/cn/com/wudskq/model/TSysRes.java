@@ -1,6 +1,7 @@
 package cn.com.wudskq.model;
 
 import cn.com.wudskq.common.CreateInfoModel;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -46,6 +47,7 @@ public class TSysRes extends CreateInfoModel{
     private String icon;
 
     @ApiModelProperty("是否有子节点 默认为false")
+    @TableField(exist = false)
     private Boolean hasChildren=false;
 }
 

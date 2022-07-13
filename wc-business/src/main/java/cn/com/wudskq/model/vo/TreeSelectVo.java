@@ -1,6 +1,7 @@
 package cn.com.wudskq.model.vo;
 
 import cn.com.wudskq.model.SysDictType;
+import cn.com.wudskq.model.TSysRes;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -27,10 +28,10 @@ public class TreeSelectVo implements Serializable {
     @ApiModelProperty(value = "节点名称")
     private String label;
 
-    @ApiModelProperty(value = "节点级别(0系统字典 1模块字典 2公共字典 3其他)")
+    @ApiModelProperty(value = "节点级别")
     private Integer level;
 
-    @ApiModelProperty(value = "字典代码")
+    @ApiModelProperty(value = "节点代码")
     private String code;
 
     @ApiModelProperty(value = "冗余字段")
@@ -49,6 +50,13 @@ public class TreeSelectVo implements Serializable {
         this.label = sysDictType.getLabel();
         this.code = sysDictType.getType();
     };
+
+    //菜单
+    public TreeSelectVo(TSysRes sysRes){
+        this.id = sysRes.getId();
+        this.label = sysRes.getName();
+        this.code = sysRes.getPermission();
+    }
 
 
     public List<TreeSelectVo> getChildren() {

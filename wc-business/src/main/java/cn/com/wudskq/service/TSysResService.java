@@ -2,6 +2,7 @@ package cn.com.wudskq.service;
 
 import cn.com.wudskq.model.TSysRes;
 import cn.com.wudskq.model.query.ResInfoQueryDTO;
+import cn.com.wudskq.model.vo.TreeSelectVo;
 
 import java.util.List;
 
@@ -16,6 +17,12 @@ public interface TSysResService {
      * @return
      */
     List<TSysRes> findResByUserId(String userId);
+
+    /**
+     * 查询菜单权限树
+     * @return
+     */
+    List<TreeSelectVo> getResTree();
 
     /**
      * 获取资源/菜单信息列表

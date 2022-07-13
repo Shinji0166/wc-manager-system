@@ -4,6 +4,7 @@ import cn.com.wudskq.annotation.InterfaceCall;
 import cn.com.wudskq.annotation.OperatorLog;
 import cn.com.wudskq.model.TSysRes;
 import cn.com.wudskq.model.query.ResInfoQueryDTO;
+import cn.com.wudskq.model.vo.TreeSelectVo;
 import cn.com.wudskq.service.TSysResService;
 import cn.com.wudskq.vo.Response;
 import com.github.pagehelper.PageInfo;
@@ -30,6 +31,15 @@ public class SysResController {
     @Autowired
     private TSysResService sysResService;
 
+
+    @ApiOperation(value = "查询菜单权限树")
+    @InterfaceCall(interfaceName = "查询菜单权限树",requestMode = "GET")
+    @OperatorLog(module = "菜单权限管理", function = "菜单信息", action = "查询菜单权限树", requestMode = "GET")
+    @GetMapping("/res/tree")
+    public Response getResTree() {
+        List<TreeSelectVo> resTree = sysResService.getResTree();
+        return Response.success(resTree);
+    }
 
     @ApiOperation(value = "获取菜单权限列表")
     @InterfaceCall(interfaceName = "获取菜单权限列表",requestMode = "POST")

@@ -87,17 +87,20 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
         //迭代判断是否为顶级节点
         for (Iterator<SysDictType> iterator= dictTypes.iterator(); iterator.hasNext();){
              SysDictType sysDictType = iterator.next();
-             //判断是否为顶级节点
-            if(!idList.contains(Long.valueOf(sysDictType.getPid()))){
-                //生成顶级节点
-                TreeSelectVo treeSelectNode = new TreeSelectVo(sysDictType);
-                //设置顶级节点级别为0
-                treeSelectNode.setLevel(0);
-                //递归查找顶级节点下属所有子节点
-                recursionFn(dictTypes, treeSelectNode);
-                //结果中添加顶级节点
-                resultList.add(treeSelectNode);
-            }
+             if(null != sysDictType.getPid())
+             {
+                 //判断是否为顶级节点
+                 if(!idList.contains(Long.valueOf(sysDictType.getPid()))){
+                     //生成顶级节点
+                     TreeSelectVo treeSelectNode = new TreeSelectVo(sysDictType);
+                     //设置顶级节点级别为0
+                     treeSelectNode.setLevel(0);
+                     //递归查找顶级节点下属所有子节点
+                     recursionFn(dictTypes, treeSelectNode);
+                     //结果中添加顶级节点
+                     resultList.add(treeSelectNode);
+                 }
+             }
         }
         if (resultList.isEmpty())
         {
