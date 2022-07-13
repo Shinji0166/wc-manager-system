@@ -2,6 +2,8 @@ package cn.com.wudskq.model.vo;
 
 import cn.com.wudskq.model.SysDictType;
 import cn.com.wudskq.model.TSysRes;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -23,6 +25,8 @@ public class TreeSelectVo implements Serializable {
     private static final long serialVersionUID = 6001894065800097155L;
 
     @ApiModelProperty(value = "节点ID")
+    //防止数据失真
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @ApiModelProperty(value = "节点名称")
