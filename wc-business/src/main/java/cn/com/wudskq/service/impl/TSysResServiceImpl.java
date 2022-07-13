@@ -149,6 +149,12 @@ public class TSysResServiceImpl implements TSysResService {
     {
         // 得到子节点列表
         List<TreeSelectVo> childList = getChildList(list, t);
+
+        childList.forEach(obj->{
+            // 子节点向下查询是否有子节点
+            recursionFn(list,obj);
+        });
+
         //设置子节点列表级别为3(其他)
         childList.forEach(obj->{obj.setLevel(3);});
         t.setChildren(childList);
