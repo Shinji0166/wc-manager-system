@@ -21,6 +21,15 @@ public class ResInfoQueryDTO extends PageDTO implements Serializable {
     @ApiModelProperty(value = "资源名称/菜单名称")
     private String resName;
 
+    @ApiModelProperty(value = "权限代码")
+    private String permission;
+
+    @ApiModelProperty(value = "资源类型(0目录 1菜单 2按钮)")
+    private Integer resType;
+
+    @ApiModelProperty(value = "状态(0启用,1禁用)")
+    private Integer status;
+
     @ApiModelProperty(value = "上级菜单ID")
     private Long pid;
 }

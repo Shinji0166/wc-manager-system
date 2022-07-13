@@ -32,6 +32,15 @@
             <if test="query.resName != null and query.resName != ''">
                 and name like concat('%',#{query.resName},'%')
             </if>
+            <if test="query.permission !=null and query.permission !=''">
+                and permission like concat('%',#{query.permission},'%')
+            </if>
+            <if test="query.resType !=null">
+                and res_type = #{query.resType}
+            </if>
+            <if test="query.status !=null">
+                and status = #{query.status}
+            </if>
             <if test="query.pid !=null">
                 and pid = #{query.pid}
             </if>
