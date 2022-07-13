@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.com.wudskq.mapper.TSysResMapper">
 
-    <!--用户信息模型字段映射-->
+    <!--菜单资源信息模型字段映射-->
     <resultMap id="resInfo" type="cn.com.wudskq.model.TSysRes">
         <id column="id" property="id" jdbcType="BIGINT"></id>
         <result column="name" property="name" jdbcType="VARCHAR"/>
@@ -19,7 +19,7 @@
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
-    <!-- 查询用户信息列表 -->
+    <!-- 查询菜单资源信息列表 -->
     <select id="getResLIst" resultMap="resInfo">
         select id, name, res_url, permission, res_type, icon, pid, status, create_by, create_time, update_by, update_time from sys_res
         <where>
@@ -28,16 +28,19 @@
             <if test="query.resName != null and query.resName != ''">
                 and name like concat('%',#{query.resName},'%')
             </if>
+            <if test="query.pid !=null">
+                and pid = #{query.pid}
+            </if>
         </where>
     </select>
 
-    <!-- 获取用户详细信息 -->
+    <!-- 获取菜单资源详细信息 -->
     <select id="getResDetail" resultMap="resInfo">
         select id, name, res_url, permission, res_type, icon, pid, status, create_by, create_time, update_by, update_time from sys_res
         where id = #{id}
     </select>
 
-    <!-- 删除用户信息(逻辑删除) -->
+    <!-- 删除菜单资源信息(逻辑删除) -->
     <update id="removeRes">
         update sys_res set status = 1
         <where>

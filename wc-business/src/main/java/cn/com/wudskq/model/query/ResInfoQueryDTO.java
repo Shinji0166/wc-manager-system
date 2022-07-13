@@ -14,10 +14,13 @@ import java.io.Serializable;
  * @description: TODO
  * @date 2022/6/27 11:19 AM
  */
-@ApiModel("菜单信息查询模型")
 @Data
+@ApiModel(value = "菜单信息查询模型")
 public class ResInfoQueryDTO extends PageDTO implements Serializable {
 
-    @ApiModelProperty("资源名称/菜单名称")
+    @ApiModelProperty(value = "资源名称/菜单名称")
     private String resName;
+
+    @ApiModelProperty(value = "上级菜单ID")
+    private Long pid;
 }

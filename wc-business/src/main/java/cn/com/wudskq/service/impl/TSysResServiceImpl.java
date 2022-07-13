@@ -3,7 +3,6 @@ package cn.com.wudskq.service.impl;
 import cn.com.wudskq.mapper.TSysResMapper;
 import cn.com.wudskq.mapper.TSysRoleMapper;
 import cn.com.wudskq.mapper.TSysRoleResMapper;
-import cn.com.wudskq.model.SysDictType;
 import cn.com.wudskq.model.TSysRes;
 import cn.com.wudskq.model.TSysRole;
 import cn.com.wudskq.model.query.ResInfoQueryDTO;
