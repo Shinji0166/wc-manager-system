@@ -25,6 +25,10 @@
         <where>
             <!--排除已删除状态-->
             status != 1
+            <!--默认排除非顶级节点菜单 -->
+            <if test="query.pid == null">
+                and pid = 0
+            </if>
             <if test="query.resName != null and query.resName != ''">
                 and name like concat('%',#{query.resName},'%')
             </if>
