@@ -38,7 +38,7 @@ public class TSysRes extends CreateInfoModel{
     private String permission;
 
     @ApiModelProperty("资源类型(0目录 1菜单 2按钮)")
-    private String resType;
+    private Integer resType;
 
     @ApiModelProperty("父级id 等于0时为系统顶级菜单")
     private Long pid;

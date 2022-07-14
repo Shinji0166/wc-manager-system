@@ -172,12 +172,15 @@ public class TSysResServiceImpl implements TSysResService {
         while (it.hasNext())
         {
             TSysRes n = it.next();
-            //节点列表中的节点PID等于顶级节点的ID
+            //节点列表中的节点PID等于父节点的ID
             //代表该节点为顶级节点的子节点
-            if (n.getPid().longValue() == t.getId().longValue())
+            if(null != n && null != n.getPid() && null != t && null != t.getId())
             {
-                TreeSelectVo treeSelect = new TreeSelectVo(n);
-                tlist.add(treeSelect);
+                if (n.getPid().longValue() == t.getId().longValue())
+                {
+                    TreeSelectVo treeSelect = new TreeSelectVo(n);
+                    tlist.add(treeSelect);
+                }
             }
         }
         return tlist;
