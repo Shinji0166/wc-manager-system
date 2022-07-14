@@ -1,6 +1,7 @@
 package cn.com.wudskq.model;
 
 import cn.com.wudskq.common.CreateInfoModel;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -41,6 +42,8 @@ public class TSysRes extends CreateInfoModel{
     private Integer resType;
 
     @ApiModelProperty("父级id 等于0时为系统顶级菜单")
+    //防止数据失真
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long pid;
 
     @ApiModelProperty("菜单图标")
@@ -49,5 +52,9 @@ public class TSysRes extends CreateInfoModel{
     @ApiModelProperty("是否有子节点 默认为false")
     @TableField(exist = false)
     private Boolean hasChildren=false;
+
+    @ApiModelProperty(value = "状态(0-正常,1-删除,2-禁用)")
+    @TableField(fill = FieldFill.INSERT,value = "status")
+    private Integer status;
 }
 

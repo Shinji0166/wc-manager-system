@@ -63,7 +63,7 @@ public class TSysResServiceImpl implements TSysResService {
     public List<TreeSelectVo> getResTree() {
         //查询选取菜单资源
         QueryWrapper<TSysRes> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("status",0);
+        queryWrapper.ne("status",1);
         List<TSysRes> sysResList = tSysResMapper.selectList(queryWrapper);
         //构建菜单资源树
         return buildSysResTree(sysResList);
@@ -74,8 +74,13 @@ public class TSysResServiceImpl implements TSysResService {
         PageHelper.startPage(resInfoQuery.getPageNum(),resInfoQuery.getPageSize());
         List<TSysRes> resLIst = tSysResMapper.getResLIst(resInfoQuery);
         resLIst.forEach(obj->{
-            //判断是否为系统顶级菜单
-            if(null != obj && null != obj.getPid() && 0 == obj.getPid()){
+            //判断是否为有下属子菜单(即是否为相对父菜单)
+            QueryWrapper<TSysRes> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("pid",obj.getId()).eq("status",0);
+
+            //子菜单数量
+            Integer subMenuCount = tSysResMapper.selectCount(queryWrapper);
+            if(null != subMenuCount && 0 < subMenuCount){
                 obj.setHasChildren(true);
             }
         });
@@ -120,7 +125,7 @@ public class TSysResServiceImpl implements TSysResService {
         for (Iterator<TSysRes> iterator = sysResList.iterator(); iterator.hasNext();){
             TSysRes sysRes = iterator.next();
             //判断是否为顶级节点
-            if(!idList.contains(sysRes.getPid())){
+            if(!idList.contains(sysRes.getPid()) && 0 == sysRes.getPid()){
                 //生成顶级节点
                 TreeSelectVo treeSelectNode = new TreeSelectVo(sysRes);
                 //设置顶级节点级别为0
