@@ -29,27 +29,30 @@ public class TSysRes extends CreateInfoModel{
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
-    @ApiModelProperty("资源名称")
+    @ApiModelProperty(value = "序号")
+    private Integer orderNumber;
+
+    @ApiModelProperty(value= "资源名称")
     private String name;
 
-    @ApiModelProperty("资源路径")
+    @ApiModelProperty(value= "资源路径")
     private String resUrl;
 
-    @ApiModelProperty("权限标识")
+    @ApiModelProperty(value= "权限标识")
     private String permission;
 
-    @ApiModelProperty("资源类型(0目录 1菜单 2按钮)")
+    @ApiModelProperty(value= "资源类型(0目录 1菜单 2按钮)")
     private Integer resType;
 
-    @ApiModelProperty("父级id 等于0时为系统顶级菜单")
+    @ApiModelProperty(value= "父级id 等于0时为系统顶级菜单")
     //防止数据失真
     @JsonSerialize(using = ToStringSerializer.class)
     private Long pid;
 
-    @ApiModelProperty("菜单图标")
+    @ApiModelProperty(value= "菜单图标")
     private String icon;
 
-    @ApiModelProperty("是否有子节点 默认为false")
+    @ApiModelProperty(value= "是否有子节点 默认为false")
     @TableField(exist = false)
     private Boolean hasChildren=false;
 

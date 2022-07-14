@@ -6,6 +6,7 @@
     <!--菜单资源信息模型字段映射-->
     <resultMap id="resInfo" type="cn.com.wudskq.model.TSysRes">
         <id column="id" property="id" jdbcType="BIGINT"></id>
+        <result column="order_number" property="orderNumber" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="res_url" property="resUrl" jdbcType="VARCHAR"/>
         <result column="permission" property="permission" jdbcType="VARCHAR"/>
@@ -21,7 +22,7 @@
 
     <!-- 查询菜单资源信息列表 -->
     <select id="getResLIst" resultMap="resInfo">
-        select id, name, res_url, permission, res_type, icon, pid, status, create_by, create_time, update_by, update_time from sys_res
+        select id, order_number ,name, res_url, permission, res_type, icon, pid, status, create_by, create_time, update_by, update_time from sys_res
         <where>
             <!--排除已删除状态-->
             status != 1
@@ -49,7 +50,7 @@
 
     <!-- 获取菜单资源详细信息 -->
     <select id="getResDetail" resultMap="resInfo">
-        select id, name, res_url, permission, res_type, icon, pid, status, create_by, create_time, update_by, update_time from sys_res
+        select id, order_number, name, res_url, permission, res_type, icon, pid, status, create_by, create_time, update_by, update_time from sys_res
         where id = #{id}
     </select>
 
