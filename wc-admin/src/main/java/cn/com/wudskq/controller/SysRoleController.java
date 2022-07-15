@@ -10,6 +10,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -57,7 +58,7 @@ public class SysRoleController {
     @InterfaceCall(interfaceName = "新增角色信息",requestMode = "POST")
     @OperatorLog(module = "角色管理", function = "角色信息", action = "新增角色信息", requestMode = "POST")
     @PostMapping("/save/role")
-    public Response saveRole(@RequestBody TSysRole sysRole) {
+    public Response saveRole(@Validated @RequestBody TSysRole sysRole) {
         sysRoleService.saveRole(sysRole);
         return Response.success();
     }
@@ -66,7 +67,7 @@ public class SysRoleController {
     @InterfaceCall(interfaceName = "更新角色信息",requestMode = "PUT")
     @OperatorLog(module = "角色管理", function = "角色信息", action = "更新角色信息", requestMode = "PUT")
     @PutMapping("/update/role")
-    public Response updateRole(@RequestBody TSysRole sysRole) {
+    public Response updateRole(@Validated @RequestBody TSysRole sysRole) {
         sysRoleService.updateRole(sysRole);
         return Response.success();
     }
