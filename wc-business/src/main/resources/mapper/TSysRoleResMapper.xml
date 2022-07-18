@@ -15,4 +15,10 @@
             </if>
         </where>
     </select>
+
+    <!-- 根据用户ID获取菜单资源ID -->
+    <select id="getResIdByUserId" resultType="java.lang.Long">
+        select res_id from sys_role_res where role_id in
+         (select role_id from sys_user_role where user_id = #{userId})
+    </select>
 </mapper>

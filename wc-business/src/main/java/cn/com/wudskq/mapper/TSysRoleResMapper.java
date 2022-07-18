@@ -19,5 +19,12 @@ public interface TSysRoleResMapper extends BaseMapper<TSysRoleRes> {
      * @return
      */
     List<String> selectRoleResByRoleIds(@Param("roleList") List<TSysRole> roleList);
+
+    /**
+     * 根据用户ID获取菜单资源ID
+     * @param userId
+     * @return
+     */
+    List<Long> getResIdByUserId(@Param("userId") Long userId);
 }
 

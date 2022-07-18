@@ -3,11 +3,13 @@ package cn.com.wudskq.service.impl;
 import cn.com.wudskq.mapper.TSysResMapper;
 import cn.com.wudskq.mapper.TSysRoleMapper;
 import cn.com.wudskq.mapper.TSysRoleResMapper;
+import cn.com.wudskq.model.SysUserDetails;
 import cn.com.wudskq.model.TSysRes;
 import cn.com.wudskq.model.TSysRole;
 import cn.com.wudskq.model.query.ResInfoQueryDTO;
 import cn.com.wudskq.model.vo.TreeSelectVo;
 import cn.com.wudskq.service.TSysResService;
+import cn.com.wudskq.utils.JWTTokenUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
@@ -58,10 +60,21 @@ public class TSysResServiceImpl implements TSysResService {
     }
 
     @Override
-    public List<TreeSelectVo> getResTree() {
+    public List<TreeSelectVo> getResTree(String token) {
+        //解析token 根据当前用户ID获取菜单权限列表
+        SysUserDetails sysUserDetails = JWTTokenUtil.parseAccessToken(token);
         //查询选取菜单资源
         QueryWrapper<TSysRes> queryWrapper = new QueryWrapper<>();
         queryWrapper.ne("status",1);
+
+        //admin拥有全部权限
+        if(!"admin".equals(sysUserDetails.getUsername())){
+            List<Long> resIds = tSysRoleResMapper.getResIdByUserId(sysUserDetails.getId());
+            if(null == resIds || 0 == resIds.size()){
+                return null;
+            }
+            queryWrapper.in("id",resIds);
+        }
         List<TSysRes> sysResList = tSysResMapper.selectList(queryWrapper);
         //构建菜单资源树
         return buildSysResTree(sysResList);

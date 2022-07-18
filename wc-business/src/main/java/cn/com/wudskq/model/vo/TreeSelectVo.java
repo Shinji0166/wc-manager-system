@@ -38,8 +38,8 @@ public class TreeSelectVo implements Serializable {
     @ApiModelProperty(value = "节点代码")
     private String code;
 
-    @ApiModelProperty(value = "冗余字段")
-    private String colum;
+    @ApiModelProperty(value = "类型")
+    private Integer  type;
 
     @ApiModelProperty(value = "节点列表")
     private List<TreeSelectVo> children;
@@ -60,6 +60,7 @@ public class TreeSelectVo implements Serializable {
         this.id = sysRes.getId();
         this.label = sysRes.getName();
         this.code = sysRes.getPermission();
+        this.type = sysRes.getResType();
     }
 
 

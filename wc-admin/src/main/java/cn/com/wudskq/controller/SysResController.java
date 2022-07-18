@@ -36,8 +36,8 @@ public class SysResController {
     @InterfaceCall(interfaceName = "查询菜单权限树",requestMode = "GET")
     @OperatorLog(module = "菜单权限管理", function = "菜单信息", action = "查询菜单权限树", requestMode = "GET")
     @GetMapping("/res/tree")
-    public Response getResTree() {
-        List<TreeSelectVo> resTree = sysResService.getResTree();
+    public Response getResTree(@RequestParam("token")String token) {
+        List<TreeSelectVo> resTree = sysResService.getResTree(token);
         return Response.success(resTree);
     }
 

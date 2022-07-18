@@ -22,7 +22,7 @@ public interface TSysResService {
      * 查询菜单权限树
      * @return
      */
-    List<TreeSelectVo> getResTree();
+    List<TreeSelectVo> getResTree(String token);
 
     /**
      * 获取资源/菜单信息列表
