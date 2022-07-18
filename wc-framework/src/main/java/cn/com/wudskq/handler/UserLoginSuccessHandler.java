@@ -19,6 +19,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * @author wudskq
@@ -43,7 +44,10 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
         handleOnlineUser(token);
         //新增登录日志
         handleLoginLog(token);
-        Response.responseJson(response, Response.response(200, "登录成功", token));
+        HashMap<String, Object> resultMap = new HashMap<>();
+        resultMap.put("token",token);
+        resultMap.put("userInfo",sysUserDetails);
+        Response.responseJson(response, Response.response(200, "登录成功", resultMap));
     }
 
     //封装在线用户信息

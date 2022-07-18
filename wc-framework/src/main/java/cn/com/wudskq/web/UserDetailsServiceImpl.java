@@ -1,8 +1,5 @@
 package cn.com.wudskq.web;
 
-
-import cn.com.wudskq.annotation.DataSource;
-import cn.com.wudskq.enums.DataSourceType;
 import cn.com.wudskq.mapper.TSysResMapper;
 import cn.com.wudskq.model.SysUserDetails;
 import cn.com.wudskq.model.TSysRes;
@@ -49,7 +46,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      * [username]
      */
     @Override
-//    @DataSource(DataSourceType.SLAVE)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<TSysRes> resList = null;
         //管理员账户
