@@ -17,7 +17,7 @@
     <select id="getDictDataList" resultMap="SysDictVo">
         select id,dict_label,dict_type,status,dict_value,create_time from sys_dict_data
         <where>
-            status = 0
+            status != 1
             <!-- 字典类型 -->
             <if test="query.dictType != null and query.dictType != ''">
                 and dict_type = #{query.dictType}

@@ -20,7 +20,7 @@
     <select id="getDictList" resultMap="SysDictVo">
         select id,order_number,label,type,status,classify,remark,create_time from sys_dict_type
         <where>
-            status = 0
+            status != 1
         </where>
     </select>
 
@@ -41,7 +41,7 @@
     <select id="getDictTypeTopData" resultMap="SysDictVo">
         select id,label,type,status,classify from sys_dict_type
         <where>
-             status = 0
+             status != 1
              <if test="query.id != null">
                  and pid = #{query.id}
              </if>
