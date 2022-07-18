@@ -66,4 +66,17 @@
             </if>
         </where>
     </update>
+
+    <!-- 根据角色ID查询资源ID -->
+    <select id="selectRoleResByRoleIds" resultType="java.lang.String">
+        select res_id from sys_role_res
+        <where>
+            <if test="roleList !=null and roleList.size() != 0">
+                 role_id in
+                <foreach collection="roleList" open="(" separator="," close=")" item="item">
+                      #{item.id}
+                </foreach>
+            </if>
+        </where>
+    </select>
 </mapper>

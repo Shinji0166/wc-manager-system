@@ -44,13 +44,11 @@ public class TSysResServiceImpl implements TSysResService {
         //获取用户有的角色
         //根据当前登录用户获取角色
         List<TSysRole> roleList = tSysRoleMapper.findRoleByUserId(userId);
-        if(roleList == null || roleList.size() == 0){ //如果用户没有角色返回没有权限
+        if(null == roleList  || 0 == roleList.size()){ //如果用户没有角色返回没有权限
             return null;
         }
         //根据角色获取菜单资源id关系集合
-        Map<String,Object> map = new HashMap<>();
-        map.put("roleList",roleList);
-        List<String> tSysRoleResList = tSysRoleResMapper.selectRoleResByMap(map);
+        List<String> tSysRoleResList = tSysRoleResMapper.selectRoleResByRoleIds(roleList);
         if(tSysRoleResList == null || tSysRoleResList.size() == 0){ //如果用户没有角色返回没有权限
             return null;
         }

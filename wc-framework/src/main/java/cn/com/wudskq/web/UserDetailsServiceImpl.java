@@ -65,7 +65,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             resList = tSysResMapper.selectList(new QueryWrapper<>());
             for (int i = 0; i < resList.size() ; i++) {
                 if(StringUtil.isNotEmpty(resList.get(i).getPermission())){
-                    authorities.add(new SimpleGrantedAuthority("ROLE_" + resList.get(i).getPermission()));
+                    authorities.add(new SimpleGrantedAuthority("res_" + resList.get(i).getPermission()));
                 }
             }
             sysUserDetails.setAuthorities(authorities);
@@ -83,10 +83,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             Set<GrantedAuthority> authorities = new HashSet<>(); // 角色集合
  
             resList = tSysResService.findResByUserId(String.valueOf(sysUserDetails.getId()));//当前用户有的资源集合
-            if(resList != null){
+            if(resList != null && 0 < resList.size()){
                 for (int i = 0; i < resList.size() ; i++) {
                     if(StringUtil.isNotEmpty(resList.get(i).getPermission())){
-                        authorities.add(new SimpleGrantedAuthority("ROLE_" + resList.get(i).getPermission()));
+                        authorities.add(new SimpleGrantedAuthority("res_" + resList.get(i).getPermission()));
                     }
                 }
             }

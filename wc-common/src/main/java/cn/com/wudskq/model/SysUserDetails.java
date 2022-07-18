@@ -27,7 +27,7 @@ public class SysUserDetails extends TSysUser implements UserDetails, Serializabl
 
     private String password;
 
-    @ApiModelProperty("用户角色")
+    @ApiModelProperty("用户权限")
     private Collection <GrantedAuthority> authorities;
 
     @ApiModelProperty("账号是否过期")
