@@ -22,7 +22,7 @@ import java.util.Date;
  * @author chenfangchao
  * @title: MybatisPlusPlugin
  * @projectName wc-manager-system
- * @description: TODO Mybatis-Plus插入及更新时公共字段处理
+ * @description: TODO MybatisPlus插入及更新时公共字段处理
  * @date 2022/7/2 2:05 AM
  */
 @Configuration
