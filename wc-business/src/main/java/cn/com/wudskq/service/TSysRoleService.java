@@ -2,6 +2,7 @@ package cn.com.wudskq.service;
 
 import cn.com.wudskq.model.TSysRole;
 import cn.com.wudskq.model.query.RoleInfoQueryDTO;
+import cn.com.wudskq.model.vo.SysRoleSelectVo;
 
 import java.util.List;
 
@@ -9,6 +10,13 @@ import java.util.List;
  * @author wudskq
  */
 public interface TSysRoleService {
+
+    /**
+     * 获取角色下拉框数据
+     * @param roleInfoQuery
+     * @return
+     */
+    List<SysRoleSelectVo> getRoleSelect(RoleInfoQueryDTO roleInfoQuery);
 
     /**
      * 获取角色信息列表

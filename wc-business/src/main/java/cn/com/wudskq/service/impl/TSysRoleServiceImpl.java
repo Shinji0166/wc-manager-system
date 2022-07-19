@@ -5,6 +5,7 @@ import cn.com.wudskq.mapper.TSysRoleResMapper;
 import cn.com.wudskq.model.TSysRole;
 import cn.com.wudskq.model.TSysRoleRes;
 import cn.com.wudskq.model.query.RoleInfoQueryDTO;
+import cn.com.wudskq.model.vo.SysRoleSelectVo;
 import cn.com.wudskq.service.TSysRoleService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
@@ -25,6 +26,12 @@ public class TSysRoleServiceImpl implements TSysRoleService {
 
     @Autowired
     private TSysRoleResMapper sysRoleResMapper;
+
+
+    @Override
+    public List<SysRoleSelectVo> getRoleSelect(RoleInfoQueryDTO roleInfoQuery) {
+        return sysRoleMapper.getRoleSelect(roleInfoQuery);
+    }
 
     @Override
     public List<TSysRole> getRoleInfoList(RoleInfoQueryDTO roleInfoQuery) {

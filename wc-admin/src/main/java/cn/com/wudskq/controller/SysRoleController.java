@@ -4,6 +4,7 @@ import cn.com.wudskq.annotation.InterfaceCall;
 import cn.com.wudskq.annotation.OperatorLog;
 import cn.com.wudskq.model.TSysRole;
 import cn.com.wudskq.model.query.RoleInfoQueryDTO;
+import cn.com.wudskq.model.vo.SysRoleSelectVo;
 import cn.com.wudskq.service.TSysRoleService;
 import cn.com.wudskq.vo.Response;
 import com.github.pagehelper.PageInfo;
@@ -30,6 +31,16 @@ public class SysRoleController {
 
     @Autowired
     private TSysRoleService sysRoleService;
+
+
+    @ApiOperation(value = "获取角色信息下拉框数据")
+    @InterfaceCall(interfaceName = "获取角色信息下拉框数据",requestMode = "POST")
+    @OperatorLog(module = "角色管理", function = "角色信息", action = "获取角色信息下拉框数据", requestMode = "POST")
+    @PostMapping("/role/select")
+    public Response getRoleSelect(@RequestBody(required = false) RoleInfoQueryDTO roleInfoQuery) {
+        List<SysRoleSelectVo> roleSelect = sysRoleService.getRoleSelect(roleInfoQuery);
+        return Response.success(roleSelect);
+    }
 
 
     @ApiOperation(value = "获取角色信息列表")
