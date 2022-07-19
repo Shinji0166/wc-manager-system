@@ -46,6 +46,7 @@
                 and pid = #{query.pid}
             </if>
         </where>
+        order by order_number
     </select>
 
     <!-- 获取菜单资源详细信息 -->

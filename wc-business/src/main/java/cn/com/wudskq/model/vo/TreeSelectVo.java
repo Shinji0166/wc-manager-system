@@ -44,6 +44,9 @@ public class TreeSelectVo implements Serializable {
     @ApiModelProperty(value = "资源路径")
     private String  path;
 
+    @ApiModelProperty(value = "icon")
+    private String  icon;
+
     @ApiModelProperty(value = "节点列表")
     private List<TreeSelectVo> children;
 
@@ -65,6 +68,7 @@ public class TreeSelectVo implements Serializable {
         this.code = sysRes.getPermission();
         this.type = sysRes.getResType();
         this.path = sysRes.getResUrl();
+        this.icon = sysRes.getIcon();
     }
 
 
