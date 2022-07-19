@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * @author chenfangchao
@@ -16,6 +17,7 @@ import lombok.Data;
  * @date 2022/6/23 10:56 AM
  */
 @Data
+@Accessors(chain = true)
 @TableName("sys_user_role")
 @ApiModel("用户角色表模型")
 public class TSysUserRole {
@@ -23,12 +25,12 @@ public class TSysUserRole {
     @TableId
     //防止数据失真
     @JsonSerialize(using = ToStringSerializer.class)
-    private String id;
+    private Long id;
 
     @ApiModelProperty("用户名id")
-    private String userId;
+    private Long userId;
 
     @ApiModelProperty("角色id")
-    private String roleId;
+    private Long roleId;
 }
 

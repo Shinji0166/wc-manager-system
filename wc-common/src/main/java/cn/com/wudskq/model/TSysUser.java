@@ -28,71 +28,71 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @TableName("sys_user")
-@ApiModel("用户表模型")
+@ApiModel(value = "用户表模型")
 public class TSysUser extends CreateInfoModel implements Serializable {
  
     private static final long serialVersionUID = 1L;
  
     @TableId
-    @ApiModelProperty("主键ID")
+    @ApiModelProperty(value = "主键ID")
     //防止数据失真
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @Length(min = 5,max = 20,message = "账号长度必须在5～20之间")
     @NotBlank(message = "账号不能为空")
-    @ApiModelProperty("账号")
+    @ApiModelProperty(value = "账号")
     private String userName;
-
 
     @NotBlank(message = "密码不能为空")
     @Length(min = 5,max = 20,message = "密码长度必须在5～20之间")
-    @ApiModelProperty("密码")
+    @ApiModelProperty(value = "密码")
     private String passWord;
-
 
     @NotBlank(message = "用户名不能为空")
     @Length(min = 5,max = 20,message = "用户名长度必须在5～20之间")
-    @ApiModelProperty("用户名")
+    @ApiModelProperty(value = "用户名")
     private String nickName;
-
 
     @NotBlank(message = "手机号码不能为空")
     @Length(min = 0,max = 11,message = "手机号码长度必须在1～12之间")
-    @ApiModelProperty("电话")
+    @ApiModelProperty(value = "电话")
     private String cellPhone;
 
     @Length(min = 0,max = 100,message = "邮件长度必须在0～100之间")
-    @ApiModelProperty("邮件")
+    @ApiModelProperty(value = "邮件")
     private String mail;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    @ApiModelProperty("生日")
+    @ApiModelProperty(value = "生日")
     private Date birthday;
 
-    @ApiModelProperty("状态（0-正常，1-删除，2-禁用)")
+    @ApiModelProperty(value = "状态（0-正常，1-删除，2-禁用)")
     @TableField(fill = FieldFill.INSERT,value = "status")
     private Integer status;
 
-    @ApiModelProperty("账户类型 1管理员账号 2普通账号")
+    @ApiModelProperty(value = "账户类型 1管理员账号 2普通账号")
     private String accountType;
 
-    @ApiModelProperty("邀请码")
+    @ApiModelProperty(value = "邀请码")
     private String inviteCode;
 
-    @ApiModelProperty("性别：0男 1女")
+    @ApiModelProperty(value = "性别：0男 1女")
     private String sex;
 
     @Length(min = 0,max = 100,message = "地址长度必须在0～100之间")
-    @ApiModelProperty("地址")
+    @ApiModelProperty(value = "地址")
     private String address;
 
     @Length(min = 0,max = 100,message = "个性签名长度必须在0～100之间")
-    @ApiModelProperty("个人签名")
+    @ApiModelProperty(value = "个人签名")
     private String sign;
 
-    @ApiModelProperty("用户头像")
+    @ApiModelProperty(value = "用户头像")
     private String pictureId;
 
+    @ApiModelProperty(value = "角色ID")
+    @TableField(exist = false)
+    private Long roleId;
 }
 

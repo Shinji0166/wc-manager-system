@@ -18,6 +18,9 @@ public class PageDTO implements Serializable {
 
     private static final long serialVersionUID = 5830451287724971018L;
 
+    /** 当前登录用户ID **/
+    private Long currentLoginUserId;
+
     private Integer pageNum;
 
     private Integer pageSize;

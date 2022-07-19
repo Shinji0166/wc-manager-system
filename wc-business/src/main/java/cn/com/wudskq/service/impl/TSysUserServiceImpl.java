@@ -1,7 +1,9 @@
 package cn.com.wudskq.service.impl;
 
 import cn.com.wudskq.mapper.TSysUserMapper;
+import cn.com.wudskq.mapper.TSysUserRoleMapper;
 import cn.com.wudskq.model.TSysUser;
+import cn.com.wudskq.model.TSysUserRole;
 import cn.com.wudskq.model.query.UserInfoQueryDTO;
 import cn.com.wudskq.service.TSysUserService;
 import cn.com.wudskq.snowflake.IdGeneratorSnowflake;
@@ -22,6 +24,9 @@ public class TSysUserServiceImpl implements TSysUserService {
     private TSysUserMapper tSysUserMapper;
 
     @Resource
+    private TSysUserRoleMapper tSysUserRoleMapper;
+
+    @Resource
     private IdGeneratorSnowflake idGeneratorSnowflake;
 
     @Override
@@ -40,13 +45,27 @@ public class TSysUserServiceImpl implements TSysUserService {
 
     @Override
     public TSysUser getUserDetail(Long id) {
-        return tSysUserMapper.getUserDetail(id);
+        TSysUser userDetail = tSysUserMapper.getUserDetail(id);
+        
+        //查询用户关联的角色ID
+        QueryWrapper<TSysUserRole> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id",id);
+        TSysUserRole tSysUserRole = tSysUserRoleMapper.selectOne(queryWrapper);
+        if(null != tSysUserRole && null != tSysUserRole.getRoleId()){
+            userDetail.setRoleId(tSysUserRole.getRoleId());
+        }
+        return userDetail;
     }
 
     @Override
     public void saveUser(TSysUser sysUser) {
+        //新增用户
         sysUser.setPassWord(Md5Util.MD5(sysUser.getPassWord()));
         tSysUserMapper.insert(sysUser);
+        //新增用户与角色关联关系
+        TSysUserRole tSysUserRole = new TSysUserRole();
+        tSysUserRole.setUserId(sysUser.getId()).setRoleId(sysUser.getRoleId());
+        tSysUserRoleMapper.insert(tSysUserRole);
     }
 
     @Override
@@ -60,6 +79,21 @@ public class TSysUserServiceImpl implements TSysUserService {
             sysUser.setPassWord(currentPasswd);
         }
         tSysUserMapper.updateById(sysUser);
+
+        //更新用户与角色关联关系
+        TSysUserRole tSysUserRole = new TSysUserRole();
+        tSysUserRole.setUserId(sysUser.getId()).setRoleId(sysUser.getRoleId());
+        QueryWrapper<TSysUserRole> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id",sysUser.getId());
+
+        //有的更新无则新增
+        Integer relationCount = tSysUserRoleMapper.selectCount(queryWrapper);
+        if(null != relationCount && 1 == relationCount){
+            tSysUserRoleMapper.update(tSysUserRole,queryWrapper);
+        }else {
+            tSysUserRoleMapper.insert(tSysUserRole);
+        }
+
     }
 
     @Override
