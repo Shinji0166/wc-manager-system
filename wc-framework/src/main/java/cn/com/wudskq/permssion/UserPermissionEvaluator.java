@@ -15,6 +15,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @author wudskq
+ */
+
 @Configuration
 @Component
 public class UserPermissionEvaluator implements PermissionEvaluator {
@@ -30,20 +34,23 @@ public class UserPermissionEvaluator implements PermissionEvaluator {
         } catch (Exception e){
             throw new BusinessException(403,"权限不足");
         }
- 
+
         Set<String> permissions = new HashSet<String>(); // 用户权限
- 
-        List<TSysRes> authList = tSysResService.findResByUserId(String.valueOf(sysUserDetails.getId()));
- 
-        for (int i = 0; i < authList.size() ; i++) {
-            permissions.add(authList.get(i).getPermission());
+
+        //admin拥有全部权限
+        if("admin".equals(sysUserDetails.getUsername())){
+             return true;
+        }else {
+            List<TSysRes> authList = tSysResService.findResByUserId(String.valueOf(sysUserDetails.getId()));
+            for (int i = 0; i < authList.size() ; i++) {
+                permissions.add("res_"+authList.get(i).getPermission());
+            }
+            // 判断是否拥有权限
+            if (permissions.contains(permission.toString())) {
+                return true;
+            }
+            return false;
         }
- 
-        // 判断是否拥有权限
-        if (permissions.contains(permission.toString())) {
-            return true;
-        }
-        return false;
     }
  
     @Override

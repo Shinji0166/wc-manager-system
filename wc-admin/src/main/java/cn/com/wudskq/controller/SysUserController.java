@@ -10,6 +10,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +36,7 @@ public class SysUserController {
     private TSysUserService sysUserService;
 
     @ApiOperation(value = "获取用户信息列表")
+    @PreAuthorize(value = "hasPermission('/system/user/list','res_system:user:query')")
     @InterfaceCall(interfaceName = "获取用户信息列表",requestMode = "POST")
     @OperatorLog(module = "用户管理", function = "用户信息", action = "获取用户信息列表", requestMode = "POST")
     @PostMapping("/user/list")

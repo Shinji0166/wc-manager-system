@@ -43,26 +43,29 @@ public class TSysResServiceImpl implements TSysResService {
      */
     @Override
     public List<TSysRes> findResByUserId(String userId) {
-        //获取用户有的角色
+
         //根据当前登录用户获取角色
         List<TSysRole> roleList = tSysRoleMapper.findRoleByUserId(userId);
         if(null == roleList  || 0 == roleList.size()){ //如果用户没有角色返回没有权限
             return null;
         }
+
         //根据角色获取菜单资源id关系集合
         List<String> tSysRoleResList = tSysRoleResMapper.selectRoleResByRoleIds(roleList);
-        if(tSysRoleResList == null || tSysRoleResList.size() == 0){ //如果用户没有角色返回没有权限
+
+        //如果用户没有角色返回没有权限
+        if(tSysRoleResList == null || tSysRoleResList.size() == 0){
             return null;
         }
         //根据资源id获取菜单资源
         return tSysResMapper.selectBatchIds(tSysRoleResList);
- 
     }
 
     @Override
     public List<TreeSelectVo> getResTree(String token) {
         //解析token 根据当前用户ID获取菜单权限列表
         SysUserDetails sysUserDetails = JWTTokenUtil.parseAccessToken(token);
+
         //查询选取菜单资源
         QueryWrapper<TSysRes> queryWrapper = new QueryWrapper<>();
         queryWrapper.ne("status",1);
@@ -75,6 +78,7 @@ public class TSysResServiceImpl implements TSysResService {
             }
             queryWrapper.in("id",resIds);
         }
+
         List<TSysRes> sysResList = tSysResMapper.selectList(queryWrapper);
         //构建菜单资源树
         return buildSysResTree(sysResList);
@@ -84,6 +88,7 @@ public class TSysResServiceImpl implements TSysResService {
     public List<TSysRes> getResLIst(ResInfoQueryDTO resInfoQuery) {
         PageHelper.startPage(resInfoQuery.getPageNum(),resInfoQuery.getPageSize());
         List<TSysRes> resLIst = tSysResMapper.getResLIst(resInfoQuery);
+
         resLIst.forEach(obj->{
             //判断是否为有下属子菜单(即是否为相对父菜单)
             QueryWrapper<TSysRes> queryWrapper = new QueryWrapper<>();
