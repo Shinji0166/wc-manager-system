@@ -10,6 +10,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -32,6 +33,7 @@ public class DeviceController {
 
 
     @ApiOperation(value = "获取设备信息列表")
+    @PreAuthorize(value = "hasPermission('/system/device/list','res_system:device:query')")
     @InterfaceCall(interfaceName = "获取设备信息列表",requestMode = "POST")
     @OperatorLog(module = "设备管理", function = "设备信息", action = "查看设备信息列表", requestMode = "POST")
     @PostMapping("/device/list")
@@ -46,6 +48,7 @@ public class DeviceController {
 
 
     @ApiOperation(value = "获取设备详细信息")
+    @PreAuthorize(value = "hasPermission('/system/device/detail','res_system:device:query')")
     @InterfaceCall(interfaceName = "获取设备详细信息",requestMode = "GET")
     @OperatorLog(module = "设备管理", function = "设备信息", action = "获取设备详细信息", requestMode = "GET")
     @GetMapping("/device/detail")
@@ -55,6 +58,7 @@ public class DeviceController {
     }
 
     @ApiOperation(value = "新增设备信息")
+    @PreAuthorize(value = "hasPermission('/system/save/device','res_system:device:add')")
     @InterfaceCall(interfaceName = "新增设备信息",requestMode = "POST")
     @OperatorLog(module = "设备管理", function = "设备信息", action = "新增设备信息", requestMode = "POST")
     @PostMapping("/save/device")
@@ -64,6 +68,7 @@ public class DeviceController {
     }
 
     @ApiOperation(value = "更新设备信息")
+    @PreAuthorize(value = "hasPermission('/system/update/device','res_system:device:edit')")
     @InterfaceCall(interfaceName = "更新设备信息",requestMode = "PUT")
     @OperatorLog(module = "设备管理", function = "设备信息", action = "更新设备信息", requestMode = "PUT")
     @PutMapping("/update/device")
@@ -73,6 +78,7 @@ public class DeviceController {
     }
 
     @ApiOperation(value = "删除设备信息(逻辑删除)")
+    @PreAuthorize(value = "hasPermission('/system/remove/device','res_system:device:delete')")
     @InterfaceCall(interfaceName = "删除设备信息",requestMode = "DELETE")
     @OperatorLog(module = "设备管理", function = "设备信息", action = "删除设备信息", requestMode = "DELETE")
     @DeleteMapping("/remove/device")

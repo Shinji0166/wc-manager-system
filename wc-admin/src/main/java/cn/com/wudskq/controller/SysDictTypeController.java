@@ -12,6 +12,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -43,6 +44,7 @@ public class SysDictTypeController {
     }
 
     @ApiOperation(value = "查询字典类型数据列表")
+    @PreAuthorize(value = "hasPermission('/system/dict/type/list','res_system:dict:query')")
     @InterfaceCall(interfaceName = "查询字典类型数据列表",requestMode = "POST")
     @OperatorLog(module = "字典类型管理", function = "字典信息", action = "查询字典类型数据列表", requestMode = "POST")
     @PostMapping("/dict/type/list")
@@ -70,6 +72,7 @@ public class SysDictTypeController {
     }
 
     @ApiOperation(value = "查看字典类型详情")
+    @PreAuthorize(value = "hasPermission('/system/dict/type/detail','res_system:dict:query')")
     @InterfaceCall(interfaceName = "查看字典类型详情",requestMode = "GET")
     @OperatorLog(module = "字典类型管理", function = "字典信息", action = "查看字典类型详情", requestMode = "GET")
     @GetMapping("/dict/type/detail")
@@ -79,6 +82,7 @@ public class SysDictTypeController {
     }
 
     @ApiOperation(value = "新增字典类型")
+    @PreAuthorize(value = "hasPermission('/system/save/dict/type','res_system:dict:add')")
     @InterfaceCall(interfaceName = "新增字典类型",requestMode = "POST")
     @OperatorLog(module = "字典类型管理", function = "字典信息", action = "新增字典类型", requestMode = "POST")
     @PostMapping("/save/dict/type")
@@ -88,6 +92,7 @@ public class SysDictTypeController {
     }
 
     @ApiOperation(value = "更新字典类型")
+    @PreAuthorize(value = "hasPermission('/system/update/dict/type','res_system:dict:edit')")
     @InterfaceCall(interfaceName = "更新字典类型",requestMode = "PUT")
     @OperatorLog(module = "字典类型管理", function = "字典信息", action = "更新字典类型", requestMode = "PUT")
     @PutMapping("/update/dict/type")
@@ -97,6 +102,7 @@ public class SysDictTypeController {
     }
 
     @ApiOperation(value = "删除字典类型(逻辑删除)")
+    @PreAuthorize(value = "hasPermission('/system/remove/dict/type','res_system:dict:delete')")
     @InterfaceCall(interfaceName = "删除字典类型",requestMode = "DELETE")
     @OperatorLog(module = "字典类型管理", function = "字典信息", action = "删除字典类型", requestMode = "DELETE")
     @DeleteMapping("/remove/dict/type")

@@ -11,6 +11,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -32,6 +33,7 @@ public class SysDictDataController {
     private SysDictDataService sysDictDataService;
 
     @ApiOperation(value = "根据字典类型查询字典数据列表")
+    @PreAuthorize(value = "hasPermission('/system/dict/data/list','res_system:dict:data')")
     @InterfaceCall(interfaceName = "根据字典类型查询字典数据列表",requestMode = "POST")
     @OperatorLog(module = "字典管理", function = "字典信息", action = "根据字典类型查询字典数据列表", requestMode = "POST")
     @PostMapping("/dict/data/list")
@@ -55,6 +57,7 @@ public class SysDictDataController {
 
 
     @ApiOperation(value = "获取字典数据详情")
+    @PreAuthorize(value = "hasPermission('/system/dict/data/detail','res_system:dict:query')")
     @InterfaceCall(interfaceName = "获取字典数据详情",requestMode = "GET")
     @OperatorLog(module = "字典管理", function = "字典信息", action = "获取字典数据详情", requestMode = "GET")
     @GetMapping("/dict/data/detail")
@@ -64,6 +67,7 @@ public class SysDictDataController {
     }
 
     @ApiOperation(value = "新增字典数据")
+    @PreAuthorize(value = "hasPermission('/system/save/dict/data','res_system:dict:add')")
     @InterfaceCall(interfaceName = "新增字典数据",requestMode = "POST")
     @OperatorLog(module = "字典管理", function = "字典信息", action = "新增字典数据", requestMode = "POST")
     @PostMapping("/save/dict/data")
@@ -73,6 +77,7 @@ public class SysDictDataController {
     }
 
     @ApiOperation(value = "更新字典数据")
+    @PreAuthorize(value = "hasPermission('/system/update/dict/data','res_system:dict:edit')")
     @InterfaceCall(interfaceName = "更新字典数据",requestMode = "PUT")
     @OperatorLog(module = "字典管理", function = "字典信息", action = "更新字典数据", requestMode = "PUT")
     @PutMapping("/update/dict/data")
@@ -82,6 +87,7 @@ public class SysDictDataController {
     }
 
     @ApiOperation(value = "删除字典数据")
+    @PreAuthorize(value = "hasPermission('/system/remove/dict/data','res_system:dict:delete')")
     @InterfaceCall(interfaceName = "删除字典数据",requestMode = "DELETE")
     @OperatorLog(module = "字典管理", function = "字典信息", action = "删除字典数据", requestMode = "DELETE")
     @DeleteMapping("/remove/dict/data")

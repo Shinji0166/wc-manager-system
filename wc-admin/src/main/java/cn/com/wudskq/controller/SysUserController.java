@@ -50,6 +50,7 @@ public class SysUserController {
     }
 
     @ApiOperation(value = "获取用户详情信息")
+    @PreAuthorize(value = "hasPermission('/system/user/detail','res_system:user:query')")
     @InterfaceCall(interfaceName = "获取用户详情信息",requestMode = "GET")
     @OperatorLog(module = "用户管理", function = "用户信息", action = "获取用户详情信息", requestMode = "GET")
     @GetMapping("/user/detail")
@@ -59,6 +60,7 @@ public class SysUserController {
     }
 
     @ApiOperation(value = "新增用户信息")
+    @PreAuthorize(value = "hasPermission('/system/save/user','res_system:user:add')")
     @InterfaceCall(interfaceName = "新增用户信息",requestMode = "POST")
     @OperatorLog(module = "用户管理", function = "用户信息", action = "新增用户信息", requestMode = "POST")
     @PostMapping("/save/user")
@@ -68,6 +70,7 @@ public class SysUserController {
     }
 
     @ApiOperation(value = "更新用户信息")
+    @PreAuthorize(value = "hasPermission('/system/update/user','res_system:user:edit')")
     @InterfaceCall(interfaceName = "更新用户信息",requestMode = "PUT")
     @OperatorLog(module = "用户管理", function = "用户信息", action = "更新用户信息", requestMode = "PUT")
     @PutMapping("/update/user")
@@ -77,6 +80,7 @@ public class SysUserController {
     }
 
     @ApiOperation(value = "删除用户信息(逻辑删除)")
+    @PreAuthorize(value = "hasPermission('/system/remove/user','res_system:user:delete')")
     @InterfaceCall(interfaceName = "删除用户信息",requestMode = "DELETE")
     @OperatorLog(module = "用户管理", function = "用户信息", action = "删除用户信息", requestMode = "DELETE")
     @DeleteMapping("/remove/user")

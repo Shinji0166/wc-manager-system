@@ -11,6 +11,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -42,6 +43,7 @@ public class SysResController {
     }
 
     @ApiOperation(value = "获取菜单权限列表")
+    @PreAuthorize(value = "hasPermission('/system/res/list','res_system:res:query')")
     @InterfaceCall(interfaceName = "获取菜单权限列表",requestMode = "POST")
     @OperatorLog(module = "菜单管理", function = "菜单信息", action = "获取菜单权限列表", requestMode = "POST")
     @PostMapping("/res/list")
@@ -55,6 +57,7 @@ public class SysResController {
     }
 
     @ApiOperation(value = "获取菜单详细信息")
+    @PreAuthorize(value = "hasPermission('/system/res/detail','res_system:res:query')")
     @InterfaceCall(interfaceName = "获取菜单详细信息",requestMode = "GET")
     @OperatorLog(module = "菜单管理", function = "菜单信息", action = "获取菜单详细信息", requestMode = "GET")
     @GetMapping("/res/detail")
@@ -64,6 +67,7 @@ public class SysResController {
     }
 
     @ApiOperation(value = "新增菜单信息")
+    @PreAuthorize(value = "hasPermission('/system/save/res','res_system:res:add')")
     @InterfaceCall(interfaceName = "新增菜单信息",requestMode = "POST")
     @OperatorLog(module = "菜单管理", function = "菜单信息", action = "新增菜单信息", requestMode = "POST")
     @PostMapping("/save/res")
@@ -73,6 +77,7 @@ public class SysResController {
     }
 
     @ApiOperation(value = "更新菜单信息")
+    @PreAuthorize(value = "hasPermission('/system/update/res','res_system:res:edit')")
     @InterfaceCall(interfaceName = "更新菜单信息",requestMode = "PUT")
     @OperatorLog(module = "菜单管理", function = "菜单信息", action = "更新菜单信息", requestMode = "PUT")
     @PutMapping("/update/res")
@@ -82,6 +87,7 @@ public class SysResController {
     }
 
     @ApiOperation(value = "删除菜单信息(逻辑删除)")
+    @PreAuthorize(value = "hasPermission('/system/remove/res','res_system:res:delete')")
     @InterfaceCall(interfaceName = "删除菜单信息",requestMode = "DELETE")
     @OperatorLog(module = "菜单管理", function = "菜单信息", action = "删除菜单信息", requestMode = "DELETE")
     @DeleteMapping("/remove/res")

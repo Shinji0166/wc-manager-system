@@ -10,6 +10,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -31,6 +32,7 @@ public class SysLoginLogController {
     private SysLoginLogService sysLoginLogService;
 
     @ApiOperation(value = "获取登录日志信息列表")
+    @PreAuthorize(value = "hasPermission('/system/login/log/list','res_system:login:log:query')")
     @InterfaceCall(interfaceName = "获取登录日志信息列表",requestMode = "POST")
     @OperatorLog(module = "登录日志管理", function = "登录日志信息", action = "获取登录日志信息列表", requestMode = "POST")
     @PostMapping("/login/log/list")
@@ -44,6 +46,7 @@ public class SysLoginLogController {
     }
 
     @ApiOperation(value = "获取登录日志详细信息")
+    @PreAuthorize(value = "hasPermission('/system/login/log/detail','res_system:login:log:query')")
     @InterfaceCall(interfaceName = "获取登录日志详细信息",requestMode = "GET")
     @OperatorLog(module = "登录日志管理", function = "登录日志信息", action = "获取登录日志详细信息", requestMode = "GET")
     @GetMapping("/login/log/detail")

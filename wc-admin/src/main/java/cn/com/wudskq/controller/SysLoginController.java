@@ -8,6 +8,7 @@ import cn.com.wudskq.web.LoginService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +46,7 @@ public class SysLoginController {
     }
 
     @ApiOperation(value = "强制退出")
+    @PreAuthorize(value = "hasPermission('/system/force/logout','res_system:online:user:kickout')")
     @InterfaceCall(interfaceName = "强制退出",requestMode = "GET")
     @OperatorLog(module = "系统功能", function = "登出功能", action = "强制退出", requestMode = "GET")
     @GetMapping("/force/logout")

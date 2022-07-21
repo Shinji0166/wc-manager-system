@@ -8,6 +8,7 @@ import cn.com.wudskq.vo.Response;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +32,7 @@ public class SysInterfaceCallController {
     private SysInterfaceCallService sysInterfaceCallService;
 
     @ApiOperation(value = "接口调用分析")
+    @PreAuthorize(value = "hasPermission('/system/interface/call/data','res_system:interface:call:query')")
     @OperatorLog(module = "公共模块",function = "接口调用分析",action = "接口调用分析",requestMode = "POST")
     @PostMapping("/interface/call/data")
     public Response getInterfaceCallData(@RequestBody(required = false) SysInterfaceCallQueryDTO interfaceCallQuery){

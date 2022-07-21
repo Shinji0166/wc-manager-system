@@ -9,6 +9,7 @@ import cn.com.wudskq.vo.Response;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,7 @@ public class SysOnlineUserController {
     private SysOnlineUserServie sysOnlineUserServie;
 
     @ApiOperation(value = "获取系统在线用户列表")
+    @PreAuthorize(value = "hasPermission('/system/online/user/list','res_system:online:user:query')")
     @InterfaceCall(interfaceName = "获取系统在线用户列表",requestMode = "POST")
     @OperatorLog(module = "用户管理",function = "在线用户",action = "查询系统在线用户列表",requestMode = "POST")
     @PostMapping("/online/user/list")

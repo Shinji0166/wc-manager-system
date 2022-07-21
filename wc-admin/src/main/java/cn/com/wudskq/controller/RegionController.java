@@ -10,6 +10,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -31,6 +32,7 @@ public class RegionController {
     private CountryRegionService countryRegionService;
 
     @ApiOperation(value = "获取地区信息列表")
+    @PreAuthorize(value = "hasPermission('/system/region/list','res_system:region:query')")
     @InterfaceCall(interfaceName = "获取地区信息列表",requestMode = "POST")
     @OperatorLog(module = "地区管理", function = "地区信息", action = "获取地区信息列表", requestMode = "POST")
     @PostMapping("/region/list")
@@ -45,6 +47,7 @@ public class RegionController {
 
 
     @ApiOperation(value = "获取地区详细信息")
+    @PreAuthorize(value = "hasPermission('/system/region/detail','res_system:region:query')")
     @InterfaceCall(interfaceName = "获取地区详细信息",requestMode = "GET")
     @OperatorLog(module = "地区管理", function = "地区信息", action = "获取地区详细信息", requestMode = "GET")
     @GetMapping("/region/detail")
@@ -54,6 +57,7 @@ public class RegionController {
     }
 
     @ApiOperation(value = "新增地区信息")
+    @PreAuthorize(value = "hasPermission('/system/save/region','res_system:region:add')")
     @InterfaceCall(interfaceName = "新增地区信息",requestMode = "POST")
     @OperatorLog(module = "地区管理", function = "地区信息", action = "新增地区信息", requestMode = "POST")
     @PostMapping("/save/region")
@@ -63,6 +67,7 @@ public class RegionController {
     }
 
     @ApiOperation(value = "更新地区信息")
+    @PreAuthorize(value = "hasPermission('/system/update/region','res_system:region:edit')")
     @InterfaceCall(interfaceName = "更新地区信息",requestMode = "PUT")
     @OperatorLog(module = "地区管理", function = "地区信息", action = "更新地区信息", requestMode = "PUT")
     @PutMapping("/update/region")
@@ -72,6 +77,7 @@ public class RegionController {
     }
 
     @ApiOperation(value = "删除地区信息(逻辑删除)")
+    @PreAuthorize(value = "hasPermission('/system/remove/region','res_system:region:delete')")
     @InterfaceCall(interfaceName = "删除地区信息",requestMode = "DELETE")
     @OperatorLog(module = "地区管理", function = "地区信息", action = "删除地区信息", requestMode = "DELETE")
     @DeleteMapping("/remove/region")

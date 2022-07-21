@@ -10,6 +10,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -31,6 +32,7 @@ public class ToiletInfoController {
     private ToiletInfoService toiletInfoService;
 
     @ApiOperation(value = "获取公厕信息列表")
+    @PreAuthorize(value = "hasPermission('/system/toilet/list','res_system:toilet:query')")
     @InterfaceCall(interfaceName = "获取公厕信息列表",requestMode = "POST")
     @OperatorLog(module = "公厕管理", function = "公厕信息", action = "获取公厕信息列表", requestMode = "POST")
     @PostMapping("/toilet/list")
@@ -45,6 +47,7 @@ public class ToiletInfoController {
 
 
     @ApiOperation(value = "获取公厕详细信息")
+    @PreAuthorize(value = "hasPermission('/system/toilet/detail','res_system:toilet:query')")
     @InterfaceCall(interfaceName = "获取公厕详细信息",requestMode = "GET")
     @OperatorLog(module = "公厕管理", function = "公厕信息", action = "获取公厕详细信息", requestMode = "GET")
     @GetMapping("/toilet/detail")
@@ -54,6 +57,7 @@ public class ToiletInfoController {
     }
 
     @ApiOperation(value = "新增公厕信息")
+    @PreAuthorize(value = "hasPermission('/system/save/toilet','res_system:toilet:add')")
     @InterfaceCall(interfaceName = "新增公厕信息",requestMode = "POST")
     @OperatorLog(module = "公厕管理", function = "公厕信息", action = "新增公厕信息", requestMode = "POST")
     @PostMapping("/save/toilet")
@@ -63,6 +67,7 @@ public class ToiletInfoController {
     }
 
     @ApiOperation(value = "更新公厕信息")
+    @PreAuthorize(value = "hasPermission('/system/update/toilet','res_system:toilet:edit')")
     @InterfaceCall(interfaceName = "更新公厕信息",requestMode = "PUT")
     @OperatorLog(module = "公厕管理", function = "公厕信息", action = "更新公厕信息", requestMode = "PUT")
     @PutMapping("/update/toilet")
@@ -72,6 +77,7 @@ public class ToiletInfoController {
     }
 
     @ApiOperation(value = "删除公厕信息(逻辑删除)")
+    @PreAuthorize(value = "hasPermission('/system/remove/toilet','res_system:toilet:delete')")
     @InterfaceCall(interfaceName = "删除公厕信息",requestMode = "DELETE")
     @OperatorLog(module = "公厕管理", function = "公厕信息", action = "删除公厕信息", requestMode = "DELETE")
     @DeleteMapping("/remove/toilet")

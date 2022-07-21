@@ -11,6 +11,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,6 @@ public class SysRoleController {
     @Autowired
     private TSysRoleService sysRoleService;
 
-
     @ApiOperation(value = "获取角色信息下拉框数据")
     @InterfaceCall(interfaceName = "获取角色信息下拉框数据",requestMode = "POST")
     @OperatorLog(module = "角色管理", function = "角色信息", action = "获取角色信息下拉框数据", requestMode = "POST")
@@ -44,6 +44,7 @@ public class SysRoleController {
 
 
     @ApiOperation(value = "获取角色信息列表")
+    @PreAuthorize(value = "hasPermission('/system/role/list','res_system:role:query')")
     @InterfaceCall(interfaceName = "获取角色信息列表",requestMode = "POST")
     @OperatorLog(module = "角色管理", function = "角色信息", action = "获取角色信息列表", requestMode = "POST")
     @PostMapping("/role/list")
@@ -57,6 +58,7 @@ public class SysRoleController {
     }
 
     @ApiOperation(value = "获取角色详细信息")
+    @PreAuthorize(value = "hasPermission('/system/role/detail','res_system:role:query')")
     @InterfaceCall(interfaceName = "获取角色详细信息",requestMode = "GET")
     @OperatorLog(module = "角色管理", function = "角色信息", action = "获取角色详细信息", requestMode = "GET")
     @GetMapping("/role/detail")
@@ -66,6 +68,7 @@ public class SysRoleController {
     }
 
     @ApiOperation(value = "新增角色信息")
+    @PreAuthorize(value = "hasPermission('/system/save/role','res_system:role:add')")
     @InterfaceCall(interfaceName = "新增角色信息",requestMode = "POST")
     @OperatorLog(module = "角色管理", function = "角色信息", action = "新增角色信息", requestMode = "POST")
     @PostMapping("/save/role")
@@ -75,6 +78,7 @@ public class SysRoleController {
     }
 
     @ApiOperation(value = "更新角色信息")
+    @PreAuthorize(value = "hasPermission('/system/update/role','res_system:role:edit')")
     @InterfaceCall(interfaceName = "更新角色信息",requestMode = "PUT")
     @OperatorLog(module = "角色管理", function = "角色信息", action = "更新角色信息", requestMode = "PUT")
     @PutMapping("/update/role")
@@ -84,6 +88,7 @@ public class SysRoleController {
     }
 
     @ApiOperation(value = "删除角色信息(逻辑删除)")
+    @PreAuthorize(value = "hasPermission('/system/remove/role','res_system:role:delete')")
     @InterfaceCall(interfaceName = "删除角色信息",requestMode = "DELETE")
     @OperatorLog(module = "角色管理", function = "角色信息", action = "删除角色信息", requestMode = "DELETE")
     @DeleteMapping("/remove/role")

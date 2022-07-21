@@ -9,6 +9,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -31,6 +32,7 @@ public class SysOperatorLogController {
 
 
     @ApiOperation(value = "系统操作日志列表")
+    @PreAuthorize(value = "hasPermission('/system/operator/log/list','res_system:operator:log:query')")
     @InterfaceCall(interfaceName = "系统操作日志列表",requestMode = "POST")
     @PostMapping("/operator/log/list")
     public Response getOperatorLogList(@RequestBody OperatorQueryDTO operatorQuery){
