@@ -23,8 +23,10 @@ public class SysUserDetails extends TSysUser implements UserDetails, Serializabl
 
     private static final long serialVersionUID = 1L;
 
+    /** 账号 **/
     private String username;
 
+    /** 密码 **/
     private String password;
 
     @ApiModelProperty("用户权限")

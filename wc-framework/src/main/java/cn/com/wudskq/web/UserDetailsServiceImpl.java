@@ -56,12 +56,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             tSysUser.setNickName("系统管理员");
             SysUserDetails sysUserDetails = new SysUserDetails();
             BeanUtils.copyProperties(tSysUser, sysUserDetails);
+
             //处理账户名密码
             sysUserDetails.setUsername(tSysUser.getUserName());
             sysUserDetails.setPassword(tSysUser.getPassWord());
+
             // 角色集合
             Set<GrantedAuthority> authorities = new HashSet<>();
-            //admin用户有的资源集合
+
+            //admin用户拥有全部系统资源权限
             resList = tSysResMapper.selectList(new QueryWrapper<>());
             for (int i = 0; i < resList.size() ; i++) {
                 if(StringUtil.isNotEmpty(resList.get(i).getPermission())){
@@ -76,13 +79,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (tSysUser != null) {
             SysUserDetails sysUserDetails = new SysUserDetails();
             BeanUtils.copyProperties(tSysUser, sysUserDetails);
+
             //处理账户名密码 昵称等
+            sysUserDetails.setNickName(tSysUser.getNickName());
             sysUserDetails.setUsername(tSysUser.getUserName());
             sysUserDetails.setPassword(tSysUser.getPassWord());
-            sysUserDetails.setNickName(tSysUser.getNickName());
-            Set<GrantedAuthority> authorities = new HashSet<>(); // 角色集合
- 
-            resList = tSysResService.findResByUserId(String.valueOf(sysUserDetails.getId()));//当前用户有的资源集合
+
+            // 角色集合
+            Set<GrantedAuthority> authorities = new HashSet<>();
+
+            //当前用户有的资源集合
+            resList = tSysResService.findResByUserId(String.valueOf(sysUserDetails.getId()));
             if(resList != null && 0 < resList.size()){
                 for (int i = 0; i < resList.size() ; i++) {
                     if(StringUtil.isNotEmpty(resList.get(i).getPermission())){

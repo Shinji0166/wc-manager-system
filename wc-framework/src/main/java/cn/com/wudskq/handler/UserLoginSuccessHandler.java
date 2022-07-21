@@ -40,12 +40,17 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
         SysUserDetails sysUserDetails = (SysUserDetails) authentication.getPrincipal();
         //创建token
         String token = JWTTokenUtil.createAccessToken(sysUserDetails);
+
         //存储redis一份,实现在线用户注销强退等功能
         handleOnlineUser(token);
+
         //新增登录日志
         handleLoginLog(token);
         HashMap<String, Object> resultMap = new HashMap<>();
         resultMap.put("token",token);
+
+        //后台权限代码(敏感信息)设置为空
+        sysUserDetails.setAuthorities(null);
         resultMap.put("userInfo",sysUserDetails);
         Response.responseJson(response, Response.response(200, "登录成功", resultMap));
     }
