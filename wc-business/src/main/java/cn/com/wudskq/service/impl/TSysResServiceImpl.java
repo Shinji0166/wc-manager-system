@@ -68,7 +68,7 @@ public class TSysResServiceImpl implements TSysResService {
 
         //查询选取菜单资源
         QueryWrapper<TSysRes> queryWrapper = new QueryWrapper<>();
-        queryWrapper.ne("status",1);
+        queryWrapper.eq("status",0);
 
         //admin拥有全部权限
         if(!"admin".equals(sysUserDetails.getUsername())){

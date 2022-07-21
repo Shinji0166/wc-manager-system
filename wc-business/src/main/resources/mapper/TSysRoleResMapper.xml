@@ -19,7 +19,7 @@
     <!-- 根据用户ID获取菜单资源ID -->
     <select id="getResIdByUserId" resultType="java.lang.Long">
         select id from sys_res where id in ( select res_id from sys_role_res where role_id in
-        (select role_id from sys_user_role where user_id = #{userId}))
+        (select role_id from sys_user_role where user_id = #{userId})) and status = 0
         order by sys_res.order_number
     </select>
 </mapper>
