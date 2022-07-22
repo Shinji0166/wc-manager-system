@@ -8,7 +8,7 @@ server:
 
 spring:
   profiles:
-    active: local
+    active: prod
 
 # mybatis-plus
 mybatis-plus:
@@ -46,5 +46,5 @@ xxl:
       ip:
       logpath: ./logs/xxl-job/jobhandler
       logretentiondays: 30
-      port: 6887
+      port: 7688
 
