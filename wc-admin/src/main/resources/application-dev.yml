@@ -67,3 +67,11 @@ spring:
         max-idle: 8
         min-idle: 0
     connect-timeout: 30000
+
+#阿里云oss
+aliyun:
+  endpoint: #(示例: https://oss-cn-hangzhou.aliyuncs.com)
+  accessKeyId:  # 填写自己的key
+  accessKeySecret:  #填写自己的Secret
+  bucketName: # 填写自己的bucketName
+  bucketDirName: # 填写自己的bucketDirName(即bucket中文件夹的路径)
