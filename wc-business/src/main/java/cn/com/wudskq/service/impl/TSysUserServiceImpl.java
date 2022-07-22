@@ -11,6 +11,8 @@ import cn.com.wudskq.utils.Md5Util;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -57,6 +59,7 @@ public class TSysUserServiceImpl implements TSysUserService {
         return userDetail;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void saveUser(TSysUser sysUser) {
         //新增用户
@@ -68,6 +71,7 @@ public class TSysUserServiceImpl implements TSysUserService {
         tSysUserRoleMapper.insert(tSysUserRole);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void updateUser(TSysUser sysUser) {
         //判断更新密码是否与原密码相同

@@ -1,7 +1,5 @@
 package cn.com.wudskq.service.impl;
 
-import cn.com.wudskq.annotation.DataSource;
-import cn.com.wudskq.enums.DataSourceType;
 import cn.com.wudskq.mapper.DeviceMapper;
 import cn.com.wudskq.model.Device;
 import cn.com.wudskq.model.query.DeviceQueryDTO;
@@ -26,32 +24,27 @@ public class DeviceServiceImpl implements DeviceService {
     private DeviceMapper deviceMapper;
 
     @Override
-//    @DataSource(DataSourceType.MASTER)
     public List<Device> getDeviceList(DeviceQueryDTO deviceQuery) {
         PageHelper.startPage(deviceQuery.getPageNum(),deviceQuery.getPageSize());
         return deviceMapper.getDeviceList(deviceQuery);
     }
 
     @Override
-//    @DataSource(DataSourceType.MASTER)
     public Device getDeviceDetail(Long id) {
         return deviceMapper.getDeviceDetail(id);
     }
 
     @Override
-//    @DataSource(DataSourceType.SLAVE)
     public void saveDevice(Device deviceInfo) {
         deviceMapper.insert(deviceInfo);
     }
 
     @Override
-//    @DataSource(DataSourceType.SLAVE)
     public void updateDevice(Device deviceInfo) {
         deviceMapper.updateById(deviceInfo);
     }
 
     @Override
-//    @DataSource(DataSourceType.SLAVE)
     public void removeDevice(List<Long> ids) {
         deviceMapper.removeDevice(ids);
     }

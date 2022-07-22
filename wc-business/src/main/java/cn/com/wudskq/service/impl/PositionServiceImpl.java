@@ -1,7 +1,6 @@
 package cn.com.wudskq.service.impl;
 
-import cn.com.wudskq.annotation.DataSource;
-import cn.com.wudskq.enums.DataSourceType;
+
 import cn.com.wudskq.mapper.PositionMapper;
 import cn.com.wudskq.model.Position;
 import cn.com.wudskq.model.query.PositionQueryDTO;
@@ -26,32 +25,27 @@ public class PositionServiceImpl implements PositionService {
     private PositionMapper positionMapper;
 
     @Override
-//    @DataSource(DataSourceType.MASTER)
     public List<Position> getPositionList(PositionQueryDTO positionQuery) {
         PageHelper.startPage(positionQuery.getPageNum(),positionQuery.getPageSize());
         return positionMapper.getPositionList(positionQuery);
     }
 
     @Override
-//    @DataSource(DataSourceType.MASTER)
     public Position getPositionDetail(Long id) {
         return positionMapper.getPositionDetail(id);
     }
 
     @Override
-//    @DataSource(DataSourceType.SLAVE)
     public void savePosition(Position positionInfo) {
         positionMapper.insert(positionInfo);
     }
 
     @Override
-//    @DataSource(DataSourceType.SLAVE)
     public void updatePosition(Position positionInfo) {
         positionMapper.updateById(positionInfo);
     }
 
     @Override
-//    @DataSource(DataSourceType.SLAVE)
     public void removePosition(List<Long> ids) {
         positionMapper.removePosition(ids);
     }

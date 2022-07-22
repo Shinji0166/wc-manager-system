@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +59,7 @@ public class TSysRoleServiceImpl implements TSysRoleService {
     }
 
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void saveRole(TSysRole sysRole) {
         sysRoleMapper.insert(sysRole);
@@ -68,6 +70,7 @@ public class TSysRoleServiceImpl implements TSysRoleService {
         });
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void updateRole(TSysRole sysRole) {
         sysRoleMapper.updateById(sysRole);
