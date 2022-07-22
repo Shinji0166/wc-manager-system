@@ -112,7 +112,8 @@
         <logger name="cn.com.wudskq" level="debug" />
     </springProfile>
 
-    <springProfile name="local">
+    <!-- 生产环境开启sql记录 -->
+    <springProfile name="prod">
         <logger name="cn.com.wudskq.mapper" level="debug"/>
     </springProfile> -->
 
@@ -121,8 +122,5 @@
         <appender-ref ref="ALL_FILE" />
         <appender-ref ref="ERROR_FILE" />
     </root>
-
-    <!-- 调整nacos日志级别 -->
-    <logger name="com.alibaba.nacos.client.naming" level="WARN"/>
 
 </configuration>
