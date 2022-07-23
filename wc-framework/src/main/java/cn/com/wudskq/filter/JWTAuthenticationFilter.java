@@ -9,6 +9,7 @@ import cn.com.wudskq.model.SysUserDetails;
 import cn.com.wudskq.utils.JWTTokenUtil;
 import cn.com.wudskq.utils.RedisUtil;
 import cn.com.wudskq.utils.spring.SpringContextUtils;
+import cn.com.wudskq.wapper.RequestWrapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -39,10 +41,15 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws IOException, ServletException {
+
+        //请求参数对象
+        ServletRequest requestWrapper = null;
+
         //得到RedisUtil对象
         RedisUtil redisUtil = SpringContextUtils.getBean("redisUtil");
         // 取出Token
         String token = request.getHeader(JWTConfig.tokenHeader);
+
         // 截取Token有效部分
         if (token != null && token.startsWith(JWTConfig.tokenPrefix)) {
             SysUserDetails sysUserDetails = JWTTokenUtil.parseAccessToken(token);
@@ -62,8 +69,16 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
                SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
-        //放行
-        filterChain.doFilter(request, response);
+
+        // filter层封装传递post参数
+        if(request instanceof HttpServletRequest) {
+            requestWrapper = new RequestWrapper(request);
+        }
+        if(requestWrapper == null) {
+            filterChain.doFilter(request, response);
+        } else {
+            filterChain.doFilter(requestWrapper, response);
+        }
     }
  
 }

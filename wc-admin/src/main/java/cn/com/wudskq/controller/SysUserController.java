@@ -2,6 +2,7 @@ package cn.com.wudskq.controller;
 
 import cn.com.wudskq.annotation.InterfaceCall;
 import cn.com.wudskq.annotation.OperatorLog;
+import cn.com.wudskq.annotation.ProhibitResubmit;
 import cn.com.wudskq.model.TSysUser;
 import cn.com.wudskq.model.query.UserInfoQueryDTO;
 import cn.com.wudskq.service.TSysUserService;
@@ -60,6 +61,7 @@ public class SysUserController {
     }
 
     @ApiOperation(value = "新增用户信息")
+    @ProhibitResubmit
     @PreAuthorize(value = "hasPermission('/system/save/user','res_system:user:add')")
     @InterfaceCall(interfaceName = "新增用户信息",requestMode = "POST")
     @OperatorLog(module = "用户管理", function = "用户信息", action = "新增用户信息", requestMode = "POST")
