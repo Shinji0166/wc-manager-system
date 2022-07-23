@@ -9,6 +9,10 @@ server:
 spring:
   profiles:
     active: prod
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true  # [fix]stream closed
 
 # mybatis-plus
 mybatis-plus:

@@ -49,9 +49,10 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
         HashMap<String, Object> resultMap = new HashMap<>();
         resultMap.put("token",token);
 
-        //后台权限代码(敏感信息)设置为空
-        sysUserDetails.setAuthorities(null);
-        resultMap.put("userInfo",sysUserDetails);
+        //处理敏感信息
+        SysUserDetails sysUserDetailsResult = handleSensitiveData(sysUserDetails);
+
+        resultMap.put("userInfo",sysUserDetailsResult);
         Response.responseJson(response, Response.response(200, "登录成功", resultMap));
     }
 
@@ -103,5 +104,25 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
         sysLoginLog.setOperatorSystem(userAgent.getOperatingSystem().getName());
         sysLoginLog.setResult("登录成功");
         sysLoginLogService.saveSysLoginLog(sysLoginLog);
+    }
+
+    /**
+     * 处理敏感数据
+     * @param sysUserDetails
+     * @return
+     */
+    private SysUserDetails  handleSensitiveData(SysUserDetails sysUserDetails){
+        //账号及密码
+        sysUserDetails.setUsername(null);sysUserDetails.setUserName(null);
+        sysUserDetails.setPassword(null);sysUserDetails.setPassWord(null);
+
+        //性别 电话号码
+        sysUserDetails.setSex(null); sysUserDetails.setCellPhone(null);
+        sysUserDetails.setCreateBy(null); sysUserDetails.setCreateTime(null);
+        sysUserDetails.setUpdateBy(null); sysUserDetails.setUpdateTime(null);
+
+        //后台权限代码(敏感信息)设置为空
+        sysUserDetails.setAuthorities(null);
+        return sysUserDetails;
     }
 }
