@@ -72,6 +72,7 @@ public class SysUserController {
     }
 
     @ApiOperation(value = "更新用户信息")
+    @ProhibitResubmit
     @PreAuthorize(value = "hasPermission('/system/update/user','res_system:user:edit')")
     @InterfaceCall(interfaceName = "更新用户信息",requestMode = "PUT")
     @OperatorLog(module = "用户管理", function = "用户信息", action = "更新用户信息", requestMode = "PUT")

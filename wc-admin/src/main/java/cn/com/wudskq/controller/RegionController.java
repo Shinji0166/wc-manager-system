@@ -2,6 +2,7 @@ package cn.com.wudskq.controller;
 
 import cn.com.wudskq.annotation.InterfaceCall;
 import cn.com.wudskq.annotation.OperatorLog;
+import cn.com.wudskq.annotation.ProhibitResubmit;
 import cn.com.wudskq.model.CountryRegion;
 import cn.com.wudskq.model.query.RegionQueryDTO;
 import cn.com.wudskq.service.CountryRegionService;
@@ -57,6 +58,7 @@ public class RegionController {
     }
 
     @ApiOperation(value = "新增地区信息")
+    @ProhibitResubmit
     @PreAuthorize(value = "hasPermission('/system/save/region','res_system:region:add')")
     @InterfaceCall(interfaceName = "新增地区信息",requestMode = "POST")
     @OperatorLog(module = "地区管理", function = "地区信息", action = "新增地区信息", requestMode = "POST")
@@ -67,6 +69,7 @@ public class RegionController {
     }
 
     @ApiOperation(value = "更新地区信息")
+    @ProhibitResubmit
     @PreAuthorize(value = "hasPermission('/system/update/region','res_system:region:edit')")
     @InterfaceCall(interfaceName = "更新地区信息",requestMode = "PUT")
     @OperatorLog(module = "地区管理", function = "地区信息", action = "更新地区信息", requestMode = "PUT")

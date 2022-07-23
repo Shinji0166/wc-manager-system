@@ -2,6 +2,7 @@ package cn.com.wudskq.controller;
 
 import cn.com.wudskq.annotation.InterfaceCall;
 import cn.com.wudskq.annotation.OperatorLog;
+import cn.com.wudskq.annotation.ProhibitResubmit;
 import cn.com.wudskq.model.ToiletInfo;
 import cn.com.wudskq.model.query.ToiletInfoQueryDTO;
 import cn.com.wudskq.service.ToiletInfoService;
@@ -57,6 +58,7 @@ public class ToiletInfoController {
     }
 
     @ApiOperation(value = "新增公厕信息")
+    @ProhibitResubmit
     @PreAuthorize(value = "hasPermission('/system/save/toilet','res_system:toilet:add')")
     @InterfaceCall(interfaceName = "新增公厕信息",requestMode = "POST")
     @OperatorLog(module = "公厕管理", function = "公厕信息", action = "新增公厕信息", requestMode = "POST")
@@ -67,6 +69,7 @@ public class ToiletInfoController {
     }
 
     @ApiOperation(value = "更新公厕信息")
+    @ProhibitResubmit
     @PreAuthorize(value = "hasPermission('/system/update/toilet','res_system:toilet:edit')")
     @InterfaceCall(interfaceName = "更新公厕信息",requestMode = "PUT")
     @OperatorLog(module = "公厕管理", function = "公厕信息", action = "更新公厕信息", requestMode = "PUT")

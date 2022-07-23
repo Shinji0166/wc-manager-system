@@ -2,6 +2,7 @@ package cn.com.wudskq.controller;
 
 import cn.com.wudskq.annotation.InterfaceCall;
 import cn.com.wudskq.annotation.OperatorLog;
+import cn.com.wudskq.annotation.ProhibitResubmit;
 import cn.com.wudskq.model.SysDictType;
 import cn.com.wudskq.model.query.SysDictQueryDTO;
 import cn.com.wudskq.model.vo.SysDictVo;
@@ -82,6 +83,7 @@ public class SysDictTypeController {
     }
 
     @ApiOperation(value = "新增字典类型")
+    @ProhibitResubmit
     @PreAuthorize(value = "hasPermission('/system/save/dict/type','res_system:dict:add')")
     @InterfaceCall(interfaceName = "新增字典类型",requestMode = "POST")
     @OperatorLog(module = "字典类型管理", function = "字典信息", action = "新增字典类型", requestMode = "POST")
@@ -92,6 +94,7 @@ public class SysDictTypeController {
     }
 
     @ApiOperation(value = "更新字典类型")
+    @ProhibitResubmit
     @PreAuthorize(value = "hasPermission('/system/update/dict/type','res_system:dict:edit')")
     @InterfaceCall(interfaceName = "更新字典类型",requestMode = "PUT")
     @OperatorLog(module = "字典类型管理", function = "字典信息", action = "更新字典类型", requestMode = "PUT")

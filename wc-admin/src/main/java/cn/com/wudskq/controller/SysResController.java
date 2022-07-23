@@ -2,6 +2,7 @@ package cn.com.wudskq.controller;
 
 import cn.com.wudskq.annotation.InterfaceCall;
 import cn.com.wudskq.annotation.OperatorLog;
+import cn.com.wudskq.annotation.ProhibitResubmit;
 import cn.com.wudskq.model.TSysRes;
 import cn.com.wudskq.model.query.ResInfoQueryDTO;
 import cn.com.wudskq.model.vo.TreeSelectVo;
@@ -67,6 +68,7 @@ public class SysResController {
     }
 
     @ApiOperation(value = "新增菜单信息")
+    @ProhibitResubmit
     @PreAuthorize(value = "hasPermission('/system/save/res','res_system:res:add')")
     @InterfaceCall(interfaceName = "新增菜单信息",requestMode = "POST")
     @OperatorLog(module = "菜单管理", function = "菜单信息", action = "新增菜单信息", requestMode = "POST")
@@ -77,6 +79,7 @@ public class SysResController {
     }
 
     @ApiOperation(value = "更新菜单信息")
+    @ProhibitResubmit
     @PreAuthorize(value = "hasPermission('/system/update/res','res_system:res:edit')")
     @InterfaceCall(interfaceName = "更新菜单信息",requestMode = "PUT")
     @OperatorLog(module = "菜单管理", function = "菜单信息", action = "更新菜单信息", requestMode = "PUT")

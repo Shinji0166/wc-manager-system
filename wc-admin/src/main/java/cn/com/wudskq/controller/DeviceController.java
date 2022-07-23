@@ -2,6 +2,7 @@ package cn.com.wudskq.controller;
 
 import cn.com.wudskq.annotation.InterfaceCall;
 import cn.com.wudskq.annotation.OperatorLog;
+import cn.com.wudskq.annotation.ProhibitResubmit;
 import cn.com.wudskq.model.Device;
 import cn.com.wudskq.model.query.DeviceQueryDTO;
 import cn.com.wudskq.service.DeviceService;
@@ -58,6 +59,7 @@ public class DeviceController {
     }
 
     @ApiOperation(value = "新增设备信息")
+    @ProhibitResubmit
     @PreAuthorize(value = "hasPermission('/system/save/device','res_system:device:add')")
     @InterfaceCall(interfaceName = "新增设备信息",requestMode = "POST")
     @OperatorLog(module = "设备管理", function = "设备信息", action = "新增设备信息", requestMode = "POST")
@@ -68,6 +70,7 @@ public class DeviceController {
     }
 
     @ApiOperation(value = "更新设备信息")
+    @ProhibitResubmit
     @PreAuthorize(value = "hasPermission('/system/update/device','res_system:device:edit')")
     @InterfaceCall(interfaceName = "更新设备信息",requestMode = "PUT")
     @OperatorLog(module = "设备管理", function = "设备信息", action = "更新设备信息", requestMode = "PUT")

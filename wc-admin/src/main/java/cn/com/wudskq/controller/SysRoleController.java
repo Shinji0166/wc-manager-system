@@ -2,6 +2,7 @@ package cn.com.wudskq.controller;
 
 import cn.com.wudskq.annotation.InterfaceCall;
 import cn.com.wudskq.annotation.OperatorLog;
+import cn.com.wudskq.annotation.ProhibitResubmit;
 import cn.com.wudskq.model.TSysRole;
 import cn.com.wudskq.model.query.RoleInfoQueryDTO;
 import cn.com.wudskq.model.vo.SysRoleSelectVo;
@@ -68,6 +69,7 @@ public class SysRoleController {
     }
 
     @ApiOperation(value = "新增角色信息")
+    @ProhibitResubmit
     @PreAuthorize(value = "hasPermission('/system/save/role','res_system:role:add')")
     @InterfaceCall(interfaceName = "新增角色信息",requestMode = "POST")
     @OperatorLog(module = "角色管理", function = "角色信息", action = "新增角色信息", requestMode = "POST")
@@ -78,6 +80,7 @@ public class SysRoleController {
     }
 
     @ApiOperation(value = "更新角色信息")
+    @ProhibitResubmit
     @PreAuthorize(value = "hasPermission('/system/update/role','res_system:role:edit')")
     @InterfaceCall(interfaceName = "更新角色信息",requestMode = "PUT")
     @OperatorLog(module = "角色管理", function = "角色信息", action = "更新角色信息", requestMode = "PUT")

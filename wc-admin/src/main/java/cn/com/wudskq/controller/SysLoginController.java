@@ -2,6 +2,7 @@ package cn.com.wudskq.controller;
 
 import cn.com.wudskq.annotation.InterfaceCall;
 import cn.com.wudskq.annotation.OperatorLog;
+import cn.com.wudskq.annotation.ProhibitResubmit;
 import cn.com.wudskq.model.common.LoginDTO;
 import cn.com.wudskq.vo.Response;
 import cn.com.wudskq.web.LoginService;
@@ -30,6 +31,7 @@ public class SysLoginController {
     private LoginService loginService;
 
     @ApiOperation(value = "登录接口")
+    @ProhibitResubmit
     @InterfaceCall(interfaceName = "登录接口",requestMode = "POST")
     @PostMapping("/doLogin")
     public void doLogin(@RequestBody LoginDTO login, HttpServletRequest request, HttpServletResponse response) {

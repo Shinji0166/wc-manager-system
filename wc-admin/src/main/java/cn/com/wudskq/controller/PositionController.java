@@ -2,6 +2,7 @@ package cn.com.wudskq.controller;
 
 import cn.com.wudskq.annotation.InterfaceCall;
 import cn.com.wudskq.annotation.OperatorLog;
+import cn.com.wudskq.annotation.ProhibitResubmit;
 import cn.com.wudskq.model.Position;
 import cn.com.wudskq.model.query.PositionQueryDTO;
 import cn.com.wudskq.service.PositionService;
@@ -57,6 +58,7 @@ public class PositionController {
     }
 
     @ApiOperation(value = "新增坑位信息")
+    @ProhibitResubmit
     @PreAuthorize(value = "hasPermission('/system/save/position','res_system:position:add')")
     @InterfaceCall(interfaceName = "新增坑位信息",requestMode = "POST")
     @OperatorLog(module = "坑位管理", function = "坑位信息", action = "新增坑位信息", requestMode = "POST")
@@ -67,6 +69,7 @@ public class PositionController {
     }
 
     @ApiOperation(value = "更新坑位信息")
+    @ProhibitResubmit
     @PreAuthorize(value = "hasPermission('/system/update/position','res_system:position:edit')")
     @InterfaceCall(interfaceName = "更新坑位信息",requestMode = "PUT")
     @OperatorLog(module = "坑位管理", function = "坑位信息", action = "更新坑位信息", requestMode = "PUT")
