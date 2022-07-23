@@ -23,6 +23,9 @@ public class SysUserDetails extends TSysUser implements UserDetails, Serializabl
 
     private static final long serialVersionUID = 1L;
 
+    /** 当前账号ID **/
+    private String currentUserId;
+
     /** 账号 **/
     private String username;
 

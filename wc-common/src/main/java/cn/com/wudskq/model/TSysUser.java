@@ -92,6 +92,8 @@ public class TSysUser extends CreateInfoModel implements Serializable {
     private String pictureId;
 
     @ApiModelProperty(value = "角色ID")
+    //防止数据失真
+    @JsonSerialize(using = ToStringSerializer.class)
     @TableField(exist = false)
     private Long roleId;
 }

@@ -123,6 +123,8 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
 
         //后台权限代码(敏感信息)设置为空
         sysUserDetails.setAuthorities(null);
+
+        sysUserDetails.setCurrentUserId(String.valueOf(sysUserDetails.getId()));
         return sysUserDetails;
     }
 }
