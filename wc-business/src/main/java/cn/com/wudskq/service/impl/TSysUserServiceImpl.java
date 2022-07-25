@@ -73,21 +73,22 @@ public class TSysUserServiceImpl implements TSysUserService {
             QueryWrapper<TSysUser> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("user_name",sysUser.getUserName());
             TSysUser tSysUser = tSysUserMapper.selectOne(queryWrapper);
-            if(sysUser.getUserName().equals(tSysUser.getUserName())){
-                throw new BusinessException(200,"当前添加的用户名重复!");
+            if(null != tSysUser){
+               if(sysUser.getUserName().equals(tSysUser.getUserName())) {
+                  throw new BusinessException(200, "当前添加的账号已存在,请勿重复添加!");
+               }
             }else {
                 //新增用户
                 sysUser.setPassWord(Md5Util.MD5(sysUser.getPassWord()));
                 tSysUserMapper.insert(sysUser);
-
                 //新增用户与角色关联关系
                 TSysUserRole tSysUserRole = new TSysUserRole();
                 tSysUserRole.setUserId(sysUser.getId()).setRoleId(sysUser.getRoleId());
                 tSysUserRoleMapper.insert(tSysUserRole);
             }
         } catch (Exception e) {
-            Response.responseJson(response, Response.response(500,e.getMessage(),null));
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            Response.responseJson(response, Response.response(500,e.getMessage(),null));
         }
     }
 
