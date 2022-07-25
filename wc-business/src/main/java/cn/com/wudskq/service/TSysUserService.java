@@ -3,6 +3,8 @@ package cn.com.wudskq.service;
 import cn.com.wudskq.model.TSysUser;
 import cn.com.wudskq.model.query.UserInfoQueryDTO;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -36,7 +38,7 @@ public interface TSysUserService {
      * 保存用户信息
      * @param sysUser
      */
-    void saveUser(TSysUser sysUser);
+    void saveUser(TSysUser sysUser,HttpServletResponse response);
 
     /**
      * 更新用户信息

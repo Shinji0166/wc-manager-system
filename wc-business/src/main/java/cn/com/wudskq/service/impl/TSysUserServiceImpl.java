@@ -1,19 +1,25 @@
 package cn.com.wudskq.service.impl;
 
+import cn.com.wudskq.expection.BusinessException;
 import cn.com.wudskq.mapper.TSysUserMapper;
 import cn.com.wudskq.mapper.TSysUserRoleMapper;
+import cn.com.wudskq.model.SysUserDetails;
 import cn.com.wudskq.model.TSysUser;
 import cn.com.wudskq.model.TSysUserRole;
 import cn.com.wudskq.model.query.UserInfoQueryDTO;
 import cn.com.wudskq.service.TSysUserService;
 import cn.com.wudskq.snowflake.IdGeneratorSnowflake;
+import cn.com.wudskq.utils.JWTTokenUtil;
 import cn.com.wudskq.utils.Md5Util;
+import cn.com.wudskq.vo.Response;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -61,19 +67,41 @@ public class TSysUserServiceImpl implements TSysUserService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void saveUser(TSysUser sysUser) {
-        //新增用户
-        sysUser.setPassWord(Md5Util.MD5(sysUser.getPassWord()));
-        tSysUserMapper.insert(sysUser);
-        //新增用户与角色关联关系
-        TSysUserRole tSysUserRole = new TSysUserRole();
-        tSysUserRole.setUserId(sysUser.getId()).setRoleId(sysUser.getRoleId());
-        tSysUserRoleMapper.insert(tSysUserRole);
+    public void saveUser(TSysUser sysUser,HttpServletResponse response){
+        try {
+            //查询账号是否重复
+            QueryWrapper<TSysUser> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("user_name",sysUser.getUserName());
+            TSysUser tSysUser = tSysUserMapper.selectOne(queryWrapper);
+            if(sysUser.getUserName().equals(tSysUser.getUserName())){
+                throw new BusinessException(200,"当前添加的用户名重复!");
+            }else {
+                //新增用户
+                sysUser.setPassWord(Md5Util.MD5(sysUser.getPassWord()));
+                tSysUserMapper.insert(sysUser);
+
+                //新增用户与角色关联关系
+                TSysUserRole tSysUserRole = new TSysUserRole();
+                tSysUserRole.setUserId(sysUser.getId()).setRoleId(sysUser.getRoleId());
+                tSysUserRoleMapper.insert(tSysUserRole);
+            }
+        } catch (Exception e) {
+            Response.responseJson(response, Response.response(500,e.getMessage(),null));
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void updateUser(TSysUser sysUser) {
+        //特殊情况(admin账号只有admin可以更改)
+        SysUserDetails currentLoginUser = JWTTokenUtil.getCurrentLoginUser();
+        //如果更新的账号为admin
+        if("admin".equals(sysUser.getUserName())){
+            if(!"admin".equals(currentLoginUser.getUsername())){
+                throw new BusinessException(403,"您无权修改admin账号");
+            }
+        }
         //判断更新密码是否与原密码相同
         TSysUser datasourceUser = tSysUserMapper.selectById(sysUser.getId());
         if(datasourceUser.getPassWord().equals(sysUser.getPassWord())){

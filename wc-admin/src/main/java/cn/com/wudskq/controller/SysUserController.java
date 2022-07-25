@@ -10,11 +10,14 @@ import cn.com.wudskq.vo.Response;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -60,14 +63,15 @@ public class SysUserController {
         return Response.success(userDetail);
     }
 
+
     @ApiOperation(value = "新增用户信息")
     @ProhibitResubmit
     @PreAuthorize(value = "hasPermission('/system/save/user','res_system:user:add')")
     @InterfaceCall(interfaceName = "新增用户信息",requestMode = "POST")
     @OperatorLog(module = "用户管理", function = "用户信息", action = "新增用户信息", requestMode = "POST")
     @PostMapping("/save/user")
-    public Response saveUser(@Validated @RequestBody TSysUser sysUser) {
-        sysUserService.saveUser(sysUser);
+    public Response saveUser(@Validated @RequestBody TSysUser sysUser,HttpServletResponse response) {
+        sysUserService.saveUser(sysUser,response);
         return Response.success();
     }
 

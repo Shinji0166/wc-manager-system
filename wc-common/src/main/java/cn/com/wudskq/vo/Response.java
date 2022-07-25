@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.ServletResponse;
 import java.io.PrintWriter;
@@ -124,6 +126,10 @@ public class Response {
      * Response输出Json格式
      */
     public static void responseJson(ServletResponse response, Object data) {
+        if(null == response){
+            ServletRequestAttributes attributes  = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            response = attributes.getResponse();
+        }
         PrintWriter out = null;
         try {
             response.setCharacterEncoding("UTF-8");

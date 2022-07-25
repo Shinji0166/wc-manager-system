@@ -11,7 +11,10 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 /**
@@ -88,6 +91,30 @@ public class JWTTokenUtil {
         }
         return sysUserDetails;
     }
- 
+
+
+    /**
+     * 获取当前登录用户
+     * @return
+     */
+    public static SysUserDetails getCurrentLoginUser(){
+        //获取HttpRequest
+        ServletRequestAttributes attributes  = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = null;
+        if(null != attributes){
+            request = attributes.getRequest();
+        }
+        String token = null;
+        if(null != request){
+            //获取当前操作的用户token
+            token = request.getHeader(JWTConfig.tokenHeader);
+        }
+        if(null != token) {
+            //解析token
+            SysUserDetails sysUserDetails = JWTTokenUtil.parseAccessToken(token);
+            return sysUserDetails;
+        }
+        return null;
+    }
 }
 
