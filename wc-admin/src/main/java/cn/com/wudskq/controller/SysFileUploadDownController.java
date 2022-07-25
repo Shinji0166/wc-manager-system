@@ -37,7 +37,7 @@ public class SysFileUploadDownController {
     @InterfaceCall(interfaceName = "根据附件ID查询附件",requestMode = "GET")
     @OperatorLog(module = "附件管理", function = "附件信息", action = "根据附件ID查询附件", requestMode = "GET")
     @GetMapping("/query/file")
-    public Response queryFile(@RequestParam("id")String id){
+    public Response queryFile(@RequestParam(value = "id",required = false)String id){
         return Response.success(sysAppendixService.queryFile(id));
     }
 
