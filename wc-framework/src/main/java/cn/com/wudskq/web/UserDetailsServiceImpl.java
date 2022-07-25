@@ -48,33 +48,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<TSysRes> resList = null;
-        //管理员账户
-        if("admin".equals(username)){
-            TSysUser tSysUser = new TSysUser();
-            tSysUser.setId(0L);
-            tSysUser.setUserName("admin");
-            tSysUser.setNickName("系统管理员");
-            SysUserDetails sysUserDetails = new SysUserDetails();
-            BeanUtils.copyProperties(tSysUser, sysUserDetails);
 
-            //处理账户名密码
-            sysUserDetails.setUsername(tSysUser.getUserName());
-            sysUserDetails.setPassword(tSysUser.getPassWord());
-
-            // 角色集合
-            Set<GrantedAuthority> authorities = new HashSet<>();
-
-            //admin用户拥有全部系统资源权限
-            resList = tSysResMapper.selectList(new QueryWrapper<>());
-            for (int i = 0; i < resList.size() ; i++) {
-                if(StringUtil.isNotEmpty(resList.get(i).getPermission())){
-                    authorities.add(new SimpleGrantedAuthority("res_" + resList.get(i).getPermission()));
-                }
-            }
-            sysUserDetails.setAuthorities(authorities);
-            return sysUserDetails;
-        }
-        //普通用户账户
+        //查询当前登录用户信息
         TSysUser tSysUser = tSysUserService.findByUsername(username);
         if (tSysUser != null) {
             SysUserDetails sysUserDetails = new SysUserDetails();
@@ -88,12 +63,23 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             // 角色集合
             Set<GrantedAuthority> authorities = new HashSet<>();
 
-            //当前用户有的资源集合
-            resList = tSysResService.findResByUserId(String.valueOf(sysUserDetails.getId()));
-            if(resList != null && 0 < resList.size()){
-                for (int i = 0; i < resList.size() ; i++) {
-                    if(StringUtil.isNotEmpty(resList.get(i).getPermission())){
-                        authorities.add(new SimpleGrantedAuthority("res_" + resList.get(i).getPermission()));
+            //管理员账户
+            if("admin".equals(username)){
+                //admin用户拥有全部系统资源权限
+                resList = tSysResMapper.selectList(new QueryWrapper<>());
+                for (TSysRes sysRes : resList) {
+                    if (StringUtil.isNotEmpty(sysRes.getPermission())) {
+                        authorities.add(new SimpleGrantedAuthority("res_" + sysRes.getPermission()));
+                    }
+                }
+            }else{
+                //当前用户有的资源集合
+                resList = tSysResService.findResByUserId(String.valueOf(sysUserDetails.getId()));
+                if(resList != null && 0 < resList.size()){
+                    for (TSysRes sysRes : resList) {
+                        if (StringUtil.isNotEmpty(sysRes.getPermission())) {
+                            authorities.add(new SimpleGrantedAuthority("res_" + sysRes.getPermission()));
+                        }
                     }
                 }
             }

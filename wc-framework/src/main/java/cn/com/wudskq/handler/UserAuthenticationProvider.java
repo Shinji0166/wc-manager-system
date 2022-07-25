@@ -35,23 +35,15 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
             throw new UsernameNotFoundException("用户名或密码不能为空");
         }
-        if("admin".equals(username) && "123456".equals(password)){
-            SysUserDetails sysUserDetails = (SysUserDetails) userDetailsService.loadUserByUsername(username);
-            UsernamePasswordAuthenticationToken usernamePasswordAuthentication = new UsernamePasswordAuthenticationToken(sysUserDetails, sysUserDetails.getId(), sysUserDetails.getAuthorities());
-            return usernamePasswordAuthentication;
-        } else if ("admin".equals(username) && !"123456".equals(password)){
-            throw new BadCredentialsException("用户名或密码错误");
-        } else {
-            SysUserDetails sysUserDetails = (SysUserDetails) userDetailsService.loadUserByUsername(username);
-            if (sysUserDetails == null) {
-                throw new UsernameNotFoundException("用户名不存在");
-            }
-            if(!sysUserDetails.getPassword().equals(Md5Util.MD5(password))){
-                throw new BadCredentialsException("用户名或密码错误");
-            }
-            UsernamePasswordAuthenticationToken usernamePasswordAuthentication = new UsernamePasswordAuthenticationToken(sysUserDetails, sysUserDetails.getId(), sysUserDetails.getAuthorities());
-            return usernamePasswordAuthentication;
+        SysUserDetails sysUserDetails = (SysUserDetails) userDetailsService.loadUserByUsername(username);
+        if (sysUserDetails == null) {
+            throw new UsernameNotFoundException("用户名不存在");
         }
+        if(!sysUserDetails.getPassword().equals(Md5Util.MD5(password))){
+            throw new BadCredentialsException("用户名或密码错误");
+        }
+        UsernamePasswordAuthenticationToken usernamePasswordAuthentication = new UsernamePasswordAuthenticationToken(sysUserDetails, sysUserDetails.getId(), sysUserDetails.getAuthorities());
+        return usernamePasswordAuthentication;
     }
  
     /**
