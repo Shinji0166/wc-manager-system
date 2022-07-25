@@ -15,7 +15,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 import java.util.List;
 
@@ -68,9 +67,8 @@ public class SysUserController {
     @InterfaceCall(interfaceName = "新增用户信息",requestMode = "POST")
     @OperatorLog(module = "用户管理", function = "用户信息", action = "新增用户信息", requestMode = "POST")
     @PostMapping("/save/user")
-    public Response saveUser(@Validated @RequestBody TSysUser sysUser,HttpServletResponse response) {
-        sysUserService.saveUser(sysUser,response);
-        return Response.success();
+    public Response saveUser(@Validated @RequestBody TSysUser sysUser) {
+        return Response.success(sysUserService.saveUser(sysUser));
     }
 
     @ApiOperation(value = "更新用户信息")
@@ -80,8 +78,7 @@ public class SysUserController {
     @OperatorLog(module = "用户管理", function = "用户信息", action = "更新用户信息", requestMode = "PUT")
     @PutMapping("/update/user")
     public Response updateUser(@Validated @RequestBody TSysUser sysUser) {
-        sysUserService.updateUser(sysUser);
-        return Response.success();
+        return Response.success(sysUserService.updateUser(sysUser));
     }
 
     @ApiOperation(value = "删除用户信息(逻辑删除)")

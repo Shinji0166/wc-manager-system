@@ -1,6 +1,7 @@
 package cn.com.wudskq.service.impl;
 
 import cn.com.wudskq.expection.BusinessException;
+import cn.com.wudskq.expection.GlobalExceptionHandler;
 import cn.com.wudskq.mapper.TSysUserMapper;
 import cn.com.wudskq.mapper.TSysUserRoleMapper;
 import cn.com.wudskq.model.SysUserDetails;
@@ -14,12 +15,12 @@ import cn.com.wudskq.utils.Md5Util;
 import cn.com.wudskq.vo.Response;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -36,6 +37,9 @@ public class TSysUserServiceImpl implements TSysUserService {
 
     @Resource
     private IdGeneratorSnowflake idGeneratorSnowflake;
+
+    @Autowired
+    private GlobalExceptionHandler globalExceptionHandler;
 
     @Override
     public TSysUser findByUsername(String username) {
@@ -67,15 +71,15 @@ public class TSysUserServiceImpl implements TSysUserService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void saveUser(TSysUser sysUser,HttpServletResponse response){
-        try {
+    public Response saveUser(TSysUser sysUser){
             //查询账号是否重复
             QueryWrapper<TSysUser> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("user_name",sysUser.getUserName());
             TSysUser tSysUser = tSysUserMapper.selectOne(queryWrapper);
             if(null != tSysUser){
                if(sysUser.getUserName().equals(tSysUser.getUserName())) {
-                  throw new BusinessException(200, "当前添加的账号已存在,请勿重复添加!");
+                   Response response = globalExceptionHandler.handleBusinessException(new BusinessException(500, "当前添加的账号已存在,请勿重复添加!"));
+                   return response;
                }
             }else {
                 //新增用户
@@ -86,21 +90,19 @@ public class TSysUserServiceImpl implements TSysUserService {
                 tSysUserRole.setUserId(sysUser.getId()).setRoleId(sysUser.getRoleId());
                 tSysUserRoleMapper.insert(tSysUserRole);
             }
-        } catch (Exception e) {
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            Response.responseJson(response, Response.response(500,e.getMessage(),null));
-        }
+       return null;
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void updateUser(TSysUser sysUser) {
+    public Response updateUser(TSysUser sysUser) {
         //特殊情况(admin账号只有admin可以更改)
         SysUserDetails currentLoginUser = JWTTokenUtil.getCurrentLoginUser();
         //如果更新的账号为admin
         if("admin".equals(sysUser.getUserName())){
             if(!"admin".equals(currentLoginUser.getUsername())){
-                throw new BusinessException(403,"您无权修改admin账号");
+                Response response = globalExceptionHandler.handleBusinessException(new BusinessException(500,"您无权修改admin账号"));
+                return response;
             }
         }
         //判断更新密码是否与原密码相同
@@ -126,7 +128,7 @@ public class TSysUserServiceImpl implements TSysUserService {
         }else {
             tSysUserRoleMapper.insert(tSysUserRole);
         }
-
+        return null;
     }
 
     @Override

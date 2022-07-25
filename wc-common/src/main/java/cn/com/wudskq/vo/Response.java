@@ -84,6 +84,10 @@ public class Response {
      * 返回成功
      */
     public static Response success(Object object) {
+        if(null != object){
+            if(object instanceof  Response) {
+                return (Response) object;
+        }}
         Response response = new Response();
         response.setCode(200);//成功
         response.setMsg("成功");//提示语
