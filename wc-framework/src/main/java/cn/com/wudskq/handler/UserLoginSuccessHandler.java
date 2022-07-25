@@ -5,6 +5,7 @@ import cn.com.wudskq.model.SysLoginLog;
 import cn.com.wudskq.model.SysOnlineUser;
 import cn.com.wudskq.model.SysUserDetails;
 import cn.com.wudskq.service.SysLoginLogService;
+import cn.com.wudskq.utils.IPUtil;
 import cn.com.wudskq.utils.JWTTokenUtil;
 import cn.com.wudskq.utils.RedisUtil;
 import cn.com.wudskq.vo.Response;
@@ -76,7 +77,7 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
                 .setBrowserName(userAgent.getBrowser().getName())
                 .setBrowserVersion(String.valueOf(userAgent.getBrowserVersion()))
                 .setOperatorSystem(userAgent.getOperatingSystem().getName())
-                .setLoginIp(request.getRemoteHost())
+                .setLoginIp(IPUtil.getRemoteAddr(request))
                 .setLoginTime(new Date())
                 .setExpirationTime(loginUser.getExpirationTime());
         //存入redis,zset集合中
