@@ -27,7 +27,7 @@ import java.util.List;
 @Api(tags = "地区管理")
 @RestController
 @RequestMapping("/system")
-public class RegionController {
+public class RegionController extends BaseController {
 
     @Autowired
     private CountryRegionService countryRegionService;

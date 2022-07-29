@@ -88,4 +88,11 @@ public class GlobalExceptionHandler {
     public Response handleMysqlDataTruncation(MysqlDataTruncation e){
         return  Response.error(500,"数据库字段超长");
     }
+
+    //演示模式
+    @ExceptionHandler(value = DemoModeException.class)
+    public Response handleDemoModeException(DemoModeException e){
+        DemoModeException demoModeException = e;
+        return  Response.error(demoModeException.getCode(), demoModeException.getMsg());
+    }
 }

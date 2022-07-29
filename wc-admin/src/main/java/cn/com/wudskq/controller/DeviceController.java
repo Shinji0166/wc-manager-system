@@ -27,7 +27,7 @@ import java.util.List;
 @Api(tags = "设备管理")
 @RestController
 @RequestMapping("/system")
-public class DeviceController {
+public class DeviceController extends  BaseController{
 
     @Autowired
     private DeviceService deviceService;

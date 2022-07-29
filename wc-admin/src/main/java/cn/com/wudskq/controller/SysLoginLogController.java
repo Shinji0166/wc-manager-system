@@ -26,7 +26,7 @@ import java.util.List;
 @Api(tags = "系统登录日志管理")
 @RestController
 @RequestMapping("/system")
-public class SysLoginLogController {
+public class SysLoginLogController extends BaseController{
 
     @Autowired
     private SysLoginLogService sysLoginLogService;

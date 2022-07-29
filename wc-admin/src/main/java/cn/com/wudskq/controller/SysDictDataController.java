@@ -28,7 +28,7 @@ import java.util.List;
 @Api(tags = "字典数据管理")
 @RestController
 @RequestMapping("/system")
-public class SysDictDataController {
+public class SysDictDataController extends BaseController{
 
     @Autowired
     private SysDictDataService sysDictDataService;

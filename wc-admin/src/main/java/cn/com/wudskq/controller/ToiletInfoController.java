@@ -27,7 +27,7 @@ import java.util.List;
 @Api(tags = "公厕管理")
 @RestController
 @RequestMapping("/system")
-public class ToiletInfoController {
+public class ToiletInfoController extends BaseController{
 
     @Autowired
     private ToiletInfoService toiletInfoService;

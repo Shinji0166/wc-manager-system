@@ -28,7 +28,7 @@ import java.util.List;
 @Api(tags = "用户管理")
 @RestController
 @RequestMapping("/system")
-public class SysUserController {
+public class SysUserController extends BaseController {
 
     /**
      * 用户组件

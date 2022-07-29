@@ -29,7 +29,7 @@ import java.util.List;
 @Api(tags = "字典类型管理")
 @RestController
 @RequestMapping("/system")
-public class SysDictTypeController {
+public class SysDictTypeController extends BaseController{
 
     @Autowired
     private SysDictTypeService sysDictTypeService;

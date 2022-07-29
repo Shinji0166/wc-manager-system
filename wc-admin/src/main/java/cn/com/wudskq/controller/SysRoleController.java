@@ -29,7 +29,7 @@ import java.util.List;
 @Api(tags = "角色管理")
 @RestController
 @RequestMapping("/system")
-public class SysRoleController {
+public class SysRoleController extends BaseController {
 
     @Autowired
     private TSysRoleService sysRoleService;

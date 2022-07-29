@@ -27,7 +27,7 @@ import java.util.List;
 @Api(tags = "坑位管理")
 @RestController
 @RequestMapping("/system")
-public class PositionController {
+public class PositionController extends BaseController{
 
     @Autowired
     private PositionService positionService;

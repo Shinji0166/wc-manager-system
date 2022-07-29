@@ -29,7 +29,7 @@ import java.util.Map;
 @Api(tags = "系统在线用户管理")
 @RestController
 @RequestMapping("/system")
-public class SysOnlineUserController {
+public class SysOnlineUserController extends BaseController {
 
     @Autowired
     private SysOnlineUserServie sysOnlineUserServie;

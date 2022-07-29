@@ -25,7 +25,7 @@ import java.util.List;
 @Api(tags = "系统操作日志管理")
 @RestController
 @RequestMapping("/system")
-public class SysOperatorLogController {
+public class SysOperatorLogController extends BaseController {
 
     @Autowired
     private SysOperatorLogService sysOperatorLogService;
