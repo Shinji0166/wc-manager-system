@@ -9,6 +9,11 @@
    <img src="https://img.shields.io/badge/Axios-3.4.1-blue" alt="Build Status">
 </p>
 
+#### 演示地址
+1. http://101.42.156.134/login 
+2. 系统管理员 用户名: admin 密码: 123456 普通用户 用户名: test-user 密码: 123456
+
+
 #### 前置条件
 
 1. node环境
