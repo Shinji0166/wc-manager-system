@@ -57,7 +57,7 @@ public class BaseController {
         if ("DELETE".equals(httpServletRequest.getMethod()) || "POST".equals(httpServletRequest.getMethod())
                 || "PUT".equals(httpServletRequest.getMethod()))
         {
-            throw new DemoModeException(500,"当前环境为演示模式!禁止操作");
+            throw new DemoModeException(500,"当前环境为演示模式！禁止操作");
         }
     }
 }
