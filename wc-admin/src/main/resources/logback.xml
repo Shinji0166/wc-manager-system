@@ -115,7 +115,11 @@
     <!-- 生产环境开启sql记录 -->
     <springProfile name="prod">
         <logger name="cn.com.wudskq.mapper" level="debug"/>
-    </springProfile> -->
+    </springProfile>
+
+    <springProfile name="demo">
+        <logger name="cn.com.wudskq.mapper" level="debug"/>
+    </springProfile>
 
     <root level="info">
         <appender-ref ref="CONSOLE" />

@@ -1,12 +1,7 @@
 /*
  Navicat Premium Data Transfer
-
- Source Server         : 阿里云RDS
+ 
  Source Server Type    : MySQL
- Source Server Version : 80025
- Source Host           : rm-bp17s87o23hkxu4800o.mysql.rds.aliyuncs.com:1606
- Source Schema         : wc_mangesys_read_db
-
  Target Server Type    : MySQL
  Target Server Version : 80025
  File Encoding         : 65001
