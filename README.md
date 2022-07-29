@@ -2,6 +2,13 @@
 
 ### 前端部署手册
 
+<p align="center">
+   <img src="https://img.shields.io/badge/Vue-2.2-green" alt="Build Status">
+   <img src="https://img.shields.io/badge/ECharts-5.3.3-yellowgreen" alt="Build Status">
+   <img src="https://img.shields.io/badge/Element%20UI-2.15.8-orange" alt="Build Status">
+   <img src="https://img.shields.io/badge/Axios-3.4.1-blue" alt="Build Status">
+</p>
+
 #### 前置条件
 
 1. node环境
@@ -112,6 +119,21 @@
 ---
 
 ### 后端部署手册
+
+<p align="center">
+   <img src="https://img.shields.io/badge/JDK-1.8-green" alt="Build Status">
+   <img src="https://img.shields.io/badge/SpringBoot-2.5.1-yellowgreen" alt="Build Status">
+   <img src="https://img.shields.io/badge/Druid-1.2.8-orange" alt="Build Status">
+   <img src="https://img.shields.io/badge/MyBatis-2.2.0-blue" alt="Build Status">
+   <img src="https://img.shields.io/badge/MyBatis--Plus-3.4.2-red" alt="Build Status">
+   <img src="https://img.shields.io/badge/Knife4j-3.0.3-orange" alt="Build Status">
+   <img src="https://img.shields.io/badge/JJWT-0.9.0-yellowgreen" alt="Build Status">
+   <img src="https://img.shields.io/badge/XXLJOB-2.3.0-blue" alt="Build Status">
+   <img src="https://img.shields.io/badge/Redis-2.5.1-orange" alt="Build Status">
+   <img src="https://img.shields.io/badge/阿里云OSS对象存储-blue" alt="Build Status">
+</p>
+
+
 
 #### 前置条件
 
