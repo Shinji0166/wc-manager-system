@@ -1,6 +1,6 @@
 ## 项目部署手册
 
-### 前端部署手册
+### [前端部署手册](https://github.com/wudskq/wc-manager-ui.git)
 
 <p align="center">
    <img src="https://img.shields.io/badge/Vue-2.2-green" alt="Build Status">
@@ -114,7 +114,20 @@
    $ ./nginx
    ```
 
-6. 通过服务器的IP加端口号即可访问！
+6. 通过服务器的IP加端口号即可访问！ 
+
+   - 系统管理员  用户名:admin 密码:123456
+   - 普通测试用户 用户名:test-user 密码:123456
+
+   ![image-20220729175229749](https://aliyun-images-service.oss-cn-hangzhou.aliyuncs.com/wudskq/data/20220729175230.png)
+
+   ![](https://aliyun-images-service.oss-cn-hangzhou.aliyuncs.com/wudskq/data/20220729175412.png)
+
+   ![image-20220729175436944](https://aliyun-images-service.oss-cn-hangzhou.aliyuncs.com/wudskq/data/20220729175436.png)
+
+   ![image-20220729175459699](https://aliyun-images-service.oss-cn-hangzhou.aliyuncs.com/wudskq/data/20220729175459.png)
+
+   ![image-20220729175555074](https://aliyun-images-service.oss-cn-hangzhou.aliyuncs.com/wudskq/data/20220729175555.png)
 
 ---
 
