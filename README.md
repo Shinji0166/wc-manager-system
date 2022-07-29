@@ -65,9 +65,6 @@
        default_type  application/octet-stream;
    
        sendfile        on;
-       #tcp_nopush     on;
-   
-       #keepalive_timeout  0;
        keepalive_timeout  65;
    
        gzip  on;
@@ -99,11 +96,6 @@
                proxy_set_header Host               $host;
                proxy_set_header X-Real-Ip          $remote_addr;
                proxy_set_header X-Forwarded-For    $proxy_add_x_forwarded_for;
-           }
-          
-           error_page   500 502 503 504  /50x.html;
-           location = /50x.html {
-               root   html;
            }
        }
    }
@@ -174,6 +166,22 @@
      bucketDirName: # 填写自己的bucketDirName(即bucket中文件夹的路径      
    ```
 
+#### 定时任务XXL-JOB部署及配置(非必要、项目不会报错、但影响部分功能使用)
+
+1. XXL-JOB部署请参考官网链接  https://www.xuxueli.com/xxl-job/
+
+   ![image-20220729164441272](https://aliyun-images-service.oss-cn-hangzhou.aliyuncs.com/wudskq/data/20220729164441.png)
+
+2. 对于该项目而言,此第三方定时任务框架用于更新项目中的接口调用数据进行入库
+
+3. 作用二用户定时清理redis中的在线用户的垃圾数据
+
+4. 安装完成后在application-dev.yml配置文件中将xxl-job的地址改为自己的xxl-job的地址、并在xxl-job中配置定时任务、对应
+
+   JobHandler必须与项目中的对应的定时任务的的Value相同 ![image-20220729164926977](https://aliyun-images-service.oss-cn-hangzhou.aliyuncs.com/wudskq/data/20220729164927.png)
+
+   ![image-20220729164654954](https://aliyun-images-service.oss-cn-hangzhou.aliyuncs.com/wudskq/data/20220729164655.png)
+
 #### 数据库配置
 
 1. 运行项目中的sql文件、进行初始化数据
@@ -191,6 +199,8 @@
    ![image-20220729140510930](https://aliyun-images-service.oss-cn-hangzhou.aliyuncs.com/wudskq/data/20220729140516.png)
 
 #### 部署步骤(对应前端部署环境)
+
+1. 这里请自定创建application-prod.yml配置文件、此操作为必须项！必须创建
 
 1. 使用maven进行打包
 
