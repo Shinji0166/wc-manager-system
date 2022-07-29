@@ -48,7 +48,7 @@
 
 3. 将systemui上传至服务器nginx中的html目录下、如下图
 
-   ![image-20220729163128428](/Users/wudskq/Library/Application Support/typora-user-images/image-20220729163128428.png)
+   ![image-20220729163128428](https://aliyun-images-service.oss-cn-hangzhou.aliyuncs.com/wudskq/data/20220729180739.png)
 
 4. 修改nginx配置文件、配置前端项目地址及后端服务信息 
 
