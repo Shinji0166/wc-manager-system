@@ -85,6 +85,9 @@ public class TSysUser extends CreateInfoModel implements Serializable {
     @ApiModelProperty(value = "个人签名")
     private String sign;
 
+    @ApiModelProperty(value = "用户祖级ID")
+    private String ancestorId;
+
     @ApiModelProperty(value = "用户头像")
     private String pictureId;
 

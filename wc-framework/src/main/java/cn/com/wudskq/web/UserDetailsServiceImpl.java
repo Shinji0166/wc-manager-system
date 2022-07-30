@@ -59,6 +59,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             sysUserDetails.setNickName(tSysUser.getNickName());
             sysUserDetails.setUsername(tSysUser.getUserName());
             sysUserDetails.setPassword(tSysUser.getPassWord());
+            //用户的组级ID
+            sysUserDetails.setAncestorId(tSysUser.getAncestorId());
 
             // 角色集合
             Set<GrantedAuthority> authorities = new HashSet<>();
