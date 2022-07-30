@@ -4,6 +4,7 @@ import cn.com.wudskq.mapper.SysOperatorLogMapper;
 import cn.com.wudskq.model.SysOperatorLog;
 import cn.com.wudskq.model.query.OperatorQueryDTO;
 import cn.com.wudskq.service.SysOperatorLogService;
+import cn.com.wudskq.utils.JWTTokenUtil;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,8 @@ public class SysOperatorLogServiceImpl implements SysOperatorLogService {
 
     @Override
     public List<SysOperatorLog> getOperatorLogList(OperatorQueryDTO operatorQuery) {
+        String tenantCode = JWTTokenUtil.getCurrentLoginUserTenantCode();
         PageHelper.startPage(operatorQuery.getPageNum(),operatorQuery.getPageSize());
-        return sysOperatorLogMapper.getOperatorLogList(operatorQuery);
+        return sysOperatorLogMapper.getOperatorLogList(operatorQuery,tenantCode);
     }
 }

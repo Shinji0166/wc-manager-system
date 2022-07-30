@@ -19,9 +19,10 @@ public interface SysLoginLogMapper extends BaseMapper<SysLoginLog> {
     /**
      * 获取系统登录日志列表
      * @param loginLogQuery
+     * @param tenantCode
      * @return
      */
-    List<SysLoginLog> getLoginLogList(@Param("query") LoginLogQueryDTO loginLogQuery);
+    List<SysLoginLog> getLoginLogList(@Param("query") LoginLogQueryDTO loginLogQuery,@Param("tenantCode") String tenantCode);
 
     /**
      * 获取系统登录日志详情

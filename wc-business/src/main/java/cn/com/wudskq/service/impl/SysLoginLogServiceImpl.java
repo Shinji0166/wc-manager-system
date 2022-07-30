@@ -4,6 +4,7 @@ import cn.com.wudskq.mapper.SysLoginLogMapper;
 import cn.com.wudskq.model.SysLoginLog;
 import cn.com.wudskq.model.query.LoginLogQueryDTO;
 import cn.com.wudskq.service.SysLoginLogService;
+import cn.com.wudskq.utils.JWTTokenUtil;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,9 @@ public class SysLoginLogServiceImpl implements SysLoginLogService {
 
     @Override
     public List<SysLoginLog> getLoginLogList(LoginLogQueryDTO loginLogQuery) {
+        String tenantCode = JWTTokenUtil.getCurrentLoginUserTenantCode();
         PageHelper.startPage(loginLogQuery.getPageNum(),loginLogQuery.getPageSize());
-        return sysLoginLogMapper.getLoginLogList(loginLogQuery);
+        return sysLoginLogMapper.getLoginLogList(loginLogQuery,tenantCode);
     }
 
     @Override

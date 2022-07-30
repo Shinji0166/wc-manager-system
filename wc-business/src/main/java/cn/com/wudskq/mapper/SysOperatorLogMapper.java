@@ -19,7 +19,8 @@ public interface SysOperatorLogMapper extends BaseMapper<SysOperatorLog> {
     /**
      * 获取系统操作日志
      * @param operatorQuery
+     * @param tenantCode
      * @return
      */
-    List<SysOperatorLog> getOperatorLogList(@Param("query") OperatorQueryDTO operatorQuery);
+    List<SysOperatorLog> getOperatorLogList(@Param("query") OperatorQueryDTO operatorQuery,@Param("tenantCode") String tenantCode);
 }
