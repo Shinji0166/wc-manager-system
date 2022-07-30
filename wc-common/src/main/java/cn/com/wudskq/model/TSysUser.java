@@ -74,9 +74,6 @@ public class TSysUser extends CreateInfoModel implements Serializable {
     @ApiModelProperty(value = "账户类型 1管理员账号 2普通账号")
     private String accountType;
 
-    @ApiModelProperty(value = "邀请码")
-    private String inviteCode;
-
     @ApiModelProperty(value = "性别：0男 1女")
     private String sex;
 

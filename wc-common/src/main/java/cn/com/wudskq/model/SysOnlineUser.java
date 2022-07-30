@@ -58,6 +58,8 @@ public class SysOnlineUser implements Serializable {
     @ApiModelProperty("状态(0在线,1注销)")
     private Integer status=0;
 
+    @ApiModelProperty(value = "多租户代码")
+    private String tenantCode;
 
     public SysOnlineUser(Object object) {
         SysOnlineUser source = (SysOnlineUser) object;
