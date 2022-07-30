@@ -31,16 +31,18 @@ public interface TSysRoleMapper extends BaseMapper<TSysRole> {
     /**
      * 获取角色下拉框数据
      * @param roleInfoQuery
+     * @param tenantCode
      * @return
      */
-    List<SysRoleSelectVo> getRoleSelect(@Param("query")RoleInfoQueryDTO roleInfoQuery);
+    List<SysRoleSelectVo> getRoleSelect(@Param("query")RoleInfoQueryDTO roleInfoQuery,@Param("tenantCode") String tenantCode);
 
     /**
      * 获取角色信息列表
      * @param roleInfoQuery
+     * @param tenantCode
      * @return
      */
-    List<TSysRole> getRoleInfoList(@Param("query") RoleInfoQueryDTO roleInfoQuery);
+    List<TSysRole> getRoleInfoList(@Param("query") RoleInfoQueryDTO roleInfoQuery,@Param("tenantCode") String tenantCode);
 
     /**
      * 获取角色详细信息

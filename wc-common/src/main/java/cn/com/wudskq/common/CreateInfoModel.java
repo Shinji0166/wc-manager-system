@@ -25,7 +25,7 @@ public class CreateInfoModel implements Serializable {
     @TableField(fill = FieldFill.INSERT,value = "status")
     private Integer status;
 
-    @ApiModelProperty(value = "系统多租户代码")
+    @ApiModelProperty(value = "系统多租户代码(为新增数据时使用)")
     @TableField(fill = FieldFill.INSERT,value = "tenant_code")
     private String tenantCode;
 

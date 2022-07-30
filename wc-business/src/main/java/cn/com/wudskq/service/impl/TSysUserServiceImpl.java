@@ -60,7 +60,7 @@ public class TSysUserServiceImpl implements TSysUserService {
 
     @Override
     public List<TSysUser> getUserInfoList(UserInfoQueryDTO userInfoQuery) {
-        //获取当前操作用户系统租户代码
+        //获取当前操作用户系统租户代码权限
         String tenantCode = JWTTokenUtil.getCurrentLoginUserTenantCode();
         PageHelper.startPage(userInfoQuery.getPageNum(),userInfoQuery.getPageSize());
         return tSysUserMapper.getUserInfoList(userInfoQuery,tenantCode);

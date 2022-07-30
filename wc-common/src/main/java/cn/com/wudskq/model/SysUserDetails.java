@@ -26,6 +26,9 @@ public class SysUserDetails extends TSysUser implements UserDetails, Serializabl
     /** 当前账号ID **/
     private String currentUserId;
 
+    /** 多租户代码字符(为控制查询数据使用) **/
+    private String tenantCodePermission;
+
     /** 账号 **/
     private String username;
 

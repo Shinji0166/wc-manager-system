@@ -42,8 +42,8 @@ public class JWTTokenUtil {
                 .claim("userid",sysUserDetails.getId())
                 .claim("ancestorId",sysUserDetails.getAncestorId()) //组级ID
                 .claim("tenantCode",sysUserDetails.getTenantCode()) //系统租户代码
+                .claim("tenantCodePermission",sysUserDetails.getTenantCodePermission())  //系统多租户代码字符串
                 .claim("nickName",sysUserDetails.getNickName())
-                .claim("tenantCode",sysUserDetails.getTenantCode())  //系统多租户代码
                 .compact(); // 自定义其他属性，如用户组织机构ID，用户所拥有的角色，用户权限信息等
         return JWTConfig.tokenPrefix + token;
     }
@@ -74,10 +74,10 @@ public class JWTTokenUtil {
                 sysUserDetails.setUsername(claims.getSubject());
                 sysUserDetails.setNickName(String.valueOf(claims.get("nickName")));
                 sysUserDetails.setAncestorId(String.valueOf(claims.get("ancestorId")));
-                sysUserDetails.setTenantCode((String) claims.get("tenantCode"));
-
                 //系统多租户代码
-                sysUserDetails.setTenantCode(String.valueOf(claims.get("tenantCode")));
+                sysUserDetails.setTenantCode((String) claims.get("tenantCode"));
+                //系统多租户代码字符串
+                sysUserDetails.setTenantCodePermission(String.valueOf(claims.get("tenantCodePermission")));
 
                 // 获取角色
                 Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
@@ -126,7 +126,7 @@ public class JWTTokenUtil {
     }
 
     /**
-     * 获取用户系统租户代码
+     * 获取用户系统租户代码权限
      * @return
      */
     public static String  getCurrentLoginUserTenantCode(){
@@ -143,7 +143,7 @@ public class JWTTokenUtil {
             if(null != token) {
                 //解析token
                 SysUserDetails sysUserDetails = JWTTokenUtil.parseAccessToken(token);
-                return sysUserDetails.getTenantCode();
+                return sysUserDetails.getTenantCodePermission();
             }
         }
         return null;

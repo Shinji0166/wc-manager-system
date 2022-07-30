@@ -7,6 +7,7 @@ import cn.com.wudskq.model.TSysRoleRes;
 import cn.com.wudskq.model.query.RoleInfoQueryDTO;
 import cn.com.wudskq.model.vo.SysRoleSelectVo;
 import cn.com.wudskq.service.TSysRoleService;
+import cn.com.wudskq.utils.JWTTokenUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +32,15 @@ public class TSysRoleServiceImpl implements TSysRoleService {
 
     @Override
     public List<SysRoleSelectVo> getRoleSelect(RoleInfoQueryDTO roleInfoQuery) {
-        return sysRoleMapper.getRoleSelect(roleInfoQuery);
+        String tenantCode = JWTTokenUtil.getCurrentLoginUserTenantCode();
+        return sysRoleMapper.getRoleSelect(roleInfoQuery,tenantCode);
     }
 
     @Override
     public List<TSysRole> getRoleInfoList(RoleInfoQueryDTO roleInfoQuery) {
+        String tenantCode = JWTTokenUtil.getCurrentLoginUserTenantCode();
         PageHelper.startPage(roleInfoQuery.getPageNum(),roleInfoQuery.getPageSize());
-        return sysRoleMapper.getRoleInfoList(roleInfoQuery);
+        return sysRoleMapper.getRoleInfoList(roleInfoQuery,tenantCode);
     }
 
     @Override
