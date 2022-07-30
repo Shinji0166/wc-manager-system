@@ -35,12 +35,12 @@ public class TSysRole extends CreateInfoModel {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
-    @Length(min = 5,max = 10,message = "角色名称长度在5～10之间")
+    @Length(min = 5,max = 20,message = "角色名称长度在5～10之间")
     @NotBlank(message = "角色名称不能为空")
     @ApiModelProperty(value = "角色名称")
     private String roleName;
 
-    @Length(min = 5,max = 10,message = "角色代码长度在5～10之间")
+    @Length(min = 5,max = 20,message = "角色代码长度在5～20之间")
     @NotBlank(message = "角色代码不能为空")
     @ApiModelProperty(value = "角色代码")
     private String roleCode;

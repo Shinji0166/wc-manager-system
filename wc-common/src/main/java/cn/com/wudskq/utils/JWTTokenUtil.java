@@ -108,15 +108,15 @@ public class JWTTokenUtil {
         if(null != attributes){
             request = attributes.getRequest();
         }
-        String token = null;
-        if(null != request){
+        if(null != request)
+        {
             //获取当前操作的用户token
-            token = request.getHeader(JWTConfig.tokenHeader);
-        }
-        if(null != token) {
-            //解析token
-            SysUserDetails sysUserDetails = JWTTokenUtil.parseAccessToken(token);
-            return sysUserDetails;
+            String token = request.getHeader(JWTConfig.tokenHeader);
+            if(null != token) {
+                //解析token
+                SysUserDetails sysUserDetails = JWTTokenUtil.parseAccessToken(token);
+                return sysUserDetails;
+            }
         }
         return null;
     }
