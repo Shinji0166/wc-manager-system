@@ -79,6 +79,7 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
                 .setOperatorSystem(userAgent.getOperatingSystem().getName())
                 .setLoginIp(IPUtil.getRemoteAddr(request))
                 .setLoginTime(new Date())
+                .setTenantCode(loginUser.getTenantCode()) //系统多租户代码
                 .setExpirationTime(loginUser.getExpirationTime());
         //存入redis,zset集合中
         redisUtil.zAdd(SystemConstants.OLINE_USER_KEY,sysOnlineUser,sysOnlineUser.getLoginTime().getTime());
@@ -103,6 +104,7 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
         sysLoginLog.setBrowserName(userAgent.getBrowser().getName());
         sysLoginLog.setBrowserVersion(String.valueOf(userAgent.getBrowserVersion()));
         sysLoginLog.setOperatorSystem(userAgent.getOperatingSystem().getName());
+        sysLoginLog.setTenantCode(loginUser.getTenantCode()); //系统多租户代码
         sysLoginLog.setResult("登录成功");
         sysLoginLogService.saveSysLoginLog(sysLoginLog);
     }

@@ -8,7 +8,7 @@ server:
 
 spring:
   profiles:
-    active: demo
+    active: prod
   mvc:
     hiddenmethod:
       filter:

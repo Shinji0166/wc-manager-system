@@ -57,13 +57,18 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
                 //判断用户登录状态
                 Integer zSetSize = redisUtil.getZSetSize(SystemConstants.OLINE_USER_KEY);
                 Set<Object> result =redisUtil.rangeByLimit(SystemConstants.OLINE_USER_KEY,1,zSetSize);
+
                 //当前在线用户列表
                 List<SysOnlineUser> collect = result.stream().map(SysOnlineUser::new).collect(Collectors.toList());
-                collect.forEach(obj ->{
-                    if(sysUserDetails.getJti().equals(obj.getJti()) && obj.getStatus() ==1){
-                        throw new BusinessException(200,"当前登录状态已过期,请重新登录!");
-                    }
-                });
+
+                if(null != collect && 0 <collect.size())
+                {
+                    collect.forEach(obj -> {
+                        if (sysUserDetails.getJti().equals(obj.getJti()) && obj.getStatus() == 1) {
+                            throw new BusinessException(200, "当前登录状态已过期,请重新登录!");
+                        }
+                    });
+                }
                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(sysUserDetails, sysUserDetails.getId(), sysUserDetails.getAuthorities());
                // 将Authentication对象（用户信息、已认证状态、权限信息）存入 SecurityContextHolder
                SecurityContextHolder.getContext().setAuthentication(authentication);

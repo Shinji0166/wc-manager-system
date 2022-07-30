@@ -49,6 +49,8 @@ public class MybatisPlusPlugin implements MetaObjectHandler {
                 TSysUser currentOperatorUser = getCurrentOperatorUser();
                 if(null != currentOperatorUser){
                     this.setFieldValByName("createBy",currentOperatorUser.getNickName(),metaObject);
+                    //系统多租户代码
+                    this.setFieldValByName("tenantCode",currentOperatorUser.getTenantCode(),metaObject);
                 }
             }
         }
@@ -92,9 +94,8 @@ public class MybatisPlusPlugin implements MetaObjectHandler {
                 }else {
                     tSysUser.setNickName("系统管理员");
                 }
-            }else {
-                tSysUser.setNickName("系统");
-            }
+                //系统多租户代码
+                tSysUser.setTenantCode(sysUserDetails.getTenantCode());}
         } catch (Exception e) {
             e.printStackTrace();
         }

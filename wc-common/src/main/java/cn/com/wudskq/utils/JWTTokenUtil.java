@@ -41,6 +41,7 @@ public class JWTTokenUtil {
                 .claim("authorities", JSON.toJSONString(sysUserDetails.getAuthorities()))
                 .claim("userid",sysUserDetails.getId())
                 .claim("nickName",sysUserDetails.getNickName())
+                .claim("tenantCode",sysUserDetails.getTenantCode())  //系统多租户代码
                 .compact(); // 自定义其他属性，如用户组织机构ID，用户所拥有的角色，用户权限信息等
         return JWTConfig.tokenPrefix + token;
     }
@@ -70,6 +71,9 @@ public class JWTTokenUtil {
                 sysUserDetails.setId(Long.valueOf(String.valueOf(claims.get("userid"))));
                 sysUserDetails.setUsername(claims.getSubject());
                 sysUserDetails.setNickName(String.valueOf(claims.get("nickName")));
+
+                //系统多租户代码
+                sysUserDetails.setTenantCode(String.valueOf(claims.get("tenantCode")));
 
                 // 获取角色
                 Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();

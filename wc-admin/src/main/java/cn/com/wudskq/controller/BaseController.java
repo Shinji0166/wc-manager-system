@@ -3,7 +3,7 @@ package cn.com.wudskq.controller;
 import cn.com.wudskq.expection.DemoModeException;
 import cn.com.wudskq.utils.ServletUtils;
 import cn.com.wudskq.utils.StringUtils;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -20,6 +20,10 @@ import java.io.IOException;
  */
 @Component
 public class BaseController {
+
+    //启动环境
+    @Value("${spring.profiles.active}")
+    private String profilesActive;
 
     //代表为查询列表操作
     private static final String LIST_URI = "/list";
@@ -38,26 +42,25 @@ public class BaseController {
 
     //该注解作用会在controller每个方法被执行前执行
     @ModelAttribute
-    @ConditionalOnProperty(value = "spring.profiles.active",havingValue = "demo")
     public void init(HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException
     {
-        String url = ServletUtils.getRequestURI();
+        if("demo".equals(profilesActive)) {
 
-        // 需要放开的url
-        if (StringUtils.isNotEmpty(url))
-        {
-            //判断是否包含演示模式可以执行的URI
-            if(url.contains(LIST_URI) || url.contains(DETAIL_URI) || url.contains(SELECT_URI) || url.contains(TREE_URI) || url.contains(DICT_URI))
-            {
-                return;
+            String url = ServletUtils.getRequestURI();
+
+            // 需要放开的url
+            if (StringUtils.isNotEmpty(url)) {
+                //判断是否包含演示模式可以执行的URI
+                if (url.contains(LIST_URI) || url.contains(DETAIL_URI) || url.contains(SELECT_URI) || url.contains(TREE_URI) || url.contains(DICT_URI)) {
+                    return;
+                }
             }
-        }
 
-        // 增删改请求
-        if ("DELETE".equals(httpServletRequest.getMethod()) || "POST".equals(httpServletRequest.getMethod())
-                || "PUT".equals(httpServletRequest.getMethod()))
-        {
-            throw new DemoModeException(500,"当前环境为演示模式！禁止操作");
+            // 增删改请求
+            if ("DELETE".equals(httpServletRequest.getMethod()) || "POST".equals(httpServletRequest.getMethod())
+                    || "PUT".equals(httpServletRequest.getMethod())) {
+                throw new DemoModeException(500, "当前环境为演示模式！禁止操作");
+            }
         }
     }
 }

@@ -59,6 +59,7 @@ public class UserLoginFailureHandler implements AuthenticationFailureHandler {
         sysLoginLog.setBrowserName(userAgent.getBrowser().getName());
         sysLoginLog.setBrowserVersion(String.valueOf(userAgent.getBrowserVersion()));
         sysLoginLog.setOperatorSystem(userAgent.getOperatingSystem().getName());
+        sysLoginLog.setTenantCode(loginUser.getTenantCode()); //系统多租户代码
         sysLoginLog.setResult("登录失败");
         sysLoginLogService.saveSysLoginLog(sysLoginLog);
     }
