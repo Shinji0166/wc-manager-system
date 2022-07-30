@@ -24,6 +24,13 @@
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
+
+    <!-- 根据用户ID获取系统租户代码 -->
+    <select id="getTenantCodeByUserId" resultType="java.lang.String">
+        select tenant_code from sys_user
+        where  status != 1 and find_in_set(#{id},ancestor_id)  or id = #{id}
+    </select>
+
     <!-- 查询用户信息列表 -->
     <select id="getUserInfoList" resultMap="userInfo">
         select id, user_name, nick_name, pass_word, cell_phone,
@@ -32,6 +39,10 @@
         <where>
             <!--排除已删除状态-->
             status != 1
+            <!-- 根据多租户代码查询 -->
+            <if test="tenantCode != null and tenantCode != ''">
+                and find_in_set(tenant_code,#{tenantCode})
+            </if>
             <if test="query.nickName != null and query.nickName != ''">
                 and nick_name like concat('%',#{query.nickName},'%')
             </if>

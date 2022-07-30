@@ -48,13 +48,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<TSysRes> resList = null;
-
         //查询当前登录用户信息
         TSysUser tSysUser = tSysUserService.findByUsername(username);
-        if (tSysUser != null) {
+        if (tSysUser != null)
+        {
             SysUserDetails sysUserDetails = new SysUserDetails();
             BeanUtils.copyProperties(tSysUser, sysUserDetails);
-
             //处理账户名密码 昵称等
             sysUserDetails.setNickName(tSysUser.getNickName());
             sysUserDetails.setUsername(tSysUser.getUserName());
@@ -64,9 +63,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
             // 角色集合
             Set<GrantedAuthority> authorities = new HashSet<>();
-
             //管理员账户
-            if("admin".equals(username)){
+            if("admin".equals(username))
+            {
                 //admin用户拥有全部系统资源权限
                 resList = tSysResMapper.selectList(new QueryWrapper<>());
                 for (TSysRes sysRes : resList) {
@@ -74,18 +73,26 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                         authorities.add(new SimpleGrantedAuthority("res_" + sysRes.getPermission()));
                     }
                 }
-            }else{
+            }else
+            {
                 //当前用户有的资源集合
                 resList = tSysResService.findResByUserId(String.valueOf(sysUserDetails.getId()));
                 if(resList != null && 0 < resList.size()){
-                    for (TSysRes sysRes : resList) {
-                        if (StringUtil.isNotEmpty(sysRes.getPermission())) {
+                    for (TSysRes sysRes : resList)
+                    {
+                        if (StringUtil.isNotEmpty(sysRes.getPermission()))
+                        {
                             authorities.add(new SimpleGrantedAuthority("res_" + sysRes.getPermission()));
                         }
                     }
                 }
             }
             sysUserDetails.setAuthorities(authorities);
+
+            //获取用户租户代码
+            String tenantCode = tSysUserService.getTenantCodeByUserId(tSysUser.getId());
+            sysUserDetails.setTenantCode(tenantCode);
+
             return sysUserDetails;
         }
         return null;

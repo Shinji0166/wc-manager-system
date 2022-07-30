@@ -18,6 +18,14 @@ public interface TSysUserService {
      */
     TSysUser findByUsername(String username);
 
+
+    /**
+     * 根据用户ID查询系统租户代码
+     * @param id
+     * @return
+     */
+    String getTenantCodeByUserId(Long id);
+
     /**
      * 获取用户信息列表
      * @param userInfoQuery

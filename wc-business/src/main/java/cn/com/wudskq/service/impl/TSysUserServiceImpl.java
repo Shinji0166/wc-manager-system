@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author wudskq
@@ -49,10 +50,20 @@ public class TSysUserServiceImpl implements TSysUserService {
         return tSysUserMapper.selectOne(queryWrapper);
     }
 
+
+    @Override
+    public String getTenantCodeByUserId(Long id) {
+        List<String> tenantCodeList = tSysUserMapper.getTenantCodeByUserId(id);
+        String res = tenantCodeList.stream().map(String::valueOf).collect(Collectors.joining(","));
+        return res;
+    }
+
     @Override
     public List<TSysUser> getUserInfoList(UserInfoQueryDTO userInfoQuery) {
+        //获取当前操作用户系统租户代码
+        String tenantCode = JWTTokenUtil.getCurrentLoginUserTenantCode();
         PageHelper.startPage(userInfoQuery.getPageNum(),userInfoQuery.getPageSize());
-        return tSysUserMapper.getUserInfoList(userInfoQuery);
+        return tSysUserMapper.getUserInfoList(userInfoQuery,tenantCode);
     }
 
     @Override

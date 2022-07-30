@@ -13,12 +13,21 @@ import java.util.List;
  */
 public interface TSysUserMapper extends BaseMapper<TSysUser> {
 
+
+    /**
+     * 根据用户ID获取系统租户代码列表
+     * @param id
+     * @return
+     */
+    List<String> getTenantCodeByUserId(@Param("id") Long id);
+
     /**
      * 获取用户信息列表
      * @param userInfoQuery
+     * @param tenantCode
      * @return
      */
-    List<TSysUser> getUserInfoList(@Param("query") UserInfoQueryDTO userInfoQuery);
+    List<TSysUser> getUserInfoList(@Param("query") UserInfoQueryDTO userInfoQuery,@Param("tenantCode") String tenantCode);
 
     /**
      * 获取用户详细信息
