@@ -44,6 +44,7 @@ public class InterfaceCallAspect {
     private StringRedisTemplate stringRedisTemplate;
 
     //全局异常处理
+    @Resource
     private GlobalExceptionHandler globalExceptionHandler;
 
     //本地线程

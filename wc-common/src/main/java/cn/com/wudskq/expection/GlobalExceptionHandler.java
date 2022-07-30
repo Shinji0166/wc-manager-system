@@ -44,6 +44,7 @@ public class GlobalExceptionHandler {
         for (FieldError error : fieldErrors) {
             list.add(error.getDefaultMessage());
         }
+        logger.error("系统日志",e);
         return Response.error(500,list.get(0));
     }
 
@@ -54,13 +55,14 @@ public class GlobalExceptionHandler {
         for (ConstraintViolation<?> item : violations) {
             list.add(item.getMessage());
         }
+        logger.error("系统日志",e);
         return Response.error(500,list.get(0));
     }
 
     //业务异常
     @ExceptionHandler(value = BusinessException.class)
     public Response handleBusinessException(BusinessException e){
-        logger.error("业务日志",e);
+        logger.error("系统日志",e);
         BusinessException businessException = e;
         return  Response.error(businessException.getCode(),businessException.getMessage());
     }
@@ -68,31 +70,35 @@ public class GlobalExceptionHandler {
     //访问权限不足异常
     @ExceptionHandler(value = AccessDeniedException.class)
     public Response handlePermissionDenied(AccessDeniedException e){
+        logger.error("系统日志",e);
         return  Response.error(403,"访问权限不足");
     }
 
     //用户名或密码错误
     @ExceptionHandler(value = BadCredentialsException.class)
     public Response handleBadCredentialsException(BadCredentialsException e){
+        logger.error("系统日志",e);
         return  Response.error(500,"用户名或密码错误");
     }
 
     //空指针异常
     @ExceptionHandler(value = NullPointerException.class)
     public Response handleNullPointerException(NullPointerException e){
+        logger.error("系统日志",e);
         return  Response.error(500,"空指针异常");
     }
 
     //数据库字段超长
     @ExceptionHandler(value = MysqlDataTruncation.class)
     public Response handleMysqlDataTruncation(MysqlDataTruncation e){
+        logger.error("系统日志",e);
         return  Response.error(500,"数据库字段超长");
     }
 
     //演示模式
     @ExceptionHandler(value = DemoModeException.class)
     public Response handleDemoModeException(DemoModeException e){
-        DemoModeException demoModeException = e;
-        return  Response.error(demoModeException.getCode(), demoModeException.getMsg());
+        logger.error("系统日志",e);
+        return  Response.error(e.getCode(), e.getMsg());
     }
 }

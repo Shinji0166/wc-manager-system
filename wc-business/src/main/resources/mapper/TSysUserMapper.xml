@@ -14,7 +14,6 @@
         <result column="birthday" property="birthday"/>
         <result column="status" property="status" jdbcType="TINYINT"/>
         <result column="account_type" property="accountType" jdbcType="TINYINT"/>
-        <result column="invite_code" property="inviteCode" jdbcType="VARCHAR"/>
         <result column="sex" property="sex" jdbcType="TINYINT"/>
         <result column="address" property="address" jdbcType="VARCHAR"/>
         <result column="sign" property="sign" jdbcType="VARCHAR"/>
@@ -28,7 +27,7 @@
     <!-- 查询用户信息列表 -->
     <select id="getUserInfoList" resultMap="userInfo">
         select id, user_name, nick_name, pass_word, cell_phone,
-               mail, birthday, status, account_type, invite_code,
+               mail, birthday, status, account_type,
                sex, address, sign, picture_id,create_time,create_by,update_time,update_by from sys_user
         <where>
             <!--排除已删除状态-->
@@ -51,7 +50,7 @@
     <!-- 获取用户详细信息 -->
     <select id="getUserDetail" resultMap="userInfo">
         select id, user_name, nick_name, pass_word, cell_phone,
-               mail, birthday, status, account_type, invite_code,
+               mail, birthday, status, account_type,
                sex, address, sign, picture_id,create_time,create_by,update_time,update_by from sys_user
         where id = #{id}
     </select>
