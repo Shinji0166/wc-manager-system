@@ -1,5 +1,6 @@
 package cn.com.wudskq.mapper;
 
+import cn.com.wudskq.annotation.TenantInterceptor;
 import cn.com.wudskq.model.ToiletInfo;
 import cn.com.wudskq.model.query.ToiletInfoQueryDTO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -21,6 +22,7 @@ public interface ToiletInfoMapper extends BaseMapper<ToiletInfo> {
      * @param toiletInfoQuery
      * @return
      */
+    @TenantInterceptor
     List<ToiletInfo> getToiletList(@Param("query") ToiletInfoQueryDTO toiletInfoQuery);
 
     /**

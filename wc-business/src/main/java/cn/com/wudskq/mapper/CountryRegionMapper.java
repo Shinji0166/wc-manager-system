@@ -1,5 +1,6 @@
 package cn.com.wudskq.mapper;
 
+import cn.com.wudskq.annotation.TenantInterceptor;
 import cn.com.wudskq.model.CountryRegion;
 import cn.com.wudskq.model.query.RegionQueryDTO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -20,6 +21,7 @@ public interface CountryRegionMapper extends BaseMapper<CountryRegion> {
      * @param regionQuery
      * @return
      */
+    @TenantInterceptor
     List<CountryRegion> getRegionList(@Param("query") RegionQueryDTO regionQuery);
 
     /**

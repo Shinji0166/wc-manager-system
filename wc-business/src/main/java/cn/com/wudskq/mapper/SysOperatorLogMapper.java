@@ -1,5 +1,6 @@
 package cn.com.wudskq.mapper;
 
+import cn.com.wudskq.annotation.TenantInterceptor;
 import cn.com.wudskq.model.SysOperatorLog;
 import cn.com.wudskq.model.query.OperatorQueryDTO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -22,5 +23,6 @@ public interface SysOperatorLogMapper extends BaseMapper<SysOperatorLog> {
      * @param tenantCode
      * @return
      */
+    @TenantInterceptor
     List<SysOperatorLog> getOperatorLogList(@Param("query") OperatorQueryDTO operatorQuery,@Param("tenantCode") String tenantCode);
 }

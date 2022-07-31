@@ -1,5 +1,6 @@
 package cn.com.wudskq.mapper;
 
+import cn.com.wudskq.annotation.TenantInterceptor;
 import cn.com.wudskq.model.SysLoginLog;
 import cn.com.wudskq.model.query.LoginLogQueryDTO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -22,6 +23,7 @@ public interface SysLoginLogMapper extends BaseMapper<SysLoginLog> {
      * @param tenantCode
      * @return
      */
+    @TenantInterceptor
     List<SysLoginLog> getLoginLogList(@Param("query") LoginLogQueryDTO loginLogQuery,@Param("tenantCode") String tenantCode);
 
     /**

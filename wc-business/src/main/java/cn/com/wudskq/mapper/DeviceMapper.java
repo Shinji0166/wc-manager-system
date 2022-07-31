@@ -1,5 +1,6 @@
 package cn.com.wudskq.mapper;
 
+import cn.com.wudskq.annotation.TenantInterceptor;
 import cn.com.wudskq.model.Device;
 import cn.com.wudskq.model.query.DeviceQueryDTO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -21,6 +22,7 @@ public interface DeviceMapper extends BaseMapper<Device>{
      * @param deviceQuery
      * @return
      */
+    @TenantInterceptor
     List<Device> getDeviceList(@Param("query") DeviceQueryDTO deviceQuery);
 
     /**

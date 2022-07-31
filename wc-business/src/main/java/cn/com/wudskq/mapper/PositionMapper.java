@@ -1,5 +1,6 @@
 package cn.com.wudskq.mapper;
 
+import cn.com.wudskq.annotation.TenantInterceptor;
 import cn.com.wudskq.model.Position;
 import cn.com.wudskq.model.query.PositionQueryDTO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -21,6 +22,7 @@ public interface PositionMapper extends BaseMapper<Position> {
      * @param positionQuery
      * @return
      */
+    @TenantInterceptor
     List<Position> getPositionList(@Param("query") PositionQueryDTO positionQuery);
 
     /**

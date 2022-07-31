@@ -1,6 +1,7 @@
 package cn.com.wudskq.mapper;
 
 
+import cn.com.wudskq.annotation.TenantInterceptor;
 import cn.com.wudskq.model.TSysRole;
 import cn.com.wudskq.model.query.RoleInfoQueryDTO;
 import cn.com.wudskq.model.vo.SysRoleSelectVo;
@@ -34,6 +35,7 @@ public interface TSysRoleMapper extends BaseMapper<TSysRole> {
      * @param tenantCode
      * @return
      */
+    @TenantInterceptor
     List<SysRoleSelectVo> getRoleSelect(@Param("query")RoleInfoQueryDTO roleInfoQuery,@Param("tenantCode") String tenantCode);
 
     /**
@@ -42,6 +44,7 @@ public interface TSysRoleMapper extends BaseMapper<TSysRole> {
      * @param tenantCode
      * @return
      */
+    @TenantInterceptor
     List<TSysRole> getRoleInfoList(@Param("query") RoleInfoQueryDTO roleInfoQuery,@Param("tenantCode") String tenantCode);
 
     /**
