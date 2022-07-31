@@ -37,7 +37,6 @@ jwt:
   # 配置白名单（不需要认证）
   antMatchers: /swagger-resources/**,/swagger-ui.html,/v2/api-docs,/webjars/**,/doc.html,/druid/**
 
-
 ## xxl-job
 xxl:
   job:
