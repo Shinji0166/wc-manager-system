@@ -99,7 +99,7 @@ public class SQLInterceptor implements Interceptor{
             SQLExpr whereExpr = query.getWhere();
 
             //获取用户多租户权限代码
-            String tenantCode = JWTTokenUtil.getCurrentLoginUserTenantCode();
+            String tenantCode = JWTTokenUtil.getCurrentLoginUserTenantCodePermission();
             //生成需要在Where语句后面跟随的SQL
             String SQL = String.format("%s,'%s","find_in_set(tenant_code",tenantCode+"'"+")");
 
