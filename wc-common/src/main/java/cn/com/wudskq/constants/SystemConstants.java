@@ -12,6 +12,9 @@ public class SystemConstants {
     //系统登录接口
     public static final String SYSTEM_LOGIN_URI = "/system/doLogin";
 
+    //用户新增接口
+    public static final String USER_ADD_URI = "/system/save/user";
+
     //系统在线用户Key
     public static final String OLINE_USER_KEY = "online_user_#";
 

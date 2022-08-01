@@ -42,15 +42,20 @@ public class MybatisPlusPlugin implements MetaObjectHandler {
         if(null != attributes){
             request = attributes.getRequest();
         }
-        if(null != request){
+        if(null != request) {
             String requestURI = request.getRequestURI();
             //如果为登录操作则跳过以下逻辑
-            if(!SystemConstants.SYSTEM_LOGIN_URI.equals(requestURI)){
+            if(!SystemConstants.SYSTEM_LOGIN_URI.equals(requestURI))
+            {
                 TSysUser currentOperatorUser = getCurrentOperatorUser();
-                if(null != currentOperatorUser){
+                if(null != currentOperatorUser)
+                {
                     this.setFieldValByName("createBy",currentOperatorUser.getNickName(),metaObject);
-                    //系统多租户代码
-                    this.setFieldValByName("tenantCode",currentOperatorUser.getTenantCode(),metaObject);
+                    if(!SystemConstants.USER_ADD_URI.equals(requestURI))
+                    {
+                        //系统多租户代码
+                        this.setFieldValByName("tenantCode",currentOperatorUser.getTenantCode(),metaObject);
+                    }
                 }
             }
         }
@@ -64,7 +69,8 @@ public class MybatisPlusPlugin implements MetaObjectHandler {
     @Override
     public void updateFill(MetaObject metaObject) {
         TSysUser currentOperatorUser = getCurrentOperatorUser();
-        if(null != currentOperatorUser){
+        if(null != currentOperatorUser)
+        {
             this.setFieldValByName("updateBy",currentOperatorUser.getNickName(),metaObject);
         }
         this.setFieldValByName("updateTime",new Date(),metaObject);
@@ -85,7 +91,8 @@ public class MybatisPlusPlugin implements MetaObjectHandler {
                 //获取当前操作的用户token
                 token = request.getHeader(JWTConfig.tokenHeader);
             }
-            if(null != token){
+            if(null != token)
+            {
                 //解析token
                 SysUserDetails sysUserDetails = JWTTokenUtil.parseAccessToken(token);
                 //是否为管理员,管理员直接跳过查询
@@ -95,7 +102,8 @@ public class MybatisPlusPlugin implements MetaObjectHandler {
                     tSysUser.setNickName("系统管理员");
                 }
                 //系统多租户代码
-                tSysUser.setTenantCode(sysUserDetails.getTenantCode());}
+                tSysUser.setTenantCode(sysUserDetails.getTenantCode());
+          }
         } catch (Exception e) {
             e.printStackTrace();
         }

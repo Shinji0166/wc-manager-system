@@ -81,19 +81,25 @@ public class TSysUserServiceImpl implements TSysUserService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Response saveUser(TSysUser sysUser){
-            //查询账号是否重复
+            //查询账号是否重复(根据账号或多租户代码查询)
             QueryWrapper<TSysUser> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("user_name",sysUser.getUserName());
+            queryWrapper.eq("status",0);
+            queryWrapper.or().eq("tenant_code", sysUser.getTenantCode());
             TSysUser tSysUser = tSysUserMapper.selectOne(queryWrapper);
+
             if(null != tSysUser)
             {
-               if(sysUser.getUserName().equals(tSysUser.getUserName())) {
-                   Response response = globalExceptionHandler.handleBusinessException(new BusinessException(500, "当前添加的账号已存在,请勿重复添加!"));
+               if(sysUser.getUserName().equals(tSysUser.getUserName()) || sysUser.getTenantCode().equals(tSysUser.getTenantCode()))
+               {
+                   Response response = globalExceptionHandler.handleBusinessException(new BusinessException(500, "当前添加的账号或系统多租户代码已存在,请勿重复添加！"));
                    return response;
                }
-            }else {
+            }else
+            {
                 //获取当前操作用户
                 SysUserDetails currentLoginUser = JWTTokenUtil.getCurrentLoginUser();
+                //注入组级ID
                 String AncestorId = currentLoginUser.getId()+",";
                 if(null != currentLoginUser.getAncestorId() && !"".equals(currentLoginUser.getAncestorId())){
                     AncestorId = AncestorId + currentLoginUser.getAncestorId();
@@ -102,7 +108,6 @@ public class TSysUserServiceImpl implements TSysUserService {
                 //新增用户
                 sysUser.setPassWord(Md5Util.MD5(sysUser.getPassWord()));
                 tSysUserMapper.insert(sysUser);
-
                 //新增用户与角色关联关系
                 TSysUserRole tSysUserRole = new TSysUserRole();
                 tSysUserRole.setUserId(sysUser.getId()).setRoleId(sysUser.getRoleId());
