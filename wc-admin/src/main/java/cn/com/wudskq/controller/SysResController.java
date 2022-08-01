@@ -5,6 +5,7 @@ import cn.com.wudskq.annotation.OperatorLog;
 import cn.com.wudskq.annotation.ProhibitResubmit;
 import cn.com.wudskq.model.TSysRes;
 import cn.com.wudskq.model.query.ResInfoQueryDTO;
+import cn.com.wudskq.model.vo.TokenVo;
 import cn.com.wudskq.model.vo.TreeSelectVo;
 import cn.com.wudskq.service.TSysResService;
 import cn.com.wudskq.vo.Response;
@@ -37,8 +38,9 @@ public class SysResController extends BaseController{
     @ApiOperation(value = "查询菜单权限树")
     @InterfaceCall(interfaceName = "查询菜单权限树",requestMode = "GET")
     @OperatorLog(module = "菜单权限管理", function = "菜单信息", action = "查询菜单权限树", requestMode = "GET")
-    @GetMapping("/res/tree")
-    public Response getResTree(@RequestParam("token")String token) {
+    @PostMapping("/res/tree")
+    public Response getResTree(@RequestBody TokenVo tokenVo) {
+        String token = tokenVo.getToken();
         List<TreeSelectVo> resTree = sysResService.getResTree(token);
         return Response.success(resTree);
     }
