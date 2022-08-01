@@ -2,7 +2,7 @@ package cn.com.wudskq.intercrptor;
 
 import cn.com.wudskq.annotation.ProhibitResubmit;
 import cn.com.wudskq.config.JWTConfig;
-import cn.com.wudskq.wapper.RequestWrapper;
+import cn.com.wudskq.utils.ServletUtils;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,32 +69,27 @@ public class SameUrlDataInterceptor implements HandlerInterceptor {
      */
     public boolean repeatDataValidator(HttpServletRequest httpServletRequest){
         //获取请求参数map
-        RequestWrapper requestWrapper = new RequestWrapper(httpServletRequest);
-        String params = requestWrapper.getBody();
-
+        String bodyParams = ServletUtils.getRequestBodyParams(httpServletRequest);
         //token
         String token = httpServletRequest.getHeader(JWTConfig.tokenHeader);
-
         //请求URI
         String url = httpServletRequest.getRequestURI();
-
         Map<String,String> map = new HashMap<>(10);
         //key为接口，value为参数
-        map.put(url, params);
-
+        map.put(url, bodyParams);
         //当前的参数
         String nowUrlParams = map.toString();
-
         //key
         String redisKey = url+"::"+token;
         String preUrlParams = stringRedisTemplate.opsForValue().get(redisKey);
-
         //如果上一个数据为null,表示还没有访问页面
-        if(preUrlParams == null){
+        if(preUrlParams == null)
+        {
             //存放并且设置有效期，6秒
             stringRedisTemplate.opsForValue().set(redisKey, nowUrlParams, 6, TimeUnit.SECONDS);
             return false;
-        }else{
+        }else
+        {
             // 如果上次url+数据和本次url+数据相同，则表示重复添加数据
             if(preUrlParams.equals(nowUrlParams)){
                 return true;

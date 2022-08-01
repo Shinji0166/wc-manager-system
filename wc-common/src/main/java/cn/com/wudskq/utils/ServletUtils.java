@@ -1,5 +1,6 @@
 package cn.com.wudskq.utils;
 
+import cn.com.wudskq.wapper.RequestWrapper;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -22,5 +23,16 @@ public class ServletUtils {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         String requestURI = request.getRequestURI();
         return requestURI;
+    }
+
+    /**
+     * 获取请求的body数据
+     * @return
+     */
+    public static String getRequestBodyParams(HttpServletRequest request){
+        //获取请求参数map
+        RequestWrapper requestWrapper = new RequestWrapper(request);
+        String wrapperBody = requestWrapper.getBody();
+        return wrapperBody;
     }
 }

@@ -6,6 +6,9 @@ import cn.com.wudskq.model.SysUserDetails;
 import cn.com.wudskq.model.TSysUser;
 import cn.com.wudskq.snowflake.IdGeneratorSnowflake;
 import cn.com.wudskq.utils.JWTTokenUtil;
+import cn.com.wudskq.utils.ServletUtils;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
 import org.slf4j.Logger;
@@ -48,13 +51,25 @@ public class MybatisPlusPlugin implements MetaObjectHandler {
             if(!SystemConstants.SYSTEM_LOGIN_URI.equals(requestURI))
             {
                 TSysUser currentOperatorUser = getCurrentOperatorUser();
-                if(null != currentOperatorUser)
-                {
+                if(null != currentOperatorUser) {
                     this.setFieldValByName("createBy",currentOperatorUser.getNickName(),metaObject);
                     if(!SystemConstants.USER_ADD_URI.equals(requestURI))
                     {
                         //系统多租户代码
                         this.setFieldValByName("tenantCode",currentOperatorUser.getTenantCode(),metaObject);
+                    }else {
+                        String bodyParams = ServletUtils.getRequestBodyParams(request);
+                        JSONObject jsonObject = JSONUtil.parseObj(bodyParams);
+                        String accountType = String.valueOf(jsonObject.get("accountType"));
+                        String tenantCode = String.valueOf(jsonObject.get("tenantCode"));
+                        //用户账户类型为管理员类型时,系统多租户代码为req传递过来的参数
+                        if("1".equals(accountType))
+                        {
+                            this.setFieldValByName("tenantCode",tenantCode,metaObject);
+                        }else
+                        {
+                            this.setFieldValByName("tenantCode",currentOperatorUser.getTenantCode(),metaObject);
+                        }
                     }
                 }
             }
