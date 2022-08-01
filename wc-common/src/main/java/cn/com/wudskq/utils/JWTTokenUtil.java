@@ -126,10 +126,34 @@ public class JWTTokenUtil {
     }
 
     /**
-     * 获取用户系统租户代码权限
+     * 获取用户系统租户代码
      * @return
      */
     public static String  getCurrentLoginUserTenantCode(){
+        //获取HttpRequest
+        ServletRequestAttributes attributes  = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = null;
+        if(null != attributes){
+            request = attributes.getRequest();
+        }
+        if(null != request)
+        {
+            //获取当前操作的用户token
+            String token = request.getHeader(JWTConfig.tokenHeader);
+            if(null != token) {
+                //解析token
+                SysUserDetails sysUserDetails = JWTTokenUtil.parseAccessToken(token);
+                return sysUserDetails.getTenantCode();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 获取用户系统租户代码权限
+     * @return
+     */
+    public static String  getCurrentLoginUserTenantCodePermission(){
         //获取HttpRequest
         ServletRequestAttributes attributes  = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = null;

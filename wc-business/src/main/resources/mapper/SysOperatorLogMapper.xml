@@ -22,10 +22,6 @@
                 create_by, create_time from sys_operator_log
         <where>
             operator_module != '' and operator_function != '' and operator_action !=''
-            <!-- 根据多租户代码查询 -->
-            <if test="tenantCode != null and tenantCode != ''">
-                and find_in_set(tenant_code,#{tenantCode})
-            </if>
         </where>
         order by  create_time desc
     </select>

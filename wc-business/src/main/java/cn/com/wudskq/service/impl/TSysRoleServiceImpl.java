@@ -32,15 +32,13 @@ public class TSysRoleServiceImpl implements TSysRoleService {
 
     @Override
     public List<SysRoleSelectVo> getRoleSelect(RoleInfoQueryDTO roleInfoQuery) {
-        String tenantCode = JWTTokenUtil.getCurrentLoginUserTenantCode();
-        return sysRoleMapper.getRoleSelect(roleInfoQuery,tenantCode);
+        return sysRoleMapper.getRoleSelect(roleInfoQuery);
     }
 
     @Override
     public List<TSysRole> getRoleInfoList(RoleInfoQueryDTO roleInfoQuery) {
-        String tenantCode = JWTTokenUtil.getCurrentLoginUserTenantCode();
         PageHelper.startPage(roleInfoQuery.getPageNum(),roleInfoQuery.getPageSize());
-        return sysRoleMapper.getRoleInfoList(roleInfoQuery,tenantCode);
+        return sysRoleMapper.getRoleInfoList(roleInfoQuery);
     }
 
     @Override

@@ -25,11 +25,10 @@ public interface TSysUserMapper extends BaseMapper<TSysUser> {
     /**
      * 获取用户信息列表
      * @param userInfoQuery
-     * @param tenantCode
      * @return
      */
     @TenantInterceptor
-    List<TSysUser> getUserInfoList(@Param("query") UserInfoQueryDTO userInfoQuery,@Param("tenantCode") String tenantCode);
+    List<TSysUser> getUserInfoList(@Param("query") UserInfoQueryDTO userInfoQuery);
 
     /**
      * 获取用户详细信息

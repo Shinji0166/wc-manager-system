@@ -26,9 +26,8 @@ public class SysLoginLogServiceImpl implements SysLoginLogService {
 
     @Override
     public List<SysLoginLog> getLoginLogList(LoginLogQueryDTO loginLogQuery) {
-        String tenantCode = JWTTokenUtil.getCurrentLoginUserTenantCode();
         PageHelper.startPage(loginLogQuery.getPageNum(),loginLogQuery.getPageSize());
-        return sysLoginLogMapper.getLoginLogList(loginLogQuery,tenantCode);
+        return sysLoginLogMapper.getLoginLogList(loginLogQuery);
     }
 
     @Override

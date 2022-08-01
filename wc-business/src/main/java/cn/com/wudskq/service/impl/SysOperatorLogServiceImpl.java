@@ -27,8 +27,7 @@ public class SysOperatorLogServiceImpl implements SysOperatorLogService {
 
     @Override
     public List<SysOperatorLog> getOperatorLogList(OperatorQueryDTO operatorQuery) {
-        String tenantCode = JWTTokenUtil.getCurrentLoginUserTenantCode();
         PageHelper.startPage(operatorQuery.getPageNum(),operatorQuery.getPageSize());
-        return sysOperatorLogMapper.getOperatorLogList(operatorQuery,tenantCode);
+        return sysOperatorLogMapper.getOperatorLogList(operatorQuery);
     }
 }

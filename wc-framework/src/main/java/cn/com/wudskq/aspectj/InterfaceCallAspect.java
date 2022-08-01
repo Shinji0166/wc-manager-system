@@ -6,6 +6,7 @@ import cn.com.wudskq.constants.SystemConstants;
 import cn.com.wudskq.expection.GlobalExceptionHandler;
 import cn.com.wudskq.model.SysInterfaceCall;
 import cn.com.wudskq.utils.IPUtil;
+import cn.com.wudskq.utils.JWTTokenUtil;
 import cn.com.wudskq.utils.RedisUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -114,11 +115,14 @@ public class InterfaceCallAspect {
         } finally {
             //接口请求时间 毫秒
             long interfaceRequestTime = System.currentTimeMillis() - startTime.get();
+
             //更新对应接口请求时常  计算总时间,平均时间,最小时间,最大时间
             countMap.compute(interfaceName,(key, value)->{
+
                 //调用次数加一
                 value.setInterfaceCallCount(value.getInterfaceCallCount() + 1);
                 value.setInterfaceCallTime(interfaceRequestTime);
+
                 //假设接口单次回调时间为最小时间
                 value.setInterfaceCallMinTime(interfaceRequestTime);
 
@@ -138,6 +142,7 @@ public class InterfaceCallAspect {
                     redisUtil.hSet(SystemConstants.INTERFACE_ACTUATOR_KEY,countMap);
                     //删除过期时间
                     stringRedisTemplate.persist(SystemConstants.INTERFACE_ACTUATOR_KEY);
+
                     //计数器置为0
                     AtomicCounter.getInstance().toZero();
                 }
@@ -153,6 +158,7 @@ public class InterfaceCallAspect {
      */
     private SysInterfaceCall handleInterfaceCall(JoinPoint joinPoint,InterfaceCall interfaceCall){
         try {
+            String tenantCode = JWTTokenUtil.getCurrentLoginUserTenantCode();
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
             Signature signature = joinPoint.getSignature();
             String declaringName = signature.getDeclaringTypeName();
@@ -166,6 +172,8 @@ public class InterfaceCallAspect {
                     .setMethodName(methodName)
                     .setRequestMode(requestMode)
                     .setRequestIp(IPUtil.getRemoteAddr(request));
+            //注入多租户代码
+            sysInterfaceCall.setTenantCode(tenantCode);
             return sysInterfaceCall;
         } catch (Exception e) {
             e.printStackTrace();
