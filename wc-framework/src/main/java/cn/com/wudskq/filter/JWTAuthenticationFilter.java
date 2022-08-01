@@ -1,11 +1,11 @@
 package cn.com.wudskq.filter;
 
-
 import cn.com.wudskq.config.JWTConfig;
 import cn.com.wudskq.constants.SystemConstants;
 import cn.com.wudskq.expection.BusinessException;
 import cn.com.wudskq.model.SysOnlineUser;
 import cn.com.wudskq.model.SysUserDetails;
+import cn.com.wudskq.service.TSysUserService;
 import cn.com.wudskq.utils.JWTTokenUtil;
 import cn.com.wudskq.utils.RedisUtil;
 import cn.com.wudskq.utils.spring.SpringContextUtils;
@@ -74,6 +74,12 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
                SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
+
+        //查询当前操作用户所拥有的系统多租户代码权限
+        SysUserDetails sysUserDetails = JWTTokenUtil.parseAccessToken(token);
+        TSysUserService tSysUserServiceImpl = SpringContextUtils.getBean("TSysUserServiceImpl");
+        String tenantCodePermission = tSysUserServiceImpl.getTenantCodeByUserId(sysUserDetails.getId());
+        request.setAttribute(SystemConstants.TENANT_CODE_PERMISSION,tenantCodePermission);
 
         // filter层封装传递post参数
         if(request instanceof HttpServletRequest) {

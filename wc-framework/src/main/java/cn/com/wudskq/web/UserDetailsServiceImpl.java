@@ -88,10 +88,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 }
             }
             sysUserDetails.setAuthorities(authorities);
-
-            //获取用户租户代码字符串
-            String tenantCodePermission = tSysUserService.getTenantCodeByUserId(tSysUser.getId());
-            sysUserDetails.setTenantCodePermission(tenantCodePermission);
             return sysUserDetails;
         }
         return null;

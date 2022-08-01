@@ -6,6 +6,7 @@ import cn.com.wudskq.model.query.SysOnlineUserQueryDTO;
 import cn.com.wudskq.service.SysOnlineUserServie;
 import cn.com.wudskq.utils.JWTTokenUtil;
 import cn.com.wudskq.utils.RedisUtil;
+import cn.com.wudskq.utils.ServletUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class SysOnlineUserImpl implements SysOnlineUserServie {
         List<SysOnlineUser> collect = result.stream().map(SysOnlineUser::new).collect(Collectors.toList());
 
         //获取用户系统多租户代码权限
-        String tenantCodePermission = JWTTokenUtil.getCurrentLoginUserTenantCodePermission();
+        String tenantCodePermission = ServletUtils.getTenantCodePermission();
 
         //进行条件查询
         List<SysOnlineUser> onlineUserList = collect.stream().filter((SysOnlineUser onlineUser) -> {

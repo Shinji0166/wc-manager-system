@@ -26,28 +26,25 @@ public class SysUserDetails extends TSysUser implements UserDetails, Serializabl
     /** 当前账号ID **/
     private String currentUserId;
 
-    /** 多租户代码字符(为控制查询数据使用) **/
-    private String tenantCodePermission;
-
     /** 账号 **/
     private String username;
 
     /** 密码 **/
     private String password;
 
-    @ApiModelProperty("用户权限")
+    @ApiModelProperty(value = "用户权限")
     private Collection <GrantedAuthority> authorities;
 
-    @ApiModelProperty("账号是否过期")
+    @ApiModelProperty(value = "账号是否过期")
     private boolean isAccountNonExpired = false;
  
-    @ApiModelProperty("账号是否锁定")
+    @ApiModelProperty(value = "账号是否锁定")
     private boolean isAccountNonLocked = false;
 
-    @ApiModelProperty("证书是否过期")
+    @ApiModelProperty(value = "证书是否过期")
     private boolean isCredentialsNonExpired = false;
  
-    @ApiModelProperty("账号是否有效(启用-禁用)")
+    @ApiModelProperty(value = "账号是否有效(启用-禁用)")
     private boolean isEnabled = true;
 
     @ApiModelProperty(value = "jti")
@@ -56,7 +53,7 @@ public class SysUserDetails extends TSysUser implements UserDetails, Serializabl
     @ApiModelProperty(value = "token过期时间")
     private Long expirationTime;
  
-    @ApiModelProperty("获得用户权限")
+    @ApiModelProperty(value = "获得用户权限")
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;

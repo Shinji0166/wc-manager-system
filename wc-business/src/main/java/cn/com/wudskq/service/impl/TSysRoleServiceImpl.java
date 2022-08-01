@@ -7,7 +7,6 @@ import cn.com.wudskq.model.TSysRoleRes;
 import cn.com.wudskq.model.query.RoleInfoQueryDTO;
 import cn.com.wudskq.model.vo.SysRoleSelectVo;
 import cn.com.wudskq.service.TSysRoleService;
-import cn.com.wudskq.utils.JWTTokenUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;

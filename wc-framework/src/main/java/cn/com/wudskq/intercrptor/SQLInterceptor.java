@@ -4,6 +4,7 @@ package cn.com.wudskq.intercrptor;
 import cn.com.wudskq.annotation.TenantInterceptor;
 import cn.com.wudskq.model.SysUserDetails;
 import cn.com.wudskq.utils.JWTTokenUtil;
+import cn.com.wudskq.utils.ServletUtils;
 import com.alibaba.druid.sql.ast.SQLExpr;
 import com.alibaba.druid.sql.ast.SQLStatement;
 import com.alibaba.druid.sql.ast.expr.SQLBinaryOpExpr;
@@ -27,7 +28,6 @@ import org.apache.ibatis.reflection.DefaultReflectorFactory;
 import org.apache.ibatis.reflection.MetaObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.sql.Connection;
@@ -55,8 +55,10 @@ public class SQLInterceptor implements Interceptor{
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
+        //负责处理Mybatis与JDBC之间Statement的交互
         StatementHandler statementHandler = (StatementHandler) invocation.getTarget();
-        //元对象
+
+        //MetaObject是Mybatis提供的一个用于方便、优雅访问对象属性的对象，通过它可以简化代码、不需要try/catch各种reflect异常，同时它支持对JavaBean、Collection、Map三种类型对象的操作。
         MetaObject metaObject = MetaObject
                 .forObject(statementHandler, DEFAULT_OBJECT_FACTORY, DEFAULT_OBJECT_WRAPPER_FACTORY,
                         new DefaultReflectorFactory());
@@ -107,10 +109,12 @@ public class SQLInterceptor implements Interceptor{
             SQLSelectQueryBlock query = (SQLSelectQueryBlock) sqlselect.getQuery();
             SQLExpr whereExpr = query.getWhere();
 
+
             //获取用户多租户权限代码
-            String tenantCode = JWTTokenUtil.getCurrentLoginUserTenantCodePermission();
+            String tenantCodePermission = ServletUtils.getTenantCodePermission();
+
             //生成需要在Where语句后面跟随的SQL
-            String SQL = String.format("%s,'%s","find_in_set(tenant_code",tenantCode+"'"+")");
+            String SQL = String.format("%s,'%s","find_in_set(tenant_code",tenantCodePermission+"'"+")");
 
             SQLExprParser constraintsParser = SQLParserUtils.createExprParser(SQL, JdbcUtils.MYSQL);
             SQLExpr constraintsExpr = constraintsParser.expr();

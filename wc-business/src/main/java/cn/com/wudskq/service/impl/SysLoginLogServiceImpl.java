@@ -4,7 +4,6 @@ import cn.com.wudskq.mapper.SysLoginLogMapper;
 import cn.com.wudskq.model.SysLoginLog;
 import cn.com.wudskq.model.query.LoginLogQueryDTO;
 import cn.com.wudskq.service.SysLoginLogService;
-import cn.com.wudskq.utils.JWTTokenUtil;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

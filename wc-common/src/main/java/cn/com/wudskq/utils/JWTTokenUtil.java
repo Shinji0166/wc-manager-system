@@ -42,7 +42,6 @@ public class JWTTokenUtil {
                 .claim("userid",sysUserDetails.getId())
                 .claim("ancestorId",sysUserDetails.getAncestorId()) //组级ID
                 .claim("tenantCode",sysUserDetails.getTenantCode()) //系统租户代码
-                .claim("tenantCodePermission",sysUserDetails.getTenantCodePermission())  //系统多租户代码字符串
                 .claim("nickName",sysUserDetails.getNickName())
                 .compact(); // 自定义其他属性，如用户组织机构ID，用户所拥有的角色，用户权限信息等
         return JWTConfig.tokenPrefix + token;
@@ -76,8 +75,6 @@ public class JWTTokenUtil {
                 sysUserDetails.setAncestorId(String.valueOf(claims.get("ancestorId")));
                 //系统多租户代码
                 sysUserDetails.setTenantCode((String) claims.get("tenantCode"));
-                //系统多租户代码字符串
-                sysUserDetails.setTenantCodePermission(String.valueOf(claims.get("tenantCodePermission")));
 
                 // 获取角色
                 Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
@@ -144,30 +141,6 @@ public class JWTTokenUtil {
                 //解析token
                 SysUserDetails sysUserDetails = JWTTokenUtil.parseAccessToken(token);
                 return sysUserDetails.getTenantCode();
-            }
-        }
-        return null;
-    }
-
-    /**
-     * 获取用户系统租户代码权限
-     * @return
-     */
-    public static String  getCurrentLoginUserTenantCodePermission(){
-        //获取HttpRequest
-        ServletRequestAttributes attributes  = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = null;
-        if(null != attributes){
-            request = attributes.getRequest();
-        }
-        if(null != request)
-        {
-            //获取当前操作的用户token
-            String token = request.getHeader(JWTConfig.tokenHeader);
-            if(null != token) {
-                //解析token
-                SysUserDetails sysUserDetails = JWTTokenUtil.parseAccessToken(token);
-                return sysUserDetails.getTenantCodePermission();
             }
         }
         return null;

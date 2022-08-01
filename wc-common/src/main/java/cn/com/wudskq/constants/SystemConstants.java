@@ -15,6 +15,9 @@ public class SystemConstants {
     //用户新增接口
     public static final String USER_ADD_URI = "/system/save/user";
 
+    //系统多租户权限代码
+    public static final String TENANT_CODE_PERMISSION = "tenantCodePermissionCode";
+
     //系统在线用户Key
     public static final String OLINE_USER_KEY = "online_user_#";
 

@@ -1,5 +1,6 @@
 package cn.com.wudskq.utils;
 
+import cn.com.wudskq.constants.SystemConstants;
 import cn.com.wudskq.wapper.RequestWrapper;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -34,5 +35,11 @@ public class ServletUtils {
         RequestWrapper requestWrapper = new RequestWrapper(request);
         String wrapperBody = requestWrapper.getBody();
         return wrapperBody;
+    }
+
+    public static String getTenantCodePermission(){
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        String tenantCodePermission = (String) request.getAttribute(SystemConstants.TENANT_CODE_PERMISSION);
+        return tenantCodePermission;
     }
 }
