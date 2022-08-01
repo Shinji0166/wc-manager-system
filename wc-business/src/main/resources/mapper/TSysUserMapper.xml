@@ -57,7 +57,7 @@
     <!-- 获取用户详细信息 -->
     <select id="getUserDetail" resultMap="userInfo">
         select id, user_name, nick_name, pass_word, cell_phone,
-               mail, birthday, status, account_type,
+               mail, birthday, status, account_type, tenant_code,
                sex, address, sign, picture_id,create_time,create_by,update_time,update_by from sys_user
         where id = #{id}
     </select>
