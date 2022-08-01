@@ -2,6 +2,7 @@ package cn.com.wudskq.service.impl;
 
 import cn.com.wudskq.constants.SystemConstants;
 import cn.com.wudskq.model.SysOnlineUser;
+import cn.com.wudskq.model.SysUserDetails;
 import cn.com.wudskq.model.query.SysOnlineUserQueryDTO;
 import cn.com.wudskq.service.SysOnlineUserServie;
 import cn.com.wudskq.utils.JWTTokenUtil;
@@ -59,8 +60,17 @@ public class SysOnlineUserImpl implements SysOnlineUserServie {
             {
                 return onlineUser.getLoginIp().contains(query.getIp());
             }
-            //过滤出在线用户及符合系统多租户权限的数据
-            return onlineUser.getStatus() == 0 && tenantCodePermission.contains(onlineUser.getTenantCode());
+
+            //特殊情况admin查询所有
+            SysUserDetails currentLoginUser = JWTTokenUtil.getCurrentLoginUser();
+            if(SystemConstants.SUPER_ADMINISTRATOR.equals(currentLoginUser.getUsername()))
+            {
+                return onlineUser.getStatus() == 0;
+            }else
+            {
+                //过滤出在线用户及符合系统多租户权限的数据
+                return onlineUser.getStatus() == 0 && tenantCodePermission.contains(onlineUser.getTenantCode());
+            }
         }).sorted(Comparator.comparing(SysOnlineUser::getLoginTime).reversed()).collect(Collectors.toList());
 
         //分页

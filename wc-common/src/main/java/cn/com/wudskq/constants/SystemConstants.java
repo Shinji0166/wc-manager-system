@@ -9,6 +9,10 @@ package cn.com.wudskq.constants;
  */
 public class SystemConstants {
 
+
+    //超级管理员账号
+    public static final String SUPER_ADMINISTRATOR = "admin";
+
     //系统登录接口
     public static final String SYSTEM_LOGIN_URI = "/system/doLogin";
 
