@@ -42,7 +42,7 @@ xxl:
   job:
     accessToken:
     admin:
-      addresses: http://101.42.156.134:8082/xxl-job-admin
+      addresses: http://localhost:8082/xxl-job-admin
     executor:
       address:
       appname: wc-manager-system

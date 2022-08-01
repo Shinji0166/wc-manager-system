@@ -1,5 +1,6 @@
 package cn.com.wudskq.mapper;
 
+import cn.com.wudskq.annotation.TenantInterceptor;
 import cn.com.wudskq.model.SysInterfaceCall;
 import cn.com.wudskq.model.query.SysInterfaceCallQueryDTO;
 import cn.com.wudskq.model.vo.InterfaceCallVo;
@@ -24,6 +25,7 @@ public interface SysInterfaceCallMapper extends BaseMapper<SysInterfaceCall> {
      * @param interfaceCallQuery
      * @return
      */
+    @TenantInterceptor
     InterfaceCallVo getInterfaceCallData(@Param("interfaceName") String interfaceName,@Param("query")SysInterfaceCallQueryDTO interfaceCallQuery);
 
     /**
@@ -31,5 +33,6 @@ public interface SysInterfaceCallMapper extends BaseMapper<SysInterfaceCall> {
      * @param interfaceCallQuery
      * @return
      */
+    @TenantInterceptor
     List<String> getInterfaceNameByGroup(@Param("query")SysInterfaceCallQueryDTO interfaceCallQuery);
 }
