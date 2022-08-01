@@ -127,16 +127,27 @@ public class TSysUserServiceImpl implements TSysUserService {
         {
             if(!"admin".equals(currentLoginUser.getUsername()))
             {
-                Response response = globalExceptionHandler.handleBusinessException(new BusinessException(500,"您无权修改admin账号"));
+                Response response = globalExceptionHandler.handleBusinessException(new BusinessException(500,"您无权修改admin账号！"));
                 return response;
             }
         }
-        //判断更新密码是否与原密码相同
-        TSysUser datasourceUser = tSysUserMapper.selectById(sysUser.getId());
-        if(datasourceUser.getPassWord().equals(sysUser.getPassWord()))
+
+        TSysUser currentUser = tSysUserMapper.selectById(sysUser.getId());
+        //判断系统多租户是否被修改
+        if(SystemEnum.ADMIN_USER_TYPE.getValue().equals(sysUser.getAccountType()))
         {
-            sysUser.setPassWord(datasourceUser.getPassWord());
-        }else {
+            if(!currentUser.getTenantCode().equals(sysUser.getTenantCode())){
+                Response response = globalExceptionHandler.handleBusinessException(new BusinessException(500,"系统租户代码不可修改！"));
+                return response;
+            }
+        }
+
+        //判断更新密码是否与原密码相同
+        if(currentUser.getPassWord().equals(sysUser.getPassWord()))
+        {
+            sysUser.setPassWord(currentUser.getPassWord());
+        }else
+        {
             String currentPasswd = Md5Util.MD5(sysUser.getPassWord());
             sysUser.setPassWord(currentPasswd);
         }
