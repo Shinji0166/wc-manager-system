@@ -2,6 +2,7 @@ package cn.com.wudskq.plugins;
 
 import cn.com.wudskq.config.JWTConfig;
 import cn.com.wudskq.constants.SystemConstants;
+import cn.com.wudskq.enums.SystemEnum;
 import cn.com.wudskq.model.SysUserDetails;
 import cn.com.wudskq.model.TSysUser;
 import cn.com.wudskq.snowflake.IdGeneratorSnowflake;
@@ -63,7 +64,7 @@ public class MybatisPlusPlugin implements MetaObjectHandler {
                         String accountType = String.valueOf(jsonObject.get("accountType"));
                         String tenantCode = String.valueOf(jsonObject.get("tenantCode"));
                         //用户账户类型为管理员类型时,系统多租户代码为req传递过来的参数
-                        if("1".equals(accountType))
+                        if(SystemEnum.ADMIN_USER_TYPE.getValue().equals(accountType))
                         {
                             this.setFieldValByName("tenantCode",tenantCode,metaObject);
                         }else
