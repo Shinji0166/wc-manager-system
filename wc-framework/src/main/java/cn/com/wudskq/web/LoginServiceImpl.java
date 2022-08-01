@@ -80,6 +80,7 @@ public class LoginServiceImpl implements LoginService {
         Set<Object> result =redisUtil.rangeByLimit(SystemConstants.OLINE_USER_KEY,1,zSetSize);
         //删除原来的在线用户列表
         redisUtil.remove(SystemConstants.OLINE_USER_KEY);
+
         //当前在线用户列表
         List<SysOnlineUser> collect = result.stream().map(SysOnlineUser::new).collect(Collectors.toList());
         collect.forEach(obj ->{

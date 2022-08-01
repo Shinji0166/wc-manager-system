@@ -4,6 +4,7 @@ import cn.com.wudskq.constants.SystemConstants;
 import cn.com.wudskq.model.SysOnlineUser;
 import cn.com.wudskq.model.query.SysOnlineUserQueryDTO;
 import cn.com.wudskq.service.SysOnlineUserServie;
+import cn.com.wudskq.utils.JWTTokenUtil;
 import cn.com.wudskq.utils.RedisUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,9 @@ public class SysOnlineUserImpl implements SysOnlineUserServie {
         //转换为list
         List<SysOnlineUser> collect = result.stream().map(SysOnlineUser::new).collect(Collectors.toList());
 
+        //获取用户系统多租户代码权限
+        String tenantCodePermission = JWTTokenUtil.getCurrentLoginUserTenantCodePermission();
+
         //进行条件查询
         List<SysOnlineUser> onlineUserList = collect.stream().filter((SysOnlineUser onlineUser) -> {
             if (StringUtils.isNotBlank(query.getNickName())&& StringUtils.isNotBlank(query.getIp()))
@@ -54,8 +58,8 @@ public class SysOnlineUserImpl implements SysOnlineUserServie {
             {
                 return onlineUser.getLoginIp().contains(query.getIp());
             }
-            //过滤出在线用户
-            return onlineUser.getStatus() == 0;
+            //过滤出在线用户及符合系统多租户权限的数据
+            return onlineUser.getStatus() == 0 && tenantCodePermission.contains(onlineUser.getTenantCode());
         }).sorted(Comparator.comparing(SysOnlineUser::getLoginTime).reversed()).collect(Collectors.toList());
 
         //分页

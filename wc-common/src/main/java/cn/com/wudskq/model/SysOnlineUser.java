@@ -61,6 +61,8 @@ public class SysOnlineUser implements Serializable {
     @ApiModelProperty(value = "多租户代码")
     private String tenantCode;
 
+
+    //在线用户转换
     public SysOnlineUser(Object object) {
         SysOnlineUser source = (SysOnlineUser) object;
         this.setId(source.getId());
@@ -74,5 +76,6 @@ public class SysOnlineUser implements Serializable {
         this.setLoginTime(source.getLoginTime());
         this.setExpirationTime(source.getExpirationTime());
         this.setStatus(source.getStatus());
+        this.setTenantCode(source.getTenantCode());
     }
 }
