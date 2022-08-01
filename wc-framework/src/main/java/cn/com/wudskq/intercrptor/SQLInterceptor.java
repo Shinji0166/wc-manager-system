@@ -2,6 +2,7 @@ package cn.com.wudskq.intercrptor;
 
 
 import cn.com.wudskq.annotation.TenantInterceptor;
+import cn.com.wudskq.model.SysUserDetails;
 import cn.com.wudskq.utils.JWTTokenUtil;
 import com.alibaba.druid.sql.ast.SQLExpr;
 import com.alibaba.druid.sql.ast.SQLStatement;
@@ -90,6 +91,14 @@ public class SQLInterceptor implements Interceptor{
             if(null == annotation){
                 return invocation.proceed();
             }
+
+            //特殊情况admin用户拥有最高权限,不用使用系统租户代码过滤数据
+            SysUserDetails currentLoginUser = JWTTokenUtil.getCurrentLoginUser();
+            if("admin".equals(currentLoginUser.getUsername()))
+            {
+                return invocation.proceed();
+            }
+
             //拿到select执行器
             SQLSelectStatement selectStmt = (SQLSelectStatement) stmt;
             SQLSelect sqlselect = selectStmt.getSelect();
