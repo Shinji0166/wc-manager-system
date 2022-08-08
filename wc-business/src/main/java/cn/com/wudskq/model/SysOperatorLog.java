@@ -37,6 +37,9 @@ public class SysOperatorLog extends CreateInfoModel implements Serializable {
     @ApiModelProperty(name = "执行动作")
     private  String operatorAction;
 
+    @ApiModelProperty(value = "请求IP")
+    private String requestIp;
+
     @ApiModelProperty(name = "请求模式")
     private  String requestMode;
 

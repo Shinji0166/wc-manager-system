@@ -4,6 +4,7 @@ import cn.com.wudskq.mapper.TSysUserMapper;
 import cn.com.wudskq.model.SysLoginLog;
 import cn.com.wudskq.model.TSysUser;
 import cn.com.wudskq.service.SysLoginLogService;
+import cn.com.wudskq.utils.IPUtil;
 import cn.com.wudskq.vo.Response;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import nl.bitwalker.useragentutils.UserAgent;
@@ -57,6 +58,7 @@ public class UserLoginFailureHandler implements AuthenticationFailureHandler {
             sysLoginLog.setFailureReason("系统中不存在该账户");
         }
         sysLoginLog.setBrowserName(userAgent.getBrowser().getName());
+        sysLoginLog.setRequestIp(IPUtil.getRemoteAddr(request));
         sysLoginLog.setBrowserVersion(String.valueOf(userAgent.getBrowserVersion()));
         sysLoginLog.setOperatorSystem(userAgent.getOperatingSystem().getName());
         sysLoginLog.setTenantCode(loginUser.getTenantCode()); //系统多租户代码

@@ -8,6 +8,7 @@ import cn.com.wudskq.model.SysOperatorLog;
 import cn.com.wudskq.model.SysUserDetails;
 import cn.com.wudskq.model.TSysUser;
 import cn.com.wudskq.snowflake.IdGeneratorSnowflake;
+import cn.com.wudskq.utils.IPUtil;
 import cn.com.wudskq.utils.JWTTokenUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -94,11 +95,16 @@ public class OperatorLogAspect {
 
     //封装系统操作数据
     public SysOperatorLog handleDataModule(OperatorLog operatorLog,TSysUser tSysUser){
+        ServletRequestAttributes attributes  = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+
+        //封装数据
         SysOperatorLog sysOperatorLog = new SysOperatorLog()
                 .setId(idGeneratorSnowflake.snowflakeId())
                 .setOperatorModule(operatorLog.module())
                 .setOperatorFunction(operatorLog.function())
                 .setOperatorAction(operatorLog.action())
+                .setRequestIp(IPUtil.getRemoteAddr(request))
                 .setRequestMode(operatorLog.requestMode());
         if(null != tSysUser){
             sysOperatorLog.setCreateBy(tSysUser.getNickName());

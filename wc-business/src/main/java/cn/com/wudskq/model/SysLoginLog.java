@@ -39,6 +39,9 @@ public class SysLoginLog extends CreateInfoModel  implements Serializable {
     @ApiModelProperty(value = "浏览器版本")
     private String browserVersion;
 
+    @ApiModelProperty(value = "请求IP")
+    private String requestIp;
+
     @ApiModelProperty(value = "操作系统")
     private String operatorSystem;
 

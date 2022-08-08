@@ -101,6 +101,7 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
         //封装数据
         SysLoginLog sysLoginLog = new SysLoginLog();
         sysLoginLog.setCreateBy(loginUser.getNickName());
+        sysLoginLog.setRequestIp(IPUtil.getRemoteAddr(request));
         sysLoginLog.setBrowserName(userAgent.getBrowser().getName());
         sysLoginLog.setBrowserVersion(String.valueOf(userAgent.getBrowserVersion()));
         sysLoginLog.setOperatorSystem(userAgent.getOperatingSystem().getName());
