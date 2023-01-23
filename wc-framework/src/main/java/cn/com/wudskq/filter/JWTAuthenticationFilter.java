@@ -80,18 +80,18 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
         //如果为登录操作则跳过以下逻辑
         if(!SystemConstants.SYSTEM_LOGIN_URI.equals(requestURI))
         {
-            //查询当前操作用户所拥有的系统多租户代码权限
-            SysUserDetails sysUserDetails = JWTTokenUtil.parseAccessToken(token);
-            //为admin时拥有最高权限
-            if(!SystemConstants.SUPER_ADMINISTRATOR.equals(sysUserDetails.getUsername()))
-            {
-                TSysUserService tSysUserServiceImpl = SpringContextUtils.getBean("TSysUserServiceImpl");
-                String tenantCodePermission = tSysUserServiceImpl.getTenantCodeByUserId(sysUserDetails.getId());
-                request.setAttribute(SystemConstants.TENANT_CODE_PERMISSION,tenantCodePermission);
+            if(null != token && !"".equals(token)){
+                //查询当前操作用户所拥有的系统多租户代码权限
+                SysUserDetails sysUserDetails = JWTTokenUtil.parseAccessToken(token);
+                //为admin时拥有最高权限
+                if(!SystemConstants.SUPER_ADMINISTRATOR.equals(sysUserDetails.getUsername()))
+                {
+                    TSysUserService tSysUserServiceImpl = SpringContextUtils.getBean("TSysUserServiceImpl");
+                    String tenantCodePermission = tSysUserServiceImpl.getTenantCodeByUserId(sysUserDetails.getId());
+                    request.setAttribute(SystemConstants.TENANT_CODE_PERMISSION,tenantCodePermission);
+                }
             }
-
         }
-
         // filter层封装传递post参数
         if(request instanceof HttpServletRequest)
         {
